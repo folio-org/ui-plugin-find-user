@@ -36,7 +36,7 @@ export default class UserSearch extends React.Component {
         <Button
           key="searchButton"
           onClick={this.openModal}
-          title="Find User by Plugin" tabIndex="-1"
+          title="Find User" tabIndex="-1"
         >
           <Icon icon="search" color="#fff" />
         </Button>
