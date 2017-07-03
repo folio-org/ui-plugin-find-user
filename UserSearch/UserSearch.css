@@ -1,0 +1,17 @@
+.searchControl {
+    margin-left: -3px;
+    margin-top: 8px;
+}
+
+.searchControl button {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.userSearchModal {
+    min-height: 400px;
+}
+
+.userError {
+    color: red
+}
