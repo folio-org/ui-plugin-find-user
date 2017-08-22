@@ -18,7 +18,7 @@ export default class UserSearchModal extends React.Component {
 
   constructor(props) {
     super(props);
-    this.connectedApp = props.stripes.connect(Users);
+    this.runningModule = props.stripes.runModule(Users);
 
     this.state = {
       error: null,
@@ -52,7 +52,7 @@ export default class UserSearchModal extends React.Component {
       <Modal onClose={this.closeModal} size="large" open={this.props.openWhen} label="Select User" dismissible>
         <div className={css.userSearchModal}>
           {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
-          <this.connectedApp {...this.props} onSelectRow={this.passUserOut} />
+          <this.runningModule {...this.props} onSelectRow={this.passUserOut} />
         </div>
       </Modal>
     );
