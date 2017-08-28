@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@folio/stripes-components/lib/Button';
 import Icon from '@folio/stripes-components/lib/Icon';
-import css from './UserSearch.css';
 
+import css from './UserSearch.css';
 import UserSearchModal from './UserSearchModal';
 
 export default class UserSearch extends React.Component {
@@ -32,13 +33,14 @@ export default class UserSearch extends React.Component {
 
   render() {
     return (
-      <div className={css.searchControl} style={{ display: 'flex' }}>
+      <div className={css.searchControl}>
         <Button
           key="searchButton"
+          buttonStyle={this.props.searchButtonStyle}
           onClick={this.openModal}
           title="Find User" tabIndex="-1"
         >
-          <Icon icon="search" color="#fff" />
+          {this.props.searchLabel ? this.props.searchLabel : <Icon icon="search" color="#fff" />}
         </Button>
         <UserSearchModal
           openWhen={this.state.openModal}
@@ -50,3 +52,12 @@ export default class UserSearch extends React.Component {
   }
 
 }
+
+UserSearch.defaultProps = {
+  searchButtonStyle: "primary noLeftRadius",
+};
+
+UserSearch.propTypes = {
+  searchLabel: PropTypes.string,
+  searchButtonStyle: PropTypes.string,
+};
