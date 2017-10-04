@@ -16,7 +16,8 @@
     "displayName": "User-finder (plugin)"
   },
   "scripts": {
-    "lint": "eslint *.js settings || true"
+    "lint": "eslint *.js settings",
+    "test": "echo 'placeholder. no tests implemented'"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",
