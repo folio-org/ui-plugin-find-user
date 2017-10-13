@@ -40,12 +40,13 @@
     "@folio/stripes-logger": "^0.0.2",
     "@folio/users": "^2.7.0",
     "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-router-dom": "^4.0.0"
   },
   "peerDependencies": {
-    "@folio/stripes-core": "^2.7.0",
-    "@folio/stripes-connect": "^2.7.0"
+    "@folio/stripes-connect": "^2.7.0",
+    "@folio/stripes-core": "^2.7.0"
   }
 }
