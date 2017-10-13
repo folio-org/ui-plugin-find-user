@@ -54,7 +54,7 @@ export default class UserSearch extends React.Component {
 }
 
 UserSearch.defaultProps = {
-  searchButtonStyle: "primary noRightRadius",
+  searchButtonStyle: 'primary noRightRadius',
 };
 
 UserSearch.propTypes = {

@@ -16,7 +16,7 @@
     "displayName": "User-finder (plugin)"
   },
   "scripts": {
-    "lint": "eslint *.js settings",
+    "lint": "eslint *.js settings UserSearch",
     "test": "echo 'placeholder. no tests implemented'"
   },
   "devDependencies": {
