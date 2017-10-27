@@ -14,6 +14,7 @@ export default class UserSearchModal extends React.Component {
     selectUser: PropTypes.func.isRequired,
     closeCB: PropTypes.func.isRequired,
     openWhen: PropTypes.bool,
+    dataKey: PropTypes.string,
   }
 
   constructor(props) {
