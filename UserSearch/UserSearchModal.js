@@ -18,7 +18,9 @@ export default class UserSearchModal extends React.Component {
 
   constructor(props) {
     super(props);
-    this.connectedApp = props.stripes.connect(Users);
+
+    const dataKey = props.dataKey;
+    this.connectedApp = props.stripes.connect(Users, { dataKey });
 
     this.state = {
       error: null,
