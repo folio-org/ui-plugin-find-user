@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 import Users from '@folio/users';
 import Modal from '@folio/stripes-components/lib/Modal';
 
@@ -14,11 +14,14 @@ export default class UserSearchModal extends React.Component {
     selectUser: PropTypes.func.isRequired,
     closeCB: PropTypes.func.isRequired,
     openWhen: PropTypes.bool,
+    dataKey: PropTypes.string,
   }
 
   constructor(props) {
     super(props);
-    this.connectedApp = props.stripes.connect(Users);
+
+    const dataKey = props.dataKey;
+    this.connectedApp = props.stripes.connect(Users, { dataKey });
 
     this.state = {
       error: null,
