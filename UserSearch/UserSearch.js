@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@folio/stripes-components/lib/Button';
 import Icon from '@folio/stripes-components/lib/Icon';
+import className from 'classnames';
 
 import css from './UserSearch.css';
 import UserSearchModal from './UserSearchModal';
@@ -19,6 +20,15 @@ export default class UserSearch extends React.Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
+  getStyle() {
+    const { marginBottom0, marginTop0 } = this.props;
+    return className(
+      css.searchControl,
+      { [css.marginBottom0]: marginBottom0 },
+      { [css.marginTop0]: marginTop0 },
+    );
+  }
+
   openModal() {
     this.setState({
       openModal: true,
@@ -33,7 +43,7 @@ export default class UserSearch extends React.Component {
 
   render() {
     return (
-      <div className={css.searchControl}>
+      <div className={this.getStyle()}>
         <Button
           key="searchButton"
           buttonStyle={this.props.searchButtonStyle}
@@ -60,4 +70,6 @@ UserSearch.defaultProps = {
 UserSearch.propTypes = {
   searchLabel: PropTypes.string,
   searchButtonStyle: PropTypes.string,
+  marginBottom0: PropTypes.bool,
+  marginTop0: PropTypes.bool,
 };
