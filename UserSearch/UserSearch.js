@@ -20,6 +20,15 @@ export default class UserSearch extends React.Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
+  getStyle() {
+    const { marginBottom0, marginTop0 } = this.props;
+    return className(
+      css.searchControl,
+      { [css.marginBottom0]: marginBottom0 },
+      { [css.marginTop0]: marginTop0 },
+    );
+  }
+
   openModal() {
     this.setState({
       openModal: true,
@@ -30,15 +39,6 @@ export default class UserSearch extends React.Component {
     this.setState({
       openModal: false,
     });
-  }
-
-  getStyle() {
-    const { marginBottom0,  marginTop0 } = this.props;
-    return className(
-      css.searchControl,
-      { [css.marginBottom0]: marginBottom0 },
-      { [css.marginTop0]: marginTop0 },
-    );
   }
 
   render() {
