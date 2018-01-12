@@ -36,7 +36,7 @@
     "webpack": "1.11.0"
   },
   "dependencies": {
-    "@folio/stripes-components": "^1.7.0",
+    "@folio/stripes-components": "^2.0.0",
     "@folio/stripes-logger": "^0.0.2",
     "@folio/users": "^2.7.0",
     "classnames": "^2.2.5",
