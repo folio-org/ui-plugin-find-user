@@ -6,6 +6,7 @@
 * Lint cleanup. Fixes UIPFU-3.
 * Add `dataKey` to connected Users component. Fixes UIPFU-4.
 * Use more-current stripes-components. Refs STRIPES-495.
+* Use more-current stripes-connect. Refs STRIPES-501.
 
 ## [1.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.1.0) (2017-09-06)
 
