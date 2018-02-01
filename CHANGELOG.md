@@ -7,6 +7,7 @@
 * Add `dataKey` to connected Users component. Fixes UIPFU-4.
 * Use more-current stripes-components. Refs STRIPES-495.
 * Use more-current stripes-connect. Refs STRIPES-501.
+* Turn SearchAndSort's show-single-result feature off. Refs STSMACOM-52. Fixes UIREQ-60, UICHKOUT-54, UIU-373.
 
 ## [1.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.1.0) (2017-09-06)
 
