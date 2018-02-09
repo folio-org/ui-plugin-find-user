@@ -6,7 +6,6 @@ import Modal from '@folio/stripes-components/lib/Modal';
 import css from './UserSearch.css';
 
 export default class UserSearchModal extends React.Component {
-
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,

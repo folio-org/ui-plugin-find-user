@@ -8,7 +8,6 @@ import css from './UserSearch.css';
 import UserSearchModal from './UserSearchModal';
 
 export default class UserSearch extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -48,7 +47,8 @@ export default class UserSearch extends React.Component {
           key="searchButton"
           buttonStyle={this.props.searchButtonStyle}
           onClick={this.openModal}
-          title="Find User" tabIndex="-1"
+          title="Find User"
+          tabIndex="-1"
         >
           {this.props.searchLabel ? this.props.searchLabel : <Icon icon="search" color="#fff" />}
         </Button>
@@ -60,7 +60,6 @@ export default class UserSearch extends React.Component {
       </div>
     );
   }
-
 }
 
 UserSearch.defaultProps = {
