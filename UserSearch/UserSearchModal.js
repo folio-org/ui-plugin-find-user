@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Users from '@folio/users';
+import Users from '@folio/users/Users';
 import Modal from '@folio/stripes-components/lib/Modal';
 
 import css from './UserSearch.css';
