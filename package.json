@@ -1,6 +1,6 @@
 {
   "name": "@folio/plugin-find-user",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "User-finder for Stripes",
   "repository": "folio-org/ui-plugin-find-user",
   "publishConfig": {
@@ -33,7 +33,7 @@
   "dependencies": {
     "@folio/stripes-components": "^2.0.0",
     "@folio/stripes-logger": "^0.0.2",
-    "@folio/users": "^2.7.0",
+    "@folio/users": "^2.12.2",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
