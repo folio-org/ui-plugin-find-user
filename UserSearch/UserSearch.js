@@ -44,6 +44,7 @@ export default class UserSearch extends React.Component {
     return (
       <div className={this.getStyle()}>
         <Button
+          id="clickable-plugin-find-user"
           key="searchButton"
           buttonStyle={this.props.searchButtonStyle}
           onClick={this.openModal}
