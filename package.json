@@ -1,7 +1,7 @@
 {
   "name": "@folio/plugin-find-user",
   "version": "1.1.1",
-  "description": "User-finder for Stripes",
+  "description": "ui-plugin-find-user.meta.desc",
   "repository": "folio-org/ui-plugin-find-user",
   "publishConfig": {
     "registry": "https://repository.folio.org/repository/npm-folio/"
@@ -13,7 +13,7 @@
   "stripes": {
     "type": "plugin",
     "pluginType": "find-user",
-    "displayName": "User-finder (plugin)"
+    "displayName": "ui-plugin-find-user.meta.title"
   },
   "scripts": {
     "lint": "eslint *.js settings UserSearch",
