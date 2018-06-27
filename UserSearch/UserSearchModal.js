@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Users from '@folio/users';
+import Users from '@folio/users/Users';
 import Modal from '@folio/stripes-components/lib/Modal';
 
 import css from './UserSearch.css';
 
 export default class UserSearchModal extends React.Component {
-
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
     }).isRequired,
     selectUser: PropTypes.func.isRequired,
     closeCB: PropTypes.func.isRequired,
+    onCloseModal: PropTypes.func,
     openWhen: PropTypes.bool,
     dataKey: PropTypes.string,
   }
@@ -55,7 +55,7 @@ export default class UserSearchModal extends React.Component {
       <Modal onClose={this.closeModal} size="large" open={this.props.openWhen} label="Select User" dismissible>
         <div className={css.userSearchModal}>
           {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
-          <this.connectedApp {...this.props} onSelectRow={this.passUserOut} />
+          <this.connectedApp {...this.props} onSelectRow={this.passUserOut} onComponentWillUnmount={this.props.onCloseModal} showSingleResult={false} browseOnly />
         </div>
       </Modal>
     );
