@@ -13,7 +13,7 @@
   "stripes": {
     "type": "plugin",
     "pluginType": "find-user",
-    "displayName": "User-finder (plugin)"
+    "displayName": "ui-plugin-find-user.meta.title"
   },
   "scripts": {
     "lint": "eslint *.js settings UserSearch",
