@@ -4,4 +4,4 @@ buildNPM {
   runLint = 'yes'
   runTest = 'yes'
   stripesPlatform = 'platform-core'
-}  
+}

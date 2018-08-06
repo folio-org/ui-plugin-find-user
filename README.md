@@ -15,9 +15,9 @@ of the Module Developer's Guide.
 
 ## Additional information
 
-Other [modules](http://dev.folio.org/source-code/#client-side).
+Other [modules](https://dev.folio.org/source-code/#client-side).
 
 See project [UIPFU](https://issues.folio.org/browse/UIPFU)
-at the [FOLIO issue tracker](http://dev.folio.org/community/guide-issues).
+at the [FOLIO issue tracker](https://dev.folio.org/guidelines/issue-tracker/).
 
-Other FOLIO Developer documentation is at [dev.folio.org](http://dev.folio.org/)
+Other FOLIO Developer documentation is at [dev.folio.org](https://dev.folio.org/)
