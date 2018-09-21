@@ -53,10 +53,8 @@ export default class UserSearchModal extends React.Component {
   render() {
     return (
       <Modal onClose={this.closeModal} contentClass={css.modalContent} size="large" open={this.props.openWhen} label="Select User" dismissible>
-        <div className={css.userSearchModal}>
-          {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
-          <this.connectedApp {...this.props} onSelectRow={this.passUserOut} onComponentWillUnmount={this.props.onCloseModal} showSingleResult={false} browseOnly />
-        </div>
+        {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
+        <this.connectedApp {...this.props} onSelectRow={this.passUserOut} onComponentWillUnmount={this.props.onCloseModal} showSingleResult={false} browseOnly />
       </Modal>
     );
   }
