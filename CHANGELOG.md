@@ -13,7 +13,7 @@
 * Set element ID on button for regression testing. UICHKOUT-414.
 * Import Users without routing. Fixes UIPFU-7.
 * Make styles more flexible. Fixes UIPFU-5.
-* Added a some CSS to the modal content. Fixes Folio-1418.
+* Added CSS to the modal content to fix scroll height bug. Fixes Folio-1418.
 
 ## [1.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.1.0) (2017-09-06)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.0.0...v1.1.0)
