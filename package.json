@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@folio/stripes-components": "^3.0.0",
-    "@folio/users": "^2.12.2",
+    "@folio/users": "^2.16.0",
     "classnames": "^2.2.5",
     "prop-types": "^15.6.0"
   },
