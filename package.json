@@ -21,9 +21,7 @@
   },
   "devDependencies": {
     "@folio/eslint-config-stripes": "^3.2.0",
-    "@folio/stripes-connect": "^3.1.1",
-    "@folio/stripes-core": "^2.7.0",
-    "@folio/stripes-logger": "^0.0.2",
+    "@folio/stripes": "^1.0.0",
     "babel-eslint": "^9.0.0",
     "eslint": "^5.5.0",
     "react": "^16.5.0",
@@ -31,14 +29,12 @@
     "webpack": "^4.10.2"
   },
   "dependencies": {
-    "@folio/stripes-components": "^3.0.0",
-    "@folio/users": "^2.16.0",
+    "@folio/users": "^2.17.0",
     "classnames": "^2.2.5",
     "prop-types": "^15.6.0"
   },
   "peerDependencies": {
-    "@folio/stripes-connect": "^3.1.1",
-    "@folio/stripes-core": "^2.7.0",
+    "@folio/stripes": "^1.0.0",
     "react": "*"
   }
 }

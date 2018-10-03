@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@folio/stripes-components/lib/Button';
-import Icon from '@folio/stripes-components/lib/Icon';
+import { Button, Icon } from '@folio/stripes/components';
 import className from 'classnames';
 
 import css from './UserSearch.css';
