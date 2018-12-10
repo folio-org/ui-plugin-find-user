@@ -1,6 +1,6 @@
 # Change history for ui-plugin-find-user
 
-## [1.4.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.3.0) (2018-12-10)
+## [1.4.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.4.0) (2018-12-10)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.3.0...v1.4.0)
 
 * Lenient prop-types for labels. 
