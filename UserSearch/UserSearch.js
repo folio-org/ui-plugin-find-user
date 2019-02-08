@@ -43,7 +43,7 @@ export default class UserSearch extends React.Component {
     return (
       <div className={this.getStyle()}>
         <Button
-          id="clickable-plugin-find-user"
+          id={this.props.id}
           key="searchButton"
           buttonStyle={this.props.searchButtonStyle}
           onClick={this.openModal}
@@ -63,10 +63,12 @@ export default class UserSearch extends React.Component {
 }
 
 UserSearch.defaultProps = {
+  id: 'clickable-plugin-find-user',
   searchButtonStyle: 'primary noRightRadius',
 };
 
 UserSearch.propTypes = {
+  id: PropTypes.string,
   searchLabel: PropTypes.node,
   searchButtonStyle: PropTypes.string,
   marginBottom0: PropTypes.bool,
