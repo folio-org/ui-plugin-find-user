@@ -1,5 +1,9 @@
 # Change history for ui-plugin-find-user
 
+## 1.6.0 (IN PROGRESS)
+
+* Accept an `id` prop for the find user button. Refs UIU-884.
+
 ## [1.5.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.5.0) (2019-01-25)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.4.0...v1.5.0)
 
