@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Users from '@folio/users/src/Users';
 import { Modal } from '@folio/stripes/components';
+import packageInfo from '../package';
 
 import css from './UserSearch.css';
 
@@ -54,7 +55,7 @@ export default class UserSearchModal extends React.Component {
     return (
       <Modal enforceFocus={false} onClose={this.closeModal} contentClass={css.modalContent} size="large" open={this.props.openWhen} label="Select User" dismissible>
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
-        <this.connectedApp {...this.props} onSelectRow={this.passUserOut} onComponentWillUnmount={this.props.onCloseModal} showSingleResult={false} browseOnly />
+        <this.connectedApp {...this.props} packageInfo={packageInfo} onSelectRow={this.passUserOut} onComponentWillUnmount={this.props.onCloseModal} showSingleResult={false} browseOnly />
       </Modal>
     );
   }
