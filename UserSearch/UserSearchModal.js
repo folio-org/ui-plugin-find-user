@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Users from '@folio/users/src/Users';
 import { Modal } from '@folio/stripes/components';
+import UserSearchContainer from './UserSearchContainer';
 
 import css from './UserSearch.css';
 
@@ -21,7 +21,7 @@ export default class UserSearchModal extends React.Component {
     super(props);
 
     const dataKey = props.dataKey;
-    this.connectedApp = props.stripes.connect(Users, { dataKey });
+    this.connectedApp = props.stripes.connect(UserSearchContainer, { dataKey });
 
     this.state = {
       error: null,
