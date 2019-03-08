@@ -169,6 +169,14 @@ class UserSearchContainer extends React.Component {
         filterPaneIsVisible
         notLoadedMessage={notLoadedMessage}
       />) : 'no source yet';
+
+    const resultsHeader = (
+      <React.Fragment>
+        <span>User Search Results</span>
+        <br />
+        <small>{`${data.length} results found`}</small>
+      </React.Fragment>
+    );
     const resultsFormatter = {
       status: user => (
         <AppIcon app="users" size="small">
@@ -203,7 +211,7 @@ class UserSearchContainer extends React.Component {
               activeFilters,
             }) => (
               <Paneset id={`${idPrefix}-paneset`}>
-                <Pane defaultWidth="18%" paneTitle="User search">
+                <Pane defaultWidth="22%" paneTitle="User search">
                   <SearchField
                     label="user search"
                     name="query"
@@ -224,7 +232,7 @@ class UserSearchContainer extends React.Component {
                     config={filterConfig}
                   />
                 </Pane>
-                <Pane subheader={data.length > 0 ? `${data.length} results found` : ''} paneTitle="User search results" defaultWidth="fill" padContent={false}>
+                <Pane paneTitle={resultsHeader} defaultWidth="fill" padContent={false}>
                   <IntlConsumer>
                     {intl => (
                       <MultiColumnList
