@@ -110,7 +110,7 @@ class UserSearchContainer extends React.Component {
 
   static defaultProps = {
     idPrefix: 'uiPluginFindUsers-',
-    visibleColumns: ['status', 'name', 'barcode', 'patron group', 'email']
+    visibleColumns: ['status', 'name', 'barcode', 'patron group', 'username', 'email']
   };
 
   constructor(props) {
@@ -161,6 +161,7 @@ class UserSearchContainer extends React.Component {
 
     const sortOrder = query.sort || '';
     const patronGroups = (resources.patronGroups || {}).records || [];
+    const data = get(resources, 'records.records', []);
     const message = this.source ? (
       <SearchAndSortNoResultsMessage
         source={this.source}
@@ -223,12 +224,12 @@ class UserSearchContainer extends React.Component {
                     config={filterConfig}
                   />
                 </Pane>
-                <Pane paneTitle="User search results" defaultWidth="fill">
+                <Pane subheader={data.length > 0 ? `${data.length} results found` : ''} paneTitle="User search results" defaultWidth="fill" padContent={false}>
                   <IntlConsumer>
                     {intl => (
                       <MultiColumnList
                         visibleColumns={visibleColumns}
-                        contentData={get(resources, 'records.records', [])}
+                        contentData={data}
                         columnMapping={{
                           status: intl.formatMessage({ id: 'ui-users.active' }),
                           name: intl.formatMessage({ id: 'ui-users.information.name' }),
