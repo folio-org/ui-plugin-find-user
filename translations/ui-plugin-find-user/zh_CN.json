@@ -1,3 +1,5 @@
 {
-    "meta.title": "用户查找器（插件）"
+    "meta.title": "用户查找器（插件）",
+    "modal.label": "Select User",
+    "searchButton.title": "Find User"
 }

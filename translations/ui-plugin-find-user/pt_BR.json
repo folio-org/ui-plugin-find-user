@@ -1,3 +1,5 @@
 {
-    "meta.title": "Localizador de usuários (plugin)"
+    "meta.title": "Localizador de usuários (plugin)",
+    "modal.label": "Select User",
+    "searchButton.title": "Find User"
 }

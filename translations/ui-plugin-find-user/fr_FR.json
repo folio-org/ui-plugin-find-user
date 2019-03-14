@@ -1,3 +1,5 @@
 {
-    "meta.title": "User-finder (plugin)"
+    "meta.title": "User-finder (plugin)",
+    "modal.label": "Select User",
+    "searchButton.title": "Find User"
 }

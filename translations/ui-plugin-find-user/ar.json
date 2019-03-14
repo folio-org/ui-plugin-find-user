@@ -1,3 +1,5 @@
 {
-    "meta.title": "باحث المستخدم (برنامج مساعد)"
+    "meta.title": "باحث المستخدم (برنامج مساعد)",
+    "modal.label": "Select User",
+    "searchButton.title": "Find User"
 }
