@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Icon } from '@folio/stripes/components';
 import className from 'classnames';
+import { FormattedMessage } from 'react-intl';
 
-import css from './UserSearch.css';
+import { Button, Icon } from '@folio/stripes/components';
+
 import UserSearchModal from './UserSearchModal';
 
-export default class UserSearch extends React.Component {
+import css from './UserSearch.css';
+
+class UserSearch extends Component {
   constructor(props) {
     super(props);
 
@@ -40,17 +43,24 @@ export default class UserSearch extends React.Component {
   }
 
   render() {
+    const { id, searchButtonStyle, searchLabel } = this.props;
+
     return (
       <div className={this.getStyle()}>
-        <Button
-          id={this.props.id}
-          key="searchButton"
-          buttonStyle={this.props.searchButtonStyle}
-          onClick={this.openModal}
-          tabIndex="-1"
-        >
-          {this.props.searchLabel ? this.props.searchLabel : <Icon icon="search" color="#fff" />}
-        </Button>
+        <FormattedMessage id="ui-plugin-find-user.searchButton.title">
+          {ariaLabel => (
+            <Button
+              id={id}
+              key="searchButton"
+              buttonStyle={searchButtonStyle}
+              tabIndex="-1"
+              ariaLabel={ariaLabel}
+              onClick={this.openModal}
+            >
+              {searchLabel || <Icon icon="search" color="#fff" />}
+            </Button>
+          )}
+        </FormattedMessage>
         <UserSearchModal
           openWhen={this.state.openModal}
           closeCB={this.closeModal}
@@ -73,3 +83,5 @@ UserSearch.propTypes = {
   marginBottom0: PropTypes.bool,
   marginTop0: PropTypes.bool,
 };
+
+export default UserSearch;

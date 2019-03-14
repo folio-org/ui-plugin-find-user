@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import Users from '@folio/users/src/Users';
 import { Modal } from '@folio/stripes/components';
@@ -6,7 +7,7 @@ import packageInfo from '../package';
 
 import css from './UserSearch.css';
 
-export default class UserSearchModal extends React.Component {
+class UserSearchModal extends Component {
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
@@ -53,10 +54,20 @@ export default class UserSearchModal extends React.Component {
 
   render() {
     return (
-      <Modal enforceFocus={false} onClose={this.closeModal} contentClass={css.modalContent} size="large" open={this.props.openWhen} label="Select User" dismissible>
+      <Modal
+        contentClass={css.modalContent}
+        dismissible
+        enforceFocus={false}
+        label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
+        open={this.props.openWhen}
+        size="large"
+        onClose={this.closeModal}
+      >
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
         <this.connectedApp {...this.props} packageInfo={packageInfo} onSelectRow={this.passUserOut} onComponentWillUnmount={this.props.onCloseModal} showSingleResult={false} browseOnly />
       </Modal>
     );
   }
 }
+
+export default UserSearchModal;
