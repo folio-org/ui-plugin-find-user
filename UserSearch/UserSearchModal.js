@@ -59,9 +59,9 @@ class UserSearchModal extends Component {
         dismissible
         enforceFocus={false}
         label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
-        onClose={this.closeModal}
         open={this.props.openWhen}
         size="large"
+        onClose={this.closeModal}
       >
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
         <this.connectedApp {...this.props} packageInfo={packageInfo} onSelectRow={this.passUserOut} onComponentWillUnmount={this.props.onCloseModal} showSingleResult={false} browseOnly />
