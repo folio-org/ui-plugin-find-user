@@ -1,6 +1,7 @@
 # Change history for ui-plugin-find-user
 
-## 1.6.0 (IN PROGRESS)
+## [1.6.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.6.0) (2019-03-15)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.5.0...v1.6.0)
 
 * Accept an `id` prop for the find user button. Refs UIU-884.
 * Pass correct `packageInfo` into Users. Refs of ERM-72.
