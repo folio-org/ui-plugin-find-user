@@ -1,5 +1,7 @@
 {
   "meta.title": "User-finder (plugin)",
   "noResults": "Choose a filter or enter a search query to show results.",
-  "searchFieldLabel": "Search"
+  "searchFieldLabel": "Search",
+  "modal.label": "Select User",
+  "searchButton.title": "Find User"
 }

@@ -1,3 +1,5 @@
 {
-    "meta.title": "Felhasználó-kereső (plugin)"
+    "meta.title": "Felhasználó-kereső (plugin)",
+    "modal.label": "Select User",
+    "searchButton.title": "Find User"
 }
