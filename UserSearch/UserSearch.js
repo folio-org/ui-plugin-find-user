@@ -16,6 +16,7 @@ export default class UserSearch extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.searchButton = React.createRef();
   }
 
   getStyle() {
@@ -48,6 +49,7 @@ export default class UserSearch extends React.Component {
           buttonStyle={this.props.searchButtonStyle}
           onClick={this.openModal}
           tabIndex="-1"
+          buttonRef={this.searchButton}
         >
           {this.props.searchLabel ? this.props.searchLabel : <Icon icon="search" color="#fff" />}
         </Button>

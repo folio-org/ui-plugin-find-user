@@ -5,23 +5,24 @@ import get from 'lodash/get';
 import { FormattedMessage } from 'react-intl';
 import { IntlConsumer, AppIcon } from '@folio/stripes/core';
 import {
-  Button,
   MultiColumnList,
   SearchField,
   Paneset,
   Pane,
+  Button,
 } from '@folio/stripes/components';
 
 import {
   SearchAndSortQuery,
   makeQueryFunction,
-  makeConnectedSource,
   StripesConnectedSource,
-  SearchAndSortNoResultsMessage,
+  SearchAndSortNoResultsMessage as NoResultsMessage,
+  SearchAndSortResetButton as ResetButton,
 } from '@folio/stripes/smart-components';
 
 import Filters from './Filters';
 import filterConfig from './filterConfig';
+import css from './UserSearch.css';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -96,12 +97,9 @@ class UserSearchContainer extends React.Component {
       }),
       query: PropTypes.shape({
         update: PropTypes.func.isRequired,
+        replace: PropTypes.func.isRequired,
       })
     }).isRequired,
-    notLoadedMessage: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.string,
-    ]),
     stripes: PropTypes.shape({
       logger: PropTypes.object
     }).isRequired,
@@ -116,11 +114,18 @@ class UserSearchContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    const logger = props.stripes.logger;
-
-    this.log = logger.log.bind(logger);
+    this.logger = props.stripes.logger;
+    this.log = this.logger.log.bind(this.logger);
     this.queryHelper = React.createRef();
-    this.source = new StripesConnectedSource(this.props, logger);
+    this.searchField = React.createRef();
+  }
+
+  componentDidMount() {
+    this.source = new StripesConnectedSource(this.props, this.logger);
+    this.props.mutator.query.replace('');
+    if (this.searchField.current) {
+      this.searchField.current.focus();
+    }
   }
 
   componentDidUpdate() {
@@ -133,10 +138,13 @@ class UserSearchContainer extends React.Component {
         this.props.mutator.initializedFilterConfig.replace(true); // triggers refresh of users
       }
     }
+    this.source.update(this.props);
   }
 
   onNeedMore = () => {
-    this.source.fetchMore(RESULT_COUNT_INCREMENT);
+    if (this.source) {
+      this.source.fetchMore(RESULT_COUNT_INCREMENT);
+    }
   };
 
   querySetter = ({ nsValues }) => {
@@ -154,29 +162,29 @@ class UserSearchContainer extends React.Component {
       resources,
       idPrefix,
       visibleColumns,
-      notLoadedMessage
     } = this.props;
 
+    if (this.source) {
+      this.source.update(this.props);
+    }
     const query = get(resources, 'query') || {};
-
+    const count = this.source ? this.source.totalCount() : 0;
     const sortOrder = query.sort || '';
     const patronGroups = (resources.patronGroups || {}).records || [];
     const data = get(resources, 'records.records', []);
-    const message = this.source ? (
-      <SearchAndSortNoResultsMessage
+    const resultsStatusMessage = this.source ? (
+      <NoResultsMessage
         source={this.source}
         searchTerm={query.query || ''}
         filterPaneIsVisible
-        notLoadedMessage={notLoadedMessage}
       />) : 'no source yet';
 
-    const resultsHeader = (
-      <React.Fragment>
-        <span>User Search Results</span>
-        <br />
-        <small>{`${data.length} results found`}</small>
-      </React.Fragment>
-    );
+    const resultsHeader = 'User Search Results';
+    let resultPaneSub = <FormattedMessage id="stripes-smart-components.searchCriteria" />;
+    if (this.source && this.source.loaded()) {
+      resultPaneSub = <FormattedMessage id="stripes-smart-components.searchResultsCountHeader" values={{ count }} />;
+    }
+
     const resultsFormatter = {
       status: user => (
         <AppIcon app="users" size="small">
@@ -209,35 +217,53 @@ class UserSearchContainer extends React.Component {
               onSort,
               getFilterHandlers,
               activeFilters,
+              filterChanged,
+              searchChanged,
             }) => (
-              <Paneset id={`${idPrefix}-paneset`}>
-                <Pane defaultWidth="22%" paneTitle="User search">
-                  <SearchField
-                    label="user search"
-                    name="query"
-                    onChange={getSearchHandlers().query}
-                    value={searchValue.query}
-                  />
-                  <Button
-                    buttonStyle="primary"
-                    disabled={(!searchValue.query || searchValue.query === '')}
-                    onClick={onSubmitSearch}
-                    fullWidth
-                  >
-                    Search
-                  </Button>
-                  <Filters
-                    onChangeHandlers={getFilterHandlers()}
-                    activeFilters={activeFilters}
-                    config={filterConfig}
-                  />
-                </Pane>
-                <Pane paneTitle={resultsHeader} defaultWidth="fill" padContent={false}>
-                  <IntlConsumer>
-                    {intl => (
+              <IntlConsumer>
+                {intl => (
+                  <Paneset id={`${idPrefix}-paneset`}>
+                    <Pane defaultWidth="22%" paneTitle="User search">
+                      <form onSubmit={onSubmitSearch}>
+                        <SearchField
+                          aria-label="user search"
+                          name="query"
+                          className={css.searchField}
+                          onChange={getSearchHandlers().query}
+                          value={searchValue.query}
+                          marginBottom0
+                          autoFocus
+                          inputRef={this.searchField}
+                        />
+                        <Button
+                          type="submit"
+                          buttonStyle="primary"
+                          fullWidth
+                          disabled={(!searchValue.query || searchValue.query === '')}
+                          data-test-search-and-sort-submit
+                        >
+                          Search
+                        </Button>
+                        <div className={css.resetButtonWrap}>
+                          <ResetButton
+                            id="clickable-reset-all"
+                            label={<FormattedMessage id="stripes-smart-components.resetAll" />}
+                            visible={filterChanged || searchChanged}
+                            onClick={() => { getSearchHandlers().reset(); getFilterHandlers().reset(); }}
+                          />
+                        </div>
+                        <Filters
+                          onChangeHandlers={getFilterHandlers()}
+                          activeFilters={activeFilters}
+                          config={filterConfig}
+                        />
+                      </form>
+                    </Pane>
+                    <Pane paneTitle={resultsHeader} paneSub={resultPaneSub} defaultWidth="fill" padContent={false}>
                       <MultiColumnList
                         visibleColumns={visibleColumns}
                         contentData={data}
+                        totalCount={count}
                         columnMapping={{
                           status: intl.formatMessage({ id: 'ui-users.active' }),
                           name: intl.formatMessage({ id: 'ui-users.information.name' }),
@@ -248,20 +274,21 @@ class UserSearchContainer extends React.Component {
                         }}
                         formatter={resultsFormatter}
                         onRowClick={onSelectRow}
-                        onNeedMore={this.onNeedMore}
+                        onNeedMoreData={this.onNeedMore}
                         onHeaderClick={onSort}
                         sortOrder={sortOrder.replace(/^-/, '').replace(/,.*/, '')}
                         sortDirection={sortOrder.startsWith('-') ? 'descending' : 'ascending'}
-                        isEmptyMessage={message}
+                        isEmptyMessage={resultsStatusMessage}
                         autosize
                         virtualize
                       />
-                    )}
-                  </IntlConsumer>
-                </Pane>
-              </Paneset>
-            )
-          }
+
+                    </Pane>
+
+                  </Paneset>
+                )}
+              </IntlConsumer>
+            )}
         </SearchAndSortQuery>
       </div>);
   }
