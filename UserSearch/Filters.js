@@ -19,7 +19,7 @@ export default class Filters extends React.Component {
   render() {
     const {
       activeFilters,
-      onChangeHandlers: { checkbox, clear },
+      onChangeHandlers: { checkbox, clearGroup },
       config,
     } = this.props;
 
@@ -31,7 +31,7 @@ export default class Filters extends React.Component {
         config={config}
         filters={groupFilters}
         onChangeFilter={checkbox}
-        onClearFilter={clear}
+        onClearFilter={clearGroup}
       />
     );
   }

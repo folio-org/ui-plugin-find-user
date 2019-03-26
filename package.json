@@ -19,6 +19,10 @@
     "lint": "eslint .",
     "test": "echo 'placeholder. no tests implemented'"
   },
+  "okapiInterfaces": {
+    "users": "15.0",
+    "users-bl": "3.2 4.0"
+  },
   "devDependencies": {
     "@folio/eslint-config-stripes": "^3.2.0",
     "@folio/stripes": "^2.0.0",
