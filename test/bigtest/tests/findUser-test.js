@@ -5,16 +5,15 @@ import { expect } from 'chai';
 import setupApplication, { mount } from '../helpers/helpers';
 import PluginHarness from '../helpers/PluginHarness';
 import FindUserInteractor from '../interactors/findUser';
+
 let closeHandled = false;
 let userChosen = false;
 
 describe('UI-plugin-find-user', function () {
   const findUser = new FindUserInteractor();
   setupApplication();
-  
 
   describe('rendering', function () {
-    
     beforeEach(async function () {
       await this.server.createList('user', 40);
       this.visit('/dummy');

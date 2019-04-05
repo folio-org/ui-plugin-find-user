@@ -7,7 +7,6 @@ import {
   fillable,
   blurrable,
   is,
-  attribute,
   isPresent,
   text,
 } from '@bigtest/interactor';

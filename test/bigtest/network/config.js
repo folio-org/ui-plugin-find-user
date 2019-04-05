@@ -1,4 +1,4 @@
-// eslint-disable-next-line jsx-a11y/label-has-associated-control
+// eslint-disable-next-line
 import CQLParser from './cql';
 
 // typical mirage config export
