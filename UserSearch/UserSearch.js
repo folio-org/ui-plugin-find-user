@@ -22,6 +22,18 @@ class UserSearch extends Component {
     this.searchButton = React.createRef();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      afterClose
+    } = this.props;
+
+    if (prevState.openModal && this.state.openModal === false) {
+      if (afterClose) {
+        afterClose();
+      }
+    }
+  }
+
   getStyle() {
     const { marginBottom0, marginTop0 } = this.props;
     return className(
@@ -47,7 +59,7 @@ class UserSearch extends Component {
     const { id, searchButtonStyle, searchLabel } = this.props;
 
     return (
-      <div className={this.getStyle()}>
+      <div className={this.getStyle()} data-test-plugin-find-user>
         <FormattedMessage id="ui-plugin-find-user.searchButton.title">
           {ariaLabel => (
             <Button
@@ -55,9 +67,10 @@ class UserSearch extends Component {
               key="searchButton"
               buttonStyle={searchButtonStyle}
               tabIndex="-1"
-              ariaLabel={ariaLabel}
+              aria-label={ariaLabel}
               onClick={this.openModal}
               buttonRef={this.searchButton}
+              data-test-plugin-find-user-button
             >
               {searchLabel || <Icon icon="search" color="#fff" />}
             </Button>
@@ -79,11 +92,13 @@ UserSearch.defaultProps = {
 };
 
 UserSearch.propTypes = {
+  afterClose: PropTypes.func,
   id: PropTypes.string,
   searchLabel: PropTypes.node,
   searchButtonStyle: PropTypes.string,
   marginBottom0: PropTypes.bool,
   marginTop0: PropTypes.bool,
+  onModalClose: PropTypes.func,
 };
 
 export default UserSearch;

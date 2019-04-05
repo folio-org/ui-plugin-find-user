@@ -3,5 +3,13 @@
   "noResults": "Choose a filter or enter a search query to show results.",
   "searchFieldLabel": "Search",
   "modal.label": "Select User",
-  "searchButton.title": "Find User"
+  "searchButton.title": "Find User",
+  "information.patronGroup": "Patron group",
+  "active": "Active",
+  "information.name": "Name",
+  "information.barcode": "Barcode",
+  "information.username": "Username",
+  "contact.email": "Email",
+  "status": "Status",
+  "inactive": "inactive"
 }

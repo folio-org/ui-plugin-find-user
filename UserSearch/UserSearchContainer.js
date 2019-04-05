@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
+import noop from 'lodash/noop';
 
 import { FormattedMessage } from 'react-intl';
 import { IntlConsumer, AppIcon } from '@folio/stripes/core';
@@ -9,6 +10,7 @@ import {
   SearchField,
   Paneset,
   Pane,
+  Icon,
   Button,
 } from '@folio/stripes/components';
 
@@ -116,7 +118,6 @@ class UserSearchContainer extends React.Component {
 
     this.logger = props.stripes.logger;
     this.log = this.logger.log.bind(this.logger);
-    this.queryHelper = React.createRef();
     this.searchField = React.createRef();
   }
 
@@ -147,8 +148,12 @@ class UserSearchContainer extends React.Component {
     }
   };
 
-  querySetter = ({ nsValues }) => {
-    this.props.mutator.query.update(nsValues);
+  querySetter = ({ nsValues, state }) => {
+    if (/reset/.test(state.changeType)) {
+      this.props.mutator.query.replace(nsValues);
+    } else {
+      this.props.mutator.query.update(nsValues);
+    }
   }
 
   queryGetter = () => {
@@ -173,11 +178,15 @@ class UserSearchContainer extends React.Component {
     const patronGroups = (resources.patronGroups || {}).records || [];
     const data = get(resources, 'records.records', []);
     const resultsStatusMessage = this.source ? (
-      <NoResultsMessage
-        source={this.source}
-        searchTerm={query.query || ''}
-        filterPaneIsVisible
-      />) : 'no source yet';
+      <div data-test-find-user-no-results-message>
+        <NoResultsMessage
+          data-test-find-user-no-results-message
+          source={this.source}
+          searchTerm={query.query || ''}
+          filterPaneIsVisible
+          toggleFilterPane={noop}
+        />
+      </div>) : 'no source yet';
 
     const resultsHeader = 'User Search Results';
     let resultPaneSub = <FormattedMessage id="stripes-smart-components.searchCriteria" />;
@@ -188,7 +197,7 @@ class UserSearchContainer extends React.Component {
     const resultsFormatter = {
       status: user => (
         <AppIcon app="users" size="small">
-          {user.active ? <FormattedMessage id="ui-users.active" /> : <FormattedMessage id="ui-users.inactive" />}
+          {user.active ? <FormattedMessage id="ui-plugin-find-user.active" /> : <FormattedMessage id="ui-plugin-find-user.inactive" />}
         </AppIcon>
       ),
       name: user => getFullName(user),
@@ -207,7 +216,7 @@ class UserSearchContainer extends React.Component {
           querySetter={this.querySetter}
           queryGetter={this.queryGetter}
           onComponentWillUnmount={onComponentWillUnmount}
-          ref={this.queryHelper}
+          initialSearch="?sort=name"
         >
           {
             ({
@@ -219,7 +228,16 @@ class UserSearchContainer extends React.Component {
               activeFilters,
               filterChanged,
               searchChanged,
-            }) => (
+              resetAll,
+            }) => {
+              const disableReset = () => {
+                if(filterChanged || searchChanged) {
+                  return false;
+                }
+                return true;
+              }
+
+              return (
               <IntlConsumer>
                 {intl => (
                   <Paneset id={`${idPrefix}-paneset`}>
@@ -234,23 +252,28 @@ class UserSearchContainer extends React.Component {
                           marginBottom0
                           autoFocus
                           inputRef={this.searchField}
+                          data-test-user-search-input
                         />
                         <Button
                           type="submit"
                           buttonStyle="primary"
                           fullWidth
                           disabled={(!searchValue.query || searchValue.query === '')}
-                          data-test-search-and-sort-submit
+                          data-test-user-search-submit
                         >
                           Search
                         </Button>
                         <div className={css.resetButtonWrap}>
-                          <ResetButton
+                          <Button
                             id="clickable-reset-all"
-                            label={<FormattedMessage id="stripes-smart-components.resetAll" />}
-                            visible={filterChanged || searchChanged}
-                            onClick={() => { getSearchHandlers().reset(); getFilterHandlers().reset(); }}
-                          />
+                            disabled={disableReset()}
+                            fullWidth
+                            onClick={resetAll}
+                          >
+                            <Icon icon="times-circle-solid">
+                              <FormattedMessage id="stripes-smart-components.resetAll" />
+                            </Icon>
+                          </Button>
                         </div>
                         <Filters
                           onChangeHandlers={getFilterHandlers()}
@@ -265,12 +288,12 @@ class UserSearchContainer extends React.Component {
                         contentData={data}
                         totalCount={count}
                         columnMapping={{
-                          status: intl.formatMessage({ id: 'ui-users.active' }),
-                          name: intl.formatMessage({ id: 'ui-users.information.name' }),
-                          barcode: intl.formatMessage({ id: 'ui-users.information.barcode' }),
-                          patronGroup: intl.formatMessage({ id: 'ui-users.information.patronGroup' }),
-                          username: intl.formatMessage({ id: 'ui-users.information.username' }),
-                          email: intl.formatMessage({ id: 'ui-users.contact.email' }),
+                          status: intl.formatMessage({ id: 'ui-plugin-find-user.active' }),
+                          name: intl.formatMessage({ id: 'ui-plugin-find-user.information.name' }),
+                          barcode: intl.formatMessage({ id: 'ui-plugin-find-user.information.barcode' }),
+                          patronGroup: intl.formatMessage({ id: 'ui-plugin-find-user.information.patronGroup' }),
+                          username: intl.formatMessage({ id: 'ui-plugin-find-user.information.username' }),
+                          email: intl.formatMessage({ id: 'ui-plugin-find-user.contact.email' }),
                         }}
                         formatter={resultsFormatter}
                         onRowClick={onSelectRow}
@@ -288,7 +311,8 @@ class UserSearchContainer extends React.Component {
                   </Paneset>
                 )}
               </IntlConsumer>
-            )}
+              );
+            }}
         </SearchAndSortQuery>
       </div>);
   }
