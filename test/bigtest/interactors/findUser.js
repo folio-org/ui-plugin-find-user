@@ -11,7 +11,7 @@ import {
   text,
 } from '@bigtest/interactor';
 
-import css from '../../../UserSearch/UserSearch.css';
+import css from '../../../src/UserSearch.css';
 
 @interactor class SearchField {
   static defaultScope = '[data-test-user-search-input]';
@@ -53,7 +53,11 @@ import css from '../../../UserSearch/UserSearch.css';
 }
 
 @interactor class FindUserInteractor {
-  button = scoped('[data-test-plugin-find-user-button]');
+  button = scoped('[data-test-plugin-find-user-button]', {
+    click: clickable(),
+    isFocused: is(':focus'),
+  });
+
   modal = new PluginModalInteractor(`.${css.modalContent}`);
 }
 

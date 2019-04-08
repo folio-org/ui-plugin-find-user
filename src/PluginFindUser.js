@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import className from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import contains from 'dom-helpers/query/contains';
 
 import { Button, Icon } from '@folio/stripes/components';
 
@@ -9,7 +10,7 @@ import UserSearchModal from './UserSearchModal';
 
 import css from './UserSearch.css';
 
-class UserSearch extends Component {
+class PluginFindUser extends Component {
   constructor(props) {
     super(props);
 
@@ -19,19 +20,8 @@ class UserSearch extends Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.searchButton = React.createRef();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const {
-      afterClose
-    } = this.props;
-
-    if (prevState.openModal && this.state.openModal === false) {
-      if (afterClose) {
-        afterClose();
-      }
-    }
+    this.modalTrigger = React.createRef();
+    this.modalContent = React.createRef();
   }
 
   getStyle() {
@@ -49,9 +39,23 @@ class UserSearch extends Component {
     });
   }
 
-  closeModal() {
+  closeModal(focusWithin) {
+    const {
+      afterClose
+    } = this.props;
+
     this.setState({
       openModal: false,
+    }, () => {
+      if (afterClose) {
+        afterClose();
+      }
+
+      if (this.modalContent.current && this.modalTrigger.current) {
+        if (contains(this.modalContent.current, document.activeElement)) {
+          this.modalTrigger.current.focus();
+        }
+      }
     });
   }
 
@@ -69,7 +73,7 @@ class UserSearch extends Component {
               tabIndex="-1"
               aria-label={ariaLabel}
               onClick={this.openModal}
-              buttonRef={this.searchButton}
+              buttonRef={this.modalTrigger}
               data-test-plugin-find-user-button
             >
               {searchLabel || <Icon icon="search" color="#fff" />}
@@ -79,6 +83,7 @@ class UserSearch extends Component {
         <UserSearchModal
           openWhen={this.state.openModal}
           closeCB={this.closeModal}
+          contentRef={this.modalContent}
           {...this.props}
         />
       </div>
@@ -86,12 +91,12 @@ class UserSearch extends Component {
   }
 }
 
-UserSearch.defaultProps = {
+PluginFindUser.defaultProps = {
   id: 'clickable-plugin-find-user',
   searchButtonStyle: 'primary noRightRadius',
 };
 
-UserSearch.propTypes = {
+PluginFindUser.propTypes = {
   afterClose: PropTypes.func,
   id: PropTypes.string,
   searchLabel: PropTypes.node,
@@ -101,4 +106,4 @@ UserSearch.propTypes = {
   onModalClose: PropTypes.func,
 };
 
-export default UserSearch;
+export default PluginFindUser;

@@ -30,5 +30,16 @@
 
 /* reset button wrap - minor alignment adjustment */
 .resetButtonWrap {
-  margin-left: -3px;
+  & [disabled] :global .stripes__icon {
+    fill: rgba(0, 0, 0, 0.62);
+  }
+
+  &.resetButton {
+    border-color: rgba(0, 0, 0, 0.62);
+    color: rgba(0, 0, 0, 0.62);
+  }
+}
+
+.searchGroupWrap {
+  margin-bottom: .5rem;
 }

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+import contains from 'dom-helpers/query/contains';
+
 import { Modal } from '@folio/stripes/components';
 import UserSearchContainer from './UserSearchContainer';
+import UserSearchView from './UserSearchView';
 
 import css from './UserSearch.css';
 
@@ -16,13 +19,14 @@ class UserSearchModal extends Component {
     onCloseModal: PropTypes.func,
     openWhen: PropTypes.bool,
     dataKey: PropTypes.string,
+    contentRef: PropTypes.object,
   }
 
   constructor(props) {
     super(props);
 
-    const dataKey = props.dataKey;
-    this.connectedApp = props.stripes.connect(UserSearchContainer, { dataKey });
+    // const dataKey = props.dataKey;
+    // this.connectedApp = props.stripes.connect(UserSearchContainer, { dataKey });
 
     this.state = {
       error: null,
@@ -30,12 +34,15 @@ class UserSearchModal extends Component {
 
     this.closeModal = this.closeModal.bind(this);
     this.passUserOut = this.passUserOut.bind(this);
+    this.modalContent = props.contentRef || React.createRef();
   }
 
   closeModal() {
-    this.props.closeCB();
     this.setState({
       error: null,
+    },
+    () => {
+      this.props.closeCB();
     });
   }
 
@@ -63,7 +70,9 @@ class UserSearchModal extends Component {
         onClose={this.closeModal}
       >
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
-        <this.connectedApp {...this.props} onSelectRow={this.passUserOut} onComponentWillUnmount={this.props.onCloseModal} />
+        <UserSearchContainer {...this.props} onComponentWillUnmount={this.props.onCloseModal}>
+          { (viewProps) => <UserSearchView {...viewProps} onSelectRow={this.passUserOut} contentRef={this.modalContent} /> }
+        </UserSearchContainer>
       </Modal>
     );
   }

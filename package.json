@@ -48,7 +48,8 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.6.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "dom-helpers":"^3.4.0"
   },
   "peerDependencies": {
     "@folio/stripes": "^2.0.0",

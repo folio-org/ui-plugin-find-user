@@ -1,4 +1,4 @@
 import React from 'react';
-import UserSearch from './UserSearch';
+import PluginFindUser from './src/PluginFindUser';
 
-export default props => <UserSearch {...props} />;
+export default props => <PluginFindUser {...props} />;

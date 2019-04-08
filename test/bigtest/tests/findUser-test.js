@@ -113,6 +113,10 @@ describe('UI-plugin-find-user', function () {
             it('calls the selectUser callback', function () {
               expect(userChosen).to.be.true;
             });
+
+            it('focuses the modal trigger button', function () {
+              expect(findUser.button.isFocused).to.be.true;
+            });
           });
         });
       });
