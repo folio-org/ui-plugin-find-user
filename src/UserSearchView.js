@@ -114,7 +114,7 @@ class UserSearchView extends React.Component {
 
     const { patronGroups, users } = data;
 
-    const query = queryGetter() || {};
+    const query = queryGetter ? queryGetter() || {} : {};
     const count = source ? source.totalCount() : 0;
     const sortOrder = query.sort || '';
     const resultsStatusMessage = source ? (
@@ -157,6 +157,8 @@ class UserSearchView extends React.Component {
           queryGetter={queryGetter}
           onComponentWillUnmount={onComponentWillUnmount}
           initialSearch={initialSearch}
+          initialSearchState={{ qindex: '', query: '' }}
+          syncToLocationSearch={false}
         >
           {
             ({

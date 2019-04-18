@@ -13,14 +13,15 @@
   "stripes": {
     "type": "plugin",
     "pluginType": "find-user",
-    "displayName": "ui-plugin-find-user.meta.title"
+    "displayName": "ui-plugin-find-user.meta.title",
+    "queryResource": "query",
+    "permissionSets": [
+      {
+        "permissionName": "module.ui-plugin-find-user.enabled",
+        "displayName": "UI: find-user plugin is enabled"
+      }
+    ]
   },
-  "permissionSets": [
-    {
-      "permissionName": "module.ui-plugin-find-user.enabled",
-      "displayName": "UI: find-user plugin is enabled"
-    }
-  ],
   "scripts": {
     "lint": "eslint .",
     "test": "stripes test karma"

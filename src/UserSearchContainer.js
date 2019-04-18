@@ -152,4 +152,4 @@ class UserSearchContainer extends React.Component {
   }
 }
 
-export default stripesConnect(UserSearchContainer);
+export default stripesConnect(UserSearchContainer, { dataKey: 'find_patron' });

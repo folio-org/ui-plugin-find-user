@@ -25,9 +25,6 @@ class UserSearchModal extends Component {
   constructor(props) {
     super(props);
 
-    // const dataKey = props.dataKey;
-    // this.connectedApp = props.stripes.connect(UserSearchContainer, { dataKey });
-
     this.state = {
       error: null,
     };
