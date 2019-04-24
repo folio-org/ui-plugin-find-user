@@ -22,7 +22,7 @@ export default function setupApplication({
       name: '@folio/ui-dummy',
       displayName: 'dummy.title',
       route: '/dummy',
-      module: () => DefaultApp,
+      module: DefaultApp,
     }],
 
     translations: {
