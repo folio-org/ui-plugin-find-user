@@ -63,7 +63,7 @@ class PluginFindUser extends Component {
   render() {
     const { id, searchButtonStyle, searchLabel } = this.props;
     // don't inadvertently pass in other resources which could result in resource confusion.
-    const isolatedProps = _omit(this.props, ['parentResources', 'resources']);
+    const isolatedProps = _omit(this.props, ['parentResources', 'resources', 'mutator', 'parentMutator']);
 
     return (
       <div className={this.getStyle()} data-test-plugin-find-user>
@@ -97,6 +97,7 @@ class PluginFindUser extends Component {
 PluginFindUser.defaultProps = {
   id: 'clickable-plugin-find-user',
   searchButtonStyle: 'primary noRightRadius',
+  dataKey: 'find_patron',
 };
 
 PluginFindUser.propTypes = {
@@ -107,6 +108,7 @@ PluginFindUser.propTypes = {
   marginBottom0: PropTypes.bool,
   marginTop0: PropTypes.bool,
   onModalClose: PropTypes.func,
+  dataKey: PropTypes.string,
 };
 
 export default PluginFindUser;

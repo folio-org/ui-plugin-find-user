@@ -29,6 +29,7 @@ class UserSearchModal extends Component {
       error: null,
     };
 
+    /// this.connectedSearchContainer = props.stripes.connect(UserSearchContainer, { dataKey: props.dataKey });
     this.closeModal = this.closeModal.bind(this);
     this.passUserOut = this.passUserOut.bind(this);
     this.modalContent = props.contentRef || React.createRef();

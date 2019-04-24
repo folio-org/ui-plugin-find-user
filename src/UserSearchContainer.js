@@ -74,7 +74,10 @@ class UserSearchContainer extends React.Component {
       query: PropTypes.shape({
         update: PropTypes.func.isRequired,
         replace: PropTypes.func.isRequired,
-      })
+      }),
+      resultCount: PropTypes.shape({
+        replace: PropTypes.func.isRequired,
+      }).isRequired
     }).isRequired,
     stripes: PropTypes.shape({
       logger: PropTypes.object
