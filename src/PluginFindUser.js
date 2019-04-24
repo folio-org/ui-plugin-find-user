@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _omit from 'lodash/omit';
 import className from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import contains from 'dom-helpers/query/contains';
@@ -61,6 +62,8 @@ class PluginFindUser extends Component {
 
   render() {
     const { id, searchButtonStyle, searchLabel } = this.props;
+    // don't inadvertently pass in other resources which could result in resource confusion.
+    const isolatedProps = _omit(this.props, ['parentResources', 'resources']);
 
     return (
       <div className={this.getStyle()} data-test-plugin-find-user>
@@ -84,7 +87,7 @@ class PluginFindUser extends Component {
           openWhen={this.state.openModal}
           closeCB={this.closeModal}
           contentRef={this.modalContent}
-          {...this.props}
+          {...isolatedProps}
         />
       </div>
     );
