@@ -16,7 +16,6 @@ describe('UI-plugin-find-user', function () {
   describe('rendering', function () {
     beforeEach(async function () {
       await this.server.createList('user', 40);
-      this.visit('/dummy');
       userChosen = false;
       closeHandled = false;
       mount(

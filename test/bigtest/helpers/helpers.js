@@ -3,7 +3,9 @@ import {
   withModules,
   clearModules,
 } from '@folio/stripes-core/test/bigtest/helpers/stripes-config';
+import { beforeEach } from '@bigtest/mocha';
 import mirageOptions from '../network';
+import DefaultApp from './DummyComponent';
 
 export default function setupApplication({
   scenarios,
@@ -20,12 +22,16 @@ export default function setupApplication({
       name: '@folio/ui-dummy',
       displayName: 'dummy.title',
       route: '/dummy',
-      module: null
+      module: () => DefaultApp,
     }],
 
     translations: {
       'dummy.title': 'Dummy'
     },
+  });
+
+  beforeEach(function () {
+    this.visit('/dummy');
   });
 }
 
