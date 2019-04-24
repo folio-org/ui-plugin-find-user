@@ -5,7 +5,7 @@ import {
 } from '@folio/stripes-core/test/bigtest/helpers/stripes-config';
 import { beforeEach } from '@bigtest/mocha';
 import mirageOptions from '../network';
-import DefaultApp from './DummyComponent';
+import PluginHarness from './PluginHarness';
 
 export default function setupApplication({
   scenarios,
@@ -22,7 +22,7 @@ export default function setupApplication({
       name: '@folio/ui-dummy',
       displayName: 'dummy.title',
       route: '/dummy',
-      module: DefaultApp,
+      module: PluginHarness,
     }],
 
     translations: {
