@@ -48,6 +48,7 @@ class UserSearchView extends React.Component {
     initialSearch: PropTypes.string,
     source: PropTypes.object,
     data: PropTypes.object,
+    onNeedMoreData: PropTypes.func,
     visibleColumns: PropTypes.arrayOf(PropTypes.string),
   }
 
@@ -103,6 +104,7 @@ class UserSearchView extends React.Component {
       onSelectRow,
       onComponentWillUnmount,
       idPrefix,
+      onNeedMoreData,
       visibleColumns,
       queryGetter,
       querySetter,
@@ -241,6 +243,7 @@ class UserSearchView extends React.Component {
                           visibleColumns={visibleColumns}
                           contentData={users}
                           totalCount={count}
+                          id="list-plugin-find-user"
                           columnMapping={{
                             status: intl.formatMessage({ id: 'ui-plugin-find-user.active' }),
                             name: intl.formatMessage({ id: 'ui-plugin-find-user.information.name' }),
@@ -251,7 +254,7 @@ class UserSearchView extends React.Component {
                           }}
                           formatter={resultsFormatter}
                           onRowClick={onSelectRow}
-                          onNeedMoreData={this.onNeedMore}
+                          onNeedMoreData={onNeedMoreData}
                           onHeaderClick={onSort}
                           sortOrder={sortOrder.replace(/^-/, '').replace(/,.*/, '')}
                           sortDirection={sortOrder.startsWith('-') ? 'descending' : 'ascending'}
