@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import contains from 'dom-helpers/query/contains';
 
 import { Modal } from '@folio/stripes/components';
 import UserSearchContainer from './UserSearchContainer';
@@ -29,7 +28,6 @@ class UserSearchModal extends Component {
       error: null,
     };
 
-    /// this.connectedSearchContainer = props.stripes.connect(UserSearchContainer, { dataKey: props.dataKey });
     this.closeModal = this.closeModal.bind(this);
     this.passUserOut = this.passUserOut.bind(this);
     this.modalContent = props.contentRef || React.createRef();

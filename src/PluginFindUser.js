@@ -40,7 +40,7 @@ class PluginFindUser extends Component {
     });
   }
 
-  closeModal(focusWithin) {
+  closeModal() {
     const {
       afterClose
     } = this.props;
