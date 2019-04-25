@@ -16,7 +16,7 @@ export default function setupApplication({
     scenarios,
     stripesConfig: { hasAllPerms },
 
-    // setup a dummy app for smart components
+    // setup a dummy app for the plugin that renders a harness.
     modules: [{
       type: 'app',
       name: '@folio/ui-dummy',
