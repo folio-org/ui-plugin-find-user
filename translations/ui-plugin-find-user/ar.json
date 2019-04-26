@@ -1,5 +1,15 @@
 {
     "meta.title": "باحث المستخدم (برنامج مساعد)",
     "modal.label": "قم بتحديد مستخدم",
-    "searchButton.title": "البحث عن مستخدم"
+    "searchButton.title": "البحث عن مستخدم",
+    "noResults": "قم باختيار منقح أو إدخال استعلام بحث لعرض النتائج",
+    "searchFieldLabel": "بحث",
+    "information.patronGroup": "مجموعة المستفيدين",
+    "active": "نشط",
+    "information.name": "الاسم",
+    "information.barcode": "الباركود",
+    "information.username": "اسم المستخدم",
+    "contact.email": "البريد الإلكتروني",
+    "status": "الحالة",
+    "inactive": "غير نشط"
 }
