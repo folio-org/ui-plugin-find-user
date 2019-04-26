@@ -1,5 +1,15 @@
 {
     "meta.title": "Localizador de usuários (plugin)",
     "modal.label": "Selecione o usuário",
-    "searchButton.title": "Encontrar usuário"
+    "searchButton.title": "Encontrar usuário",
+    "noResults": "Choose a filter or enter a search query to show results.",
+    "searchFieldLabel": "Search",
+    "information.patronGroup": "Patron group",
+    "active": "Active",
+    "information.name": "Name",
+    "information.barcode": "Barcode",
+    "information.username": "Username",
+    "contact.email": "Email",
+    "status": "Status",
+    "inactive": "inactive"
 }
