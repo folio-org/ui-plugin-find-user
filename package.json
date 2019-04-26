@@ -54,7 +54,7 @@
     "dom-helpers":"^3.4.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^2.1.0",
+    "@folio/stripes": "^2.5.0",
     "@folio/stripes-core": ">=3.3.0",
     "react": "*"
   }
