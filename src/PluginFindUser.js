@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _omit from 'lodash/omit';
 import className from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import contains from 'dom-helpers/query/contains';
 
 import { Button, Icon } from '@folio/stripes/components';
 
@@ -9,7 +11,7 @@ import UserSearchModal from './UserSearchModal';
 
 import css from './UserSearch.css';
 
-class UserSearch extends Component {
+class PluginFindUser extends Component {
   constructor(props) {
     super(props);
 
@@ -19,6 +21,8 @@ class UserSearch extends Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.modalTrigger = React.createRef();
+    this.modalContent = React.createRef();
   }
 
   getStyle() {
@@ -37,16 +41,32 @@ class UserSearch extends Component {
   }
 
   closeModal() {
+    const {
+      afterClose
+    } = this.props;
+
     this.setState({
       openModal: false,
+    }, () => {
+      if (afterClose) {
+        afterClose();
+      }
+
+      if (this.modalContent.current && this.modalTrigger.current) {
+        if (contains(this.modalContent.current, document.activeElement)) {
+          this.modalTrigger.current.focus();
+        }
+      }
     });
   }
 
   render() {
     const { id, searchButtonStyle, searchLabel } = this.props;
+    // don't inadvertently pass in other resources which could result in resource confusion.
+    const isolatedProps = _omit(this.props, ['parentResources', 'resources', 'mutator', 'parentMutator']);
 
     return (
-      <div className={this.getStyle()}>
+      <div className={this.getStyle()} data-test-plugin-find-user>
         <FormattedMessage id="ui-plugin-find-user.searchButton.title">
           {ariaLabel => (
             <Button
@@ -54,8 +74,10 @@ class UserSearch extends Component {
               key="searchButton"
               buttonStyle={searchButtonStyle}
               tabIndex="-1"
-              ariaLabel={ariaLabel}
+              aria-label={ariaLabel}
               onClick={this.openModal}
+              buttonRef={this.modalTrigger}
+              data-test-plugin-find-user-button
             >
               {searchLabel || <Icon icon="search" color="#fff" />}
             </Button>
@@ -64,24 +86,29 @@ class UserSearch extends Component {
         <UserSearchModal
           openWhen={this.state.openModal}
           closeCB={this.closeModal}
-          {...this.props}
+          contentRef={this.modalContent}
+          {...isolatedProps}
         />
       </div>
     );
   }
 }
 
-UserSearch.defaultProps = {
+PluginFindUser.defaultProps = {
   id: 'clickable-plugin-find-user',
   searchButtonStyle: 'primary noRightRadius',
+  dataKey: 'find_patron',
 };
 
-UserSearch.propTypes = {
+PluginFindUser.propTypes = {
+  afterClose: PropTypes.func,
   id: PropTypes.string,
   searchLabel: PropTypes.node,
   searchButtonStyle: PropTypes.string,
   marginBottom0: PropTypes.bool,
   marginTop0: PropTypes.bool,
+  onModalClose: PropTypes.func,
+  dataKey: PropTypes.string,
 };
 
-export default UserSearch;
+export default PluginFindUser;

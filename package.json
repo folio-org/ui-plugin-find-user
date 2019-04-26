@@ -13,16 +13,34 @@
   "stripes": {
     "type": "plugin",
     "pluginType": "find-user",
-    "displayName": "ui-plugin-find-user.meta.title"
+    "displayName": "ui-plugin-find-user.meta.title",
+    "queryResource": "query",
+    "permissionSets": [
+      {
+        "permissionName": "module.ui-plugin-find-user.enabled",
+        "displayName": "UI: find-user plugin is enabled"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "echo 'placeholder. no tests implemented'"
+    "test": "stripes test karma"
+  },
+  "okapiInterfaces": {
+    "users": "15.0",
+    "users-bl": "3.2 4.0"
   },
   "devDependencies": {
+    "@bigtest/interactor": "^0.9.1",
+    "@bigtest/mirage": "^0.0.1",
+    "@bigtest/mocha": "^0.5.2",
+    "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^3.2.0",
-    "@folio/stripes": "^2.0.0",
+    "@folio/stripes": "^2.4.0",
+    "@folio/stripes-cli": "^1.10.0",
     "babel-eslint": "^9.0.0",
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.2.0",
     "eslint": "^5.5.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
@@ -30,12 +48,14 @@
     "webpack": "^4.10.2"
   },
   "dependencies": {
-    "@folio/users": "^2.17.0",
     "classnames": "^2.2.5",
-    "prop-types": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "lodash": "^4.17.4",
+    "dom-helpers":"^3.4.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^2.0.0",
+    "@folio/stripes": "^2.5.0",
+    "@folio/stripes-core": ">=3.3.0",
     "react": "*"
   }
 }
