@@ -23,7 +23,7 @@ import css from '../../../src/UserSearch.css';
 }
 
 @interactor class PluginModalInteractor {
-  clickInactiveUsersCheckbox = clickable('#clickable-filter-active-include-inactive-users');
+  clickInactiveUsersCheckbox = clickable('#clickable-filter-active-inactive');
   clickFacultyCheckbox = clickable('#clickable-filter-pg-faculty');
   clickGraduateCheckbox = clickable('#clickable-filter-pg-graduate');
   clickStaffCheckbox = clickable('#clickable-filter-pg-staff');
