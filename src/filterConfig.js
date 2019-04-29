@@ -7,8 +7,8 @@ const filterConfig = [
     name: 'active',
     cql: 'active',
     values: [
-      { name: 'Include inactive users', cql: 'false' },
-      { name: 'Show active users', cql: 'true', hidden: true },
+      { name: 'inactive', cql: 'false' },
+      { name: 'active', cql: 'true' },
     ],
   },
   {
