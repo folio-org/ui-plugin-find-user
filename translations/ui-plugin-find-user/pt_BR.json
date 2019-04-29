@@ -2,14 +2,14 @@
     "meta.title": "Localizador de usuários (plugin)",
     "modal.label": "Selecione o usuário",
     "searchButton.title": "Encontrar usuário",
-    "noResults": "Choose a filter or enter a search query to show results.",
-    "searchFieldLabel": "Search",
-    "information.patronGroup": "Patron group",
-    "active": "Active",
-    "information.name": "Name",
-    "information.barcode": "Barcode",
-    "information.username": "Username",
-    "contact.email": "Email",
+    "noResults": "Escolha um filtro ou insira uma consulta de pesquisa para mostrar os resultados.",
+    "searchFieldLabel": "Pesquisa",
+    "information.patronGroup": "Grupo de usuários",
+    "active": "Ativo",
+    "information.name": "Nome",
+    "information.barcode": "Código de barras",
+    "information.username": "Nome de usuário",
+    "contact.email": "E-mail",
     "status": "Status",
-    "inactive": "inactive"
+    "inactive": "inativo"
 }
