@@ -138,8 +138,16 @@ class UserSearchView extends React.Component {
 
     const resultsFormatter = {
       status: user => (
-        <AppIcon app="users" size="small">
-          {user.active ? <FormattedMessage id="ui-plugin-find-user.active" /> : <FormattedMessage id="ui-plugin-find-user.inactive" />}
+        <AppIcon
+          app="users"
+          size="small"
+          className={user.active || css.inactiveAppIcon}
+        >
+          {
+            user.active
+              ? <FormattedMessage id="ui-plugin-find-user.active" />
+              : <FormattedMessage id="ui-plugin-find-user.inactive" />
+          }
         </AppIcon>
       ),
       name: user => getFullName(user),

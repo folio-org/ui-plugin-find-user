@@ -3,6 +3,7 @@
 ## 1.7.0 (IN PROGRESS)
 
 * Restore the active, inactive filters a la ui-users.
+* Add user status indication.
 
 ## [1.6.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.6.0) (2019-03-15)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.5.0...v1.6.0)
