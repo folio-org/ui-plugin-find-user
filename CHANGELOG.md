@@ -1,7 +1,9 @@
 # Change history for ui-plugin-find-user
 
-## 1.7.0 (IN PROGRESS)
+## [1.7.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.7.0) (2019-05-10)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.6.0...v1.7.0)
 
+* Complete and total routing refactor. UIU-896
 * Restore the active, inactive filters a la ui-users.
 * Add user status indication.
 
