@@ -73,7 +73,6 @@ class PluginFindUser extends Component {
               id={id}
               key="searchButton"
               buttonStyle={searchButtonStyle}
-              tabIndex="-1"
               aria-label={ariaLabel}
               onClick={this.openModal}
               buttonRef={this.modalTrigger}
