@@ -61,6 +61,7 @@ describe('UI-plugin-find-user', function () {
 
         describe('resetting the filter and search', function () {
           beforeEach(async function () {
+            await findUser.modal.clickInactiveUsersCheckbox();
             await findUser.modal.resetButton.click();
           });
 
