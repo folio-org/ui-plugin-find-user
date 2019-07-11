@@ -150,7 +150,7 @@ class UserSearchContainer extends React.Component {
       data: {
         patronGroups: (resources.patronGroups || {}).records || [],
         users: get(resources, 'records.records', []),
-      }
+      },
     });
   }
 }

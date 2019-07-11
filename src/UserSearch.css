@@ -48,3 +48,22 @@
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
+
+.UserSearchViewContent {
+  & [class^="paneset--"] {
+    height: calc(100% - 50px);
+  }
+}
+
+.UserSearchViewFooter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-top: 1px solid rgba(0,0,0,.1);
+}

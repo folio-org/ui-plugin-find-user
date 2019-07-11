@@ -13,7 +13,8 @@ class UserSearchModal extends Component {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
     }).isRequired,
-    selectUser: PropTypes.func.isRequired,
+    selectUsers: PropTypes.func,
+    selectUser: PropTypes.func,
     closeCB: PropTypes.func.isRequired,
     onCloseModal: PropTypes.func,
     openWhen: PropTypes.bool,
@@ -54,6 +55,11 @@ class UserSearchModal extends Component {
     }
   }
 
+  passUsersOut = users => {
+    this.props.selectUsers(users);
+    this.closeModal();
+  }
+
   render() {
     return (
       <Modal
@@ -67,7 +73,13 @@ class UserSearchModal extends Component {
       >
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
         <UserSearchContainer {...this.props} onComponentWillUnmount={this.props.onCloseModal}>
-          { (viewProps) => <UserSearchView {...viewProps} onSelectRow={this.passUserOut} contentRef={this.modalContent} /> }
+          { (viewProps) => <UserSearchView
+            {...viewProps}
+            onSaveMultiple={this.passUsersOut}
+            onSelectRow={this.passUserOut}
+            contentRef={this.modalContent}
+            isMultiSelect={Boolean(this.props.selectUsers)}
+          /> }
         </UserSearchContainer>
       </Modal>
     );
