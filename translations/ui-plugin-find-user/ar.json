@@ -11,5 +11,8 @@
     "information.username": "اسم المستخدم",
     "contact.email": "البريد الإلكتروني",
     "status": "الحالة",
-    "inactive": "غير نشط"
+    "inactive": "غير نشط",
+    "modal.close": "إغلاق",
+    "modal.save": "حفظ",
+    "modal.total": "إجمالي المحدد: {count}"
 }
