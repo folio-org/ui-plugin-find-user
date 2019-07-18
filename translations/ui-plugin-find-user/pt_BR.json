@@ -11,5 +11,8 @@
     "information.username": "Nome de usuário",
     "contact.email": "E-mail",
     "status": "Status",
-    "inactive": "Inativo"
+    "inactive": "Inativo",
+    "modal.close": "Fechar",
+    "modal.save": "Salvar",
+    "modal.total": "Total selecionado: {count}"
 }
