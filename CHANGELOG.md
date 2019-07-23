@@ -1,5 +1,11 @@
 # Change history for ui-plugin-find-user
 
+## [1.8.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.8.0) (2019-07-22)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.7.0...v1.8.0)
+
+* Better keyboard navigation. Refs UICHKOUT-509.
+* Allow selection of multiple rows. Refs UIAC-3.
+
 ## [1.7.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.7.0) (2019-05-10)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.6.0...v1.7.0)
 
