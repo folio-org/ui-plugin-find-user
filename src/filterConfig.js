@@ -7,8 +7,16 @@ const filterConfig = [
     name: 'active',
     cql: 'active',
     values: [
-      { name: 'inactive', cql: 'false' },
-      { name: 'active', cql: 'true' },
+      {
+        name: 'inactive',
+        cql: 'false',
+        displayName: <FormattedMessage id="ui-users.inactive" />,
+      },
+      {
+        name: 'active',
+        cql: 'true',
+        displayName: <FormattedMessage id="ui-users.active" />,
+      },
     ],
   },
   {

@@ -1,5 +1,9 @@
 # Change history for ui-plugin-find-user
 
+## 1.9.0 (IN PROGRESS)
+
+* Token search terms, just like ui-users. Fixe UIPFU-17.
+
 ## [1.8.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.8.0) (2019-07-22)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.7.0...v1.8.0)
 
