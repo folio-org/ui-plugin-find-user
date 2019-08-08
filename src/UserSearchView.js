@@ -204,7 +204,7 @@ class UserSearchView extends React.Component {
         <AppIcon
           app="users"
           size="small"
-          className={user.active || css.inactiveAppIcon}
+          className={user.active ? '' : css.inactiveAppIcon}
         >
           {
             user.active
