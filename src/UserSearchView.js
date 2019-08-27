@@ -68,7 +68,7 @@ class UserSearchView extends React.Component {
 
   static defaultProps = {
     idPrefix: 'uiPluginFindUsers-',
-    visibleColumns: ['status', 'name', 'barcode', 'patron group', 'username', 'email'],
+    visibleColumns: ['active', 'name', 'barcode', 'patron group', 'username', 'email'],
     data: {},
     isMultiSelect: false,
   };
@@ -200,7 +200,7 @@ class UserSearchView extends React.Component {
           onChange={() => this.toggleItem(user)}
         />
       ),
-      status: user => (
+      active: user => (
         <AppIcon
           app="users"
           size="small"
@@ -328,7 +328,7 @@ class UserSearchView extends React.Component {
                                   type="checkbox"
                                 />
                               ),
-                              status: intl.formatMessage({ id: 'ui-plugin-find-user.active' }),
+                              active: intl.formatMessage({ id: 'ui-plugin-find-user.status' }),
                               name: intl.formatMessage({ id: 'ui-plugin-find-user.information.name' }),
                               barcode: intl.formatMessage({ id: 'ui-plugin-find-user.information.barcode' }),
                               patronGroup: intl.formatMessage({ id: 'ui-plugin-find-user.information.patronGroup' }),
