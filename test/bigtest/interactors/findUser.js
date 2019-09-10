@@ -9,7 +9,6 @@ import {
   is,
   isPresent,
   text,
-  hasClass,
 } from '@bigtest/interactor';
 
 import css from '../../../src/UserSearch.css';
