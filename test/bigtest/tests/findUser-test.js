@@ -8,17 +8,21 @@ import FindUserInteractor from '../interactors/findUser';
 
 let closeHandled = false;
 let userChosen = false;
+let selectedUsers = [];
 
 describe('UI-plugin-find-user', function () {
   const findUser = new FindUserInteractor();
   setupApplication();
 
+  beforeEach(async function () {
+    await this.server.createList('user', 40);
+  });
+
   describe('rendering', function () {
     beforeEach(async function () {
-      await this.server.createList('user', 40);
       userChosen = false;
       closeHandled = false;
-      mount(
+      await mount(
         <PluginHarness
           selectUser={() => { userChosen = true; }}
           afterClose={() => { closeHandled = true; }}
@@ -118,6 +122,45 @@ describe('UI-plugin-find-user', function () {
               expect(findUser.button.isFocused).to.be.true;
             });
           });
+        });
+      });
+    });
+  });
+
+  describe('Multiselection of users', function () {
+    beforeEach(async function () {
+      await mount(
+        <PluginHarness
+          selectUsers={(users) => { selectedUsers = users; }}
+        />
+      );
+    });
+
+    describe('Opening the modal', function () {
+      beforeEach(async function () {
+        await findUser.button.click();
+        await findUser.modal.clickInactiveUsersCheckbox();
+        await findUser.modal.searchField.fill('t');
+      });
+
+      it('displays rows with checkboxes', () => {
+        expect(findUser.modal.instances(0).hasCheckbox).to.be.true;
+      });
+
+      it('displays "save" button', () => {
+        expect(findUser.modal.saveMultipleButton.isPresent).to.be.true;
+      });
+
+      describe('selecting multiple users', function () {
+        beforeEach(async function () {
+          selectedUsers = [];
+          await findUser.modal.instances(1).check();
+          await findUser.modal.instances(3).check();
+          await findUser.modal.saveMultipleButton.click();
+        });
+
+        it('returns selected users', function () {
+          expect(selectedUsers.length).to.equal(2);
         });
       });
     });

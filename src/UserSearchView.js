@@ -151,6 +151,8 @@ class UserSearchView extends React.Component {
     });
   }
 
+  isSelected = ({ item }) => Boolean(this.state.checkedMap[item.id]);
+
   render() {
     const {
       onSelectRow,
@@ -262,7 +264,11 @@ class UserSearchView extends React.Component {
                     {intl => (
                       <Paneset id={`${idPrefix}-paneset`}>
                         {this.state.filterPaneIsVisible &&
-                          <Pane defaultWidth="22%" paneTitle="User search">
+                          <Pane
+                            defaultWidth="22%"
+                            paneTitle="User search"
+                            id="plugin-find-user-filter-pane"
+                          >
                             <form onSubmit={onSubmitSearch}>
                               <div className={css.searchGroupWrap}>
                                 <SearchField
@@ -317,6 +323,7 @@ class UserSearchView extends React.Component {
                         >
                           <MultiColumnList
                             visibleColumns={builtVisibleColumns}
+                            isSelected={this.isSelected}
                             contentData={users}
                             totalCount={count}
                             id="list-plugin-find-user"
@@ -336,7 +343,7 @@ class UserSearchView extends React.Component {
                               email: intl.formatMessage({ id: 'ui-plugin-find-user.contact.email' }),
                             }}
                             formatter={resultsFormatter}
-                            onRowClick={!isMultiSelect && onSelectRow}
+                            onRowClick={!isMultiSelect ? onSelectRow : undefined}
                             onNeedMoreData={onNeedMoreData}
                             onHeaderClick={onSort}
                             sortOrder={sortOrder.replace(/^-/, '').replace(/,.*/, '')}
