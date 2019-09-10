@@ -9,6 +9,7 @@ import {
   is,
   isPresent,
   text,
+  hasClass,
 } from '@bigtest/interactor';
 
 import css from '../../../src/UserSearch.css';
@@ -29,7 +30,13 @@ import css from '../../../src/UserSearch.css';
   clickStaffCheckbox = clickable('#clickable-filter-pg-staff');
   clickUndergradCheckbox = clickable('#clickable-filter-pg-undergrad');
 
-  instances = collection('[role="row"]', {
+  instances = collection('[role="group"] [role="row"]', {
+    click: clickable(),
+    hasCheckbox: isPresent('input[type=checkbox]'),
+    check: clickable('input[type=checkbox]'),
+  });
+
+  saveMultipleButton = scoped('[data-test-find-users-modal-save-multiple]', {
     click: clickable()
   });
 
@@ -38,7 +45,7 @@ import css from '../../../src/UserSearch.css';
     click: clickable()
   });
 
-  filterCheckboxes = collection('input [type="checkbox"]', {
+  filterCheckboxes = collection('#plugin-find-user-filter-pane input[type="checkbox"]', {
     isChecked: is(':checked'),
   });
 
