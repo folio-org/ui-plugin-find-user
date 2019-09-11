@@ -2,7 +2,10 @@
 
 ## 1.9.0 (IN PROGRESS)
 
-* Token search terms, just like ui-users. Fixe UIPFU-17.
+* Tokenize search terms, just like ui-users. Fixes UIPFU-17.
+* Provide correct props to AppIcon. Fixes UIPFU-18.
+* Label columns consistently with ui-users. Fixes UIPFU-16.
+* Update handling for selection, multi-selection.
 
 ## [1.8.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.8.0) (2019-07-22)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.7.0...v1.8.0)
