@@ -61,7 +61,7 @@ class PluginFindUser extends Component {
   }
 
   render() {
-    const { id, searchButtonStyle, searchLabel } = this.props;
+    const { id, marginBottom0, searchButtonStyle, searchLabel } = this.props;
     // don't inadvertently pass in other resources which could result in resource confusion.
     const isolatedProps = _omit(this.props, ['parentResources', 'resources', 'mutator', 'parentMutator']);
 
@@ -76,6 +76,7 @@ class PluginFindUser extends Component {
               aria-label={ariaLabel}
               onClick={this.openModal}
               buttonRef={this.modalTrigger}
+              marginBottom0={marginBottom0}
               data-test-plugin-find-user-button
             >
               {searchLabel || <Icon icon="search" color="#fff" />}
