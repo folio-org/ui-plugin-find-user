@@ -1,8 +1,8 @@
 {
-    "meta.title": "User-finder (plugin)",
-    "modal.label": "Select User",
-    "searchButton.title": "Find User",
-    "noResults": "Choose a filter or enter a search query to show results.",
+    "meta.title": "Plugin ricerca utenti",
+    "modal.label": "Seleziona utente",
+    "searchButton.title": "Trova utente",
+    "noResults": "Scegli un filtro o inserisci una query di ricerca per mostrare i risultati.",
     "searchFieldLabel": "Cerca",
     "information.patronGroup": "Categoria utenti",
     "active": "Attivo",
@@ -14,5 +14,5 @@
     "inactive": "Inattivo",
     "modal.close": "Chiudi",
     "modal.save": "Salva",
-    "modal.total": "Total selected: {count}"
+    "modal.total": "Totale selezionato: {count}"
 }
