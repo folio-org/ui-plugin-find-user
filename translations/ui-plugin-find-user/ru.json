@@ -1,10 +1,10 @@
 {
     "meta.title": "User-finder (plugin)",
-    "modal.label": "Select User",
+    "modal.label": "Выберите пользователя",
     "searchButton.title": "Find User",
-    "noResults": "Choose a filter or enter a search query to show results.",
-    "searchFieldLabel": "Search",
-    "information.patronGroup": "Patron group",
+    "noResults": "Выберите фильтр или введите поисковый запрос, чтобы показать результаты.",
+    "searchFieldLabel": "Поиск",
+    "information.patronGroup": "Группа читателей",
     "active": "Активный",
     "information.name": "Name",
     "information.barcode": "Штрих-код",
@@ -13,6 +13,6 @@
     "status": "Статус",
     "inactive": "Inactive",
     "modal.close": "Close",
-    "modal.save": "Save",
+    "modal.save": "Сохранить",
     "modal.total": "Total selected: {count}"
 }

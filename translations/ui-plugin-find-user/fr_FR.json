@@ -1,5 +1,5 @@
 {
-    "meta.title": "User-finder (plugin)",
+    "meta.title": "Recherche adhérent (plugin)",
     "modal.label": "Sélectionner un adhérent",
     "searchButton.title": "Trouver un adhérent",
     "noResults": "Choisir un filtre ou saisir une recherche pour afficher les résultats.",
@@ -14,5 +14,5 @@
     "inactive": "Inactif",
     "modal.close": "Fermer",
     "modal.save": "Sauvegarder",
-    "modal.total": "Total selected: {count}"
+    "modal.total": "Total sélectionné: {count}"
 }
