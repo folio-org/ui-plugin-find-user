@@ -1,6 +1,12 @@
 # Change history for ui-plugin-find-user
 
-## 1.9.0 (IN PROGRESS)
+## [1.9.1](https://github.com/folio-org/ui-plugin-find-user/tree/v1.9.1) (2019-12-04)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.9.0...v1.9.1)
+
+* Correctly pass `marginBottom0` through to the `<Button>`
+
+## [1.9.0](https://github.com/folio-org/ui-plugin-find-user/tree/v1.9.0) (2019-09-11)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.8.0...v1.9.0)
 
 * Tokenize search terms, just like ui-users. Fixes UIPFU-17.
 * Provide correct props to AppIcon. Fixes UIPFU-18.
