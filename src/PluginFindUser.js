@@ -22,7 +22,7 @@ class PluginFindUser extends Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.modalTrigger = React.createRef();
-    this.modalContent = React.createRef();
+    this.modalRef = React.createRef();
   }
 
   getStyle() {
@@ -52,8 +52,8 @@ class PluginFindUser extends Component {
         afterClose();
       }
 
-      if (this.modalContent.current && this.modalTrigger.current) {
-        if (contains(this.modalContent.current, document.activeElement)) {
+      if (this.modalRef.current && this.modalTrigger.current) {
+        if (contains(this.modalRef.current, document.activeElement)) {
           this.modalTrigger.current.focus();
         }
       }
@@ -86,7 +86,7 @@ class PluginFindUser extends Component {
         <UserSearchModal
           openWhen={this.state.openModal}
           closeCB={this.closeModal}
-          contentRef={this.modalContent}
+          modalRef={this.modalRef}
           {...isolatedProps}
         />
       </div>

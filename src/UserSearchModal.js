@@ -31,14 +31,13 @@ class UserSearchModal extends Component {
 
     this.closeModal = this.closeModal.bind(this);
     this.passUserOut = this.passUserOut.bind(this);
-    this.modalContent = props.contentRef || React.createRef();
+    this.modalRef = props.modalRef || React.createRef();
   }
 
   closeModal() {
     this.setState({
       error: null,
-    },
-    () => {
+    }, () => {
       this.props.closeCB();
     });
   }
@@ -68,18 +67,18 @@ class UserSearchModal extends Component {
         enforceFocus={false}
         label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
         open={this.props.openWhen}
+        ref={this.modalRef}
         size="large"
         onClose={this.closeModal}
       >
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
         <UserSearchContainer {...this.props} onComponentWillUnmount={this.props.onCloseModal}>
-          { (viewProps) => <UserSearchView
+          {(viewProps) => <UserSearchView
             {...viewProps}
             onSaveMultiple={this.passUsersOut}
             onSelectRow={this.passUserOut}
-            contentRef={this.modalContent}
             isMultiSelect={Boolean(this.props.selectUsers)}
-          /> }
+          />}
         </UserSearchContainer>
       </Modal>
     );
