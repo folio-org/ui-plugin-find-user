@@ -1,6 +1,6 @@
 {
   "name": "@folio/plugin-find-user",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "User-finder for Stripes",
   "repository": "folio-org/ui-plugin-find-user",
   "publishConfig": {
