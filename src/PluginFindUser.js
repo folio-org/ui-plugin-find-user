@@ -60,29 +60,42 @@ class PluginFindUser extends Component {
     });
   }
 
+  renderTriggerButton() {
+    const {
+      renderTrigger,
+    } = this.props;
+
+    return renderTrigger({
+      buttonRef: this.modalTrigger,
+      onClick: this.openModal,
+    });
+  }
+
   render() {
-    const { id, marginBottom0, searchButtonStyle, searchLabel } = this.props;
+    const { id, marginBottom0, renderTrigger, searchButtonStyle, searchLabel } = this.props;
     // don't inadvertently pass in other resources which could result in resource confusion.
     const isolatedProps = _omit(this.props, ['parentResources', 'resources', 'mutator', 'parentMutator']);
 
     return (
       <div className={this.getStyle()} data-test-plugin-find-user>
-        <FormattedMessage id="ui-plugin-find-user.searchButton.title">
-          {ariaLabel => (
-            <Button
-              id={id}
-              key="searchButton"
-              buttonStyle={searchButtonStyle}
-              aria-label={ariaLabel}
-              onClick={this.openModal}
-              buttonRef={this.modalTrigger}
-              marginBottom0={marginBottom0}
-              data-test-plugin-find-user-button
-            >
-              {searchLabel || <Icon icon="search" color="#fff" />}
-            </Button>
-          )}
-        </FormattedMessage>
+        {renderTrigger ?
+          this.renderTriggerButton() :
+          <FormattedMessage id="ui-plugin-find-user.searchButton.title">
+            {ariaLabel => (
+              <Button
+                id={id}
+                key="searchButton"
+                buttonStyle={searchButtonStyle}
+                aria-label={ariaLabel}
+                onClick={this.openModal}
+                buttonRef={this.modalTrigger}
+                marginBottom0={marginBottom0}
+                data-test-plugin-find-user-button
+              >
+                {searchLabel || <Icon icon="search" color="#fff" />}
+              </Button>
+            )}
+          </FormattedMessage>}
         <UserSearchModal
           openWhen={this.state.openModal}
           closeCB={this.closeModal}
@@ -108,6 +121,7 @@ PluginFindUser.propTypes = {
   marginBottom0: PropTypes.bool,
   marginTop0: PropTypes.bool,
   onModalClose: PropTypes.func,
+  renderTrigger: PropTypes.func,
   dataKey: PropTypes.string,
 };
 
