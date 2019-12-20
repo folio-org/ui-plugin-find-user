@@ -1,7 +1,7 @@
 {
     "meta.title": "User-finder (plugin)",
-    "modal.label": "Select User",
-    "searchButton.title": "Find User",
+    "modal.label": "Select user",
+    "searchButton.title": "Find user",
     "noResults": "Choose a filter or enter a search query to show results.",
     "searchFieldLabel": "Search",
     "information.patronGroup": "Patron group",
