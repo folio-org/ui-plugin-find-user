@@ -1,7 +1,7 @@
 {
     "meta.title": "User-finder (plugin)",
-    "modal.label": "Select User",
-    "searchButton.title": "Find User",
+    "modal.label": "Seleccionar usuario",
+    "searchButton.title": "Buscar usuario",
     "noResults": "Elija un filtro o introduzca una consulta de búsqueda para mostrar los resultados.",
     "searchFieldLabel": "Buscar",
     "information.patronGroup": "Grupo de usuarios",
