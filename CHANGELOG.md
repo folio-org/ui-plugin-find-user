@@ -3,6 +3,7 @@
 ## 2.0.0 (IN PROGRESS)
 
 * update to `@folio/stripes` `v3.0.0`.
+* Migrate from `stripes.type` to `stripes.actsAs`
 
 ## [1.9.1](https://github.com/folio-org/ui-plugin-find-user/tree/v1.9.1) (2019-12-04)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.9.0...v1.9.1)

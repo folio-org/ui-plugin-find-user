@@ -11,7 +11,7 @@
     "node": ">=6.0.0"
   },
   "stripes": {
-    "type": "plugin",
+    "actsAs": ["plugin"],
     "pluginType": "find-user",
     "displayName": "ui-plugin-find-user.meta.title",
     "queryResource": "query",
