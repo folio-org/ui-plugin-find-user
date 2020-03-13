@@ -40,7 +40,6 @@
     "@folio/stripes-cli": "^1.10.0",
     "@folio/stripes-core": "^4.0.0",
     "babel-eslint": "^9.0.0",
-    "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "core-js": "^3.6.4",
     "eslint": "^5.5.0",
