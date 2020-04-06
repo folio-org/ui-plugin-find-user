@@ -10,12 +10,12 @@ const filterConfig = [
       {
         name: 'inactive',
         cql: 'false',
-        displayName: <FormattedMessage id="ui-users.inactive" />,
+        displayName: <FormattedMessage id="ui-plugin-find-user.inactive" />,
       },
       {
         name: 'active',
         cql: 'true',
-        displayName: <FormattedMessage id="ui-users.active" />,
+        displayName: <FormattedMessage id="ui-plugin-find-user.active" />,
       },
     ],
   },
