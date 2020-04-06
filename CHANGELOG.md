@@ -1,5 +1,11 @@
 # Change history for ui-plugin-find-user
 
+## [2.0.1](https://github.com/folio-org/ui-plugin-find-user/tree/v2.0.1) (2020-04-06)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v2.0.0...v2.0.1)
+
+* Default set of visible columns uses `patronGroup` rather than `patron group`. Fixes UIPFU-22.
+* Active and Inactive filters use translations from this module, not ui-users. Fixes UIPFU-26.
+
 ## [2.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v2.0.0) (2020-03-12)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v1.9.1...v2.0.0)
 
