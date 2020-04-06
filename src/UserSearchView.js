@@ -68,7 +68,7 @@ class UserSearchView extends React.Component {
 
   static defaultProps = {
     idPrefix: 'uiPluginFindUsers-',
-    visibleColumns: ['active', 'name', 'barcode', 'patron group', 'username', 'email'],
+    visibleColumns: ['active', 'name', 'barcode', 'patronGroup', 'username', 'email'],
     data: {},
     isMultiSelect: false,
   };

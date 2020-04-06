@@ -20,6 +20,7 @@ class UserSearchModal extends Component {
     openWhen: PropTypes.bool,
     dataKey: PropTypes.string,
     contentRef: PropTypes.object,
+    modalRef: PropTypes.object,
   }
 
   constructor(props) {
