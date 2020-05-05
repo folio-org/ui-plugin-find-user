@@ -2,8 +2,8 @@
     "meta.title": "用户查找器（插件）",
     "modal.label": "選擇使用者",
     "searchButton.title": "查詢使用者",
-    "noResults": "點一個篩選項目或是輸入查詢詞彙以顯示結果。",
-    "searchFieldLabel": "搜索",
+    "noResults": "點一個篩選項目或是輸入關鍵字以顯示結果。",
+    "searchFieldLabel": "查詢",
     "information.patronGroup": "讀者群組",
     "active": "啟用",
     "information.name": "名稱",
@@ -12,7 +12,7 @@
     "contact.email": "電子郵件",
     "status": "狀態",
     "inactive": "未啟用",
-    "modal.close": "关闭",
+    "modal.close": "關閉",
     "modal.save": "保存",
-    "modal.total": "已选总数： {count}"
+    "modal.total": "已選總數：{count}"
 }
