@@ -1,5 +1,9 @@
 # Change history for ui-plugin-find-user
 
+## [3.0.0](IN PROGRESS)
+
+* Update to `stripes v4.0.0`
+
 ## [2.0.1](https://github.com/folio-org/ui-plugin-find-user/tree/v2.0.1) (2020-04-06)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v2.0.0...v2.0.1)
 
