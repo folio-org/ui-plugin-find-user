@@ -29,8 +29,8 @@ import css from '../../../src/UserSearch.css';
   clickStaffCheckbox = clickable('#clickable-filter-pg-staff');
   clickUndergradCheckbox = clickable('#clickable-filter-pg-undergrad');
 
-  instances = collection('[role="group"] [role="row"]', {
-    click: clickable(),
+  instances = collection('[role="rowgroup"] [role="row"]', {
+    click: clickable('[role=gridcell]'),
     hasCheckbox: isPresent('input[type=checkbox]'),
     check: clickable('input[type=checkbox]'),
   });
