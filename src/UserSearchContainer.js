@@ -110,7 +110,7 @@ class UserSearchContainer extends React.Component {
     if (pg.length) {
       const pgFilterConfig = filterConfig.find(group => group.name === 'pg');
       const oldValuesLength = pgFilterConfig.values.length;
-      pgFilterConfig.values = pg.map(rec => ({ name: rec.group, cql: rec.id }));
+      pgFilterConfig.values = pg.map(rec => ({ name: encodeURIComponent(rec.group), displayName: rec.group, cql: rec.id }));
       if (oldValuesLength === 0) {
         this.props.mutator.initializedFilterConfig.replace(true); // triggers refresh of users
       }
