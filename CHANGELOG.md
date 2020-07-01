@@ -1,6 +1,7 @@
 # Change history for ui-plugin-find-user
 
-## 3.1.0 (IN PROGRESS)
+## [3.0.1](https://github.com/folio-org/ui-plugin-find-user/tree/v3.0.1) (2020-06-30)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v3.0.0...v3.0.1)
 
 * Update eslint to version 6.2.1. Fixes UIPFU-24
 * Updated to react-intl version 4.7.1
