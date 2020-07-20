@@ -11,7 +11,9 @@
     "node": ">=6.0.0"
   },
   "stripes": {
-    "actsAs": ["plugin"],
+    "actsAs": [
+      "plugin"
+    ],
     "pluginType": "find-user",
     "displayName": "ui-plugin-find-user.meta.title",
     "queryResource": "query",
@@ -32,7 +34,6 @@
   },
   "devDependencies": {
     "@bigtest/interactor": "^0.9.1",
-    "@bigtest/mirage": "^0.0.1",
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^3.2.0",
@@ -43,6 +44,9 @@
     "chai": "^4.2.0",
     "core-js": "^3.6.4",
     "eslint": "^6.2.1",
+    "faker": "^4.1.0",
+    "inflected": "^2.0.4",
+    "miragejs": "^0.1.40",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-intl": "^4.7.1",
@@ -58,7 +62,7 @@
   "peerDependencies": {
     "@folio/stripes": "^4.0.0",
     "react": "*",
-    "react-router-dom": "^4.0.0",
-    "react-intl": "^4.5.3"
+    "react-intl": "^4.5.3",
+    "react-router-dom": "^4.0.0"
   }
 }
