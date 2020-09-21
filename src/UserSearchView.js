@@ -262,7 +262,10 @@ class UserSearchView extends React.Component {
                 return (
                   <IntlConsumer>
                     {intl => (
-                      <Paneset id={`${idPrefix}-paneset`}>
+                      <Paneset
+                        id={`${idPrefix}-paneset`}
+                        isRoot
+                      >
                         {this.state.filterPaneIsVisible &&
                           <Pane
                             defaultWidth="22%"
