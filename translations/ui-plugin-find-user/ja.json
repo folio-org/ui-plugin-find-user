@@ -2,7 +2,7 @@
     "meta.title": "ユーザーファインダー（プラグイン）",
     "modal.label": "Select User",
     "searchButton.title": "Find User",
-    "noResults": "Choose a filter or enter a search query to show results.",
+    "noResults": "フィルターを選択するか、検索クエリを入力して結果を表示します。",
     "searchFieldLabel": "検索",
     "information.patronGroup": "利用者グループ",
     "active": "有効",
@@ -13,6 +13,6 @@
     "status": "ステータス",
     "inactive": "無効",
     "modal.close": "Close",
-    "modal.save": "Save",
+    "modal.save": "保存",
     "modal.total": "Total selected: {count}"
 }
