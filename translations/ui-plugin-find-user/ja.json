@@ -14,5 +14,5 @@
     "inactive": "無効",
     "modal.close": "Close",
     "modal.save": "保存",
-    "modal.total": "Total selected: {count}"
+    "modal.total": "選択済合計： {count}"
 }
