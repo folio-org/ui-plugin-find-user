@@ -1,6 +1,7 @@
 # Change history for ui-plugin-find-user
 
-## 4.0.0 (IN PROGRESS)
+## [4.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v4.0.0) (2020-10-09)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v3.0.0...v4.0.0)
 
 * Update eslint to version 6.2.1. Fixes UIPFU-24
 * Modified how patron group names are displayed in filter menu. Fixes UIPFU-28
