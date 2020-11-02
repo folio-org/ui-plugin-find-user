@@ -12,7 +12,7 @@
     "contact.email": "Eメール",
     "status": "ステータス",
     "inactive": "無効",
-    "modal.close": "Close",
+    "modal.close": "閉じる",
     "modal.save": "保存",
     "modal.total": "選択済合計： {count}"
 }
