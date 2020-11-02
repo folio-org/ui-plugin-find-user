@@ -1,5 +1,9 @@
 # Change history for ui-plugin-find-user
 
+## 4.0.1 IN PROGRESS
+
+* Retrieve up to 200 patron groups, just like ui-users. Refs UIPFU-33.
+
 ## [4.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v4.0.0) (2020-10-09)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v3.0.0...v4.0.0)
 
