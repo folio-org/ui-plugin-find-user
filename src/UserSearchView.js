@@ -64,6 +64,9 @@ class UserSearchView extends React.Component {
     data: PropTypes.object,
     onNeedMoreData: PropTypes.func,
     visibleColumns: PropTypes.arrayOf(PropTypes.string),
+    resultOffset: PropTypes.shape({
+      replace: PropTypes.func.isRequired,
+    }),
   }
 
   static defaultProps = {
@@ -167,6 +170,7 @@ class UserSearchView extends React.Component {
       data,
       contentRef,
       isMultiSelect,
+      resultOffset,
     } = this.props;
     const { checkedMap, isAllChecked } = this.state;
 
@@ -313,6 +317,7 @@ class UserSearchView extends React.Component {
                                 onChangeHandlers={getFilterHandlers()}
                                 activeFilters={activeFilters}
                                 config={filterConfig}
+                                resultOffset={resultOffset}
                               />
                             </form>
                           </Pane>
@@ -354,6 +359,8 @@ class UserSearchView extends React.Component {
                             isEmptyMessage={resultsStatusMessage}
                             autosize
                             virtualize
+                            pageAmount={100}
+                            pagingType="click"
                           />
 
                         </Pane>

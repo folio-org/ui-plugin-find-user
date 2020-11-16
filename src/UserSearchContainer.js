@@ -23,11 +23,12 @@ class UserSearchContainer extends React.Component {
     initializedFilterConfig: { initialValue: false },
     query: { initialValue: { sort: 'name' } },
     resultCount: { initialValue: INITIAL_RESULT_COUNT },
+    resultOffset: { initialValue: 0 },
     records: {
       type: 'okapi',
       records: 'users',
-      recordsRequired: '%{resultCount}',
-      perRequest: 30,
+      resultOffset: '%{resultOffset}',
+      perRequest: 100,
       path: 'users',
       GET: {
         params: {
@@ -82,7 +83,10 @@ class UserSearchContainer extends React.Component {
       }),
       resultCount: PropTypes.shape({
         replace: PropTypes.func.isRequired,
-      }).isRequired
+      }).isRequired,
+      resultOffset: PropTypes.shape({
+        replace: PropTypes.func.isRequired,
+      }),
     }).isRequired,
     stripes: PropTypes.shape({
       logger: PropTypes.object
@@ -118,9 +122,15 @@ class UserSearchContainer extends React.Component {
     this.source.update(this.props);
   }
 
-  onNeedMoreData = () => {
+  onNeedMoreData = (askAmount, index) => {
+    const { resultOffset } = this.props.mutator;
+
     if (this.source) {
-      this.source.fetchMore(RESULT_COUNT_INCREMENT);
+      if (resultOffset && index >= 0) {
+        this.source.fetchOffset(index);
+      } else {
+        this.source.fetchMore(RESULT_COUNT_INCREMENT);
+      }
     }
   };
 
@@ -140,6 +150,7 @@ class UserSearchContainer extends React.Component {
     const {
       resources,
       children,
+      mutator: { resultOffset },
     } = this.props;
 
     if (this.source) {
@@ -152,6 +163,7 @@ class UserSearchContainer extends React.Component {
       queryGetter: this.queryGetter,
       querySetter: this.querySetter,
       onNeedMoreData: this.onNeedMoreData,
+      resultOffset,
       data: {
         patronGroups: (resources.patronGroups || {}).records || [],
         users: get(resources, 'records.records', []),
