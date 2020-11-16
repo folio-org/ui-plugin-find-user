@@ -10,16 +10,32 @@ export default class Filters extends React.Component {
     activeFilters: PropTypes.object,
     onChangeHandlers: PropTypes.object.isRequired,
     config: PropTypes.arrayOf(PropTypes.object),
+    resultOffset: PropTypes.shape({
+      replace: PropTypes.func.isRequired,
+    }),
   };
 
   static defaultProps = {
     activeFilters: {},
   }
 
+  handleFilterChange = e => {
+    const {
+      resultOffset,
+      onChangeHandlers,
+    } = this.props;
+
+    if (resultOffset) {
+      resultOffset.replace(0);
+    }
+
+    onChangeHandlers.checkbox(e);
+  }
+
   render() {
     const {
       activeFilters,
-      onChangeHandlers: { checkbox, clearGroup },
+      onChangeHandlers: { clearGroup },
       config,
     } = this.props;
 
@@ -30,7 +46,7 @@ export default class Filters extends React.Component {
       <FilterGroups
         config={config}
         filters={groupFilters}
-        onChangeFilter={checkbox}
+        onChangeFilter={this.handleFilterChange}
         onClearFilter={clearGroup}
       />
     );
