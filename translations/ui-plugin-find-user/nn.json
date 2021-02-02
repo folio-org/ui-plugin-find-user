@@ -13,6 +13,6 @@
     "status": "Status",
     "inactive": "Inactive",
     "modal.close": "Close",
-    "modal.save": "Gem",
+    "modal.save": "Save",
     "modal.total": "Total selected: {count}"
 }
