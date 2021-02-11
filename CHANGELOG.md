@@ -1,8 +1,8 @@
 # Change history for ui-plugin-find-user
 
-## 5.0.0 (IN PROGRESS)
+## [5.0.0] IN PROGRESS
 
-* Increment `@folio/stripes` to `v6`.
+* Upgrade to stripes v6. Refs UIPFU-37.
 * Increment `@folio/stripes-cli` to `v2`. Refs UIPFU-38.
 
 ## [4.0.1](https://github.com/folio-org/ui-plugin-find-user/tree/v4.0.1) (2020-11-03)
@@ -10,6 +10,7 @@
 
 * Retrieve up to 200 patron groups, just like ui-users. Refs UIPFU-33.
 * It's election day in the USA. Vote!
+* Use `offset` to request result list pages, just like in ui-users. Fixes UIPFU-35.
 
 ## [4.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v4.0.0) (2020-10-09)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v3.0.0...v4.0.0)
