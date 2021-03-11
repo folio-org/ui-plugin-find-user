@@ -1,6 +1,6 @@
 # Change history for ui-plugin-find-user
 
-## [5.0.0]((https://github.com/folio-org/ui-plugin-find-user/tree/v5.0.0) (2021-03-11)
+## [5.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v5.0.0) (2021-03-11)
 
 * Upgrade to stripes v6. Refs UIPFU-37.
 * Increment `@folio/stripes-cli` to `v2`. Refs UIPFU-38.
