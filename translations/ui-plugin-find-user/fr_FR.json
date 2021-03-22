@@ -4,7 +4,7 @@
     "searchButton.title": "Trouver un utilisateur",
     "noResults": "Choisir un filtre ou saisir une recherche pour afficher les résultats.",
     "searchFieldLabel": "Rechercher",
-    "information.patronGroup": "Groupe d'utilisateurs",
+    "information.patronGroup": "Groupe/Catégorie d'utilisateurs",
     "active": "Actif",
     "information.name": "Nom",
     "information.barcode": "Code-barres",
