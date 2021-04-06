@@ -3,9 +3,8 @@ buildNPM {
   publishModDescriptor = 'yes'
   runLint = 'yes'
   runSonarqube = true
-  runTest = 'yes'
-  runTestOptions = '--karma.singleRun --karma.browsers ChromeDocker --karma.reporters mocha junit --coverage'
   runScripts = [
-   ['formatjs-compile': '']
+   ['formatjs-compile': ''],
+   ['test':'--karma.singleRun --karma.browsers ChromeDocker --karma.reporters mocha junit --coverage'],
   ]
 }
