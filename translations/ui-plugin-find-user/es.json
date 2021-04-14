@@ -1,5 +1,5 @@
 {
-    "meta.title": "User-finder (plugin)",
+    "meta.title": "Buscador de usuarios (plugin)",
     "modal.label": "Seleccionar usuario",
     "searchButton.title": "Buscar usuario",
     "noResults": "Elija un filtro o introduzca una consulta de búsqueda para mostrar los resultados.",
@@ -12,7 +12,7 @@
     "contact.email": "Correo electrónico",
     "status": "Estado",
     "inactive": "Inactivo",
-    "modal.close": "Close",
-    "modal.save": "Save",
-    "modal.total": "Total selected: {count}"
+    "modal.close": "Cerrar",
+    "modal.save": "Guardar",
+    "modal.total": "Total seleccionados: {count}"
 }
