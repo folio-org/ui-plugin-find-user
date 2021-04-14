@@ -12,7 +12,7 @@
     "contact.email": "Correo electrónico",
     "status": "Estado",
     "inactive": "Inactivo",
-    "modal.close": "Close",
-    "modal.save": "Save",
-    "modal.total": "Total selected: {count}"
+    "modal.close": "Cerrar",
+    "modal.save": "Guardar",
+    "modal.total": "Total seleccionados: {count}"
 }
