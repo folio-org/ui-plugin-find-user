@@ -1,6 +1,6 @@
 {
   "name": "@folio/plugin-find-user",
-  "version": "5.0.1",
+  "version": "6.0.0",
   "description": "User-finder for Stripes",
   "repository": "folio-org/ui-plugin-find-user",
   "publishConfig": {
@@ -38,9 +38,9 @@
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^3.2.0",
-    "@folio/stripes": "^6.0.0",
-    "@folio/stripes-cli": "^2.0.0",
-    "@folio/stripes-core": "^7.0.0",
+    "@folio/stripes": "^7.0.0",
+    "@folio/stripes-cli": "^2.4.0",
+    "@folio/stripes-core": "^8.0.0",
     "@formatjs/cli": "^4.2.6",
     "babel-eslint": "^9.0.0",
     "chai": "^4.2.0",
@@ -62,8 +62,8 @@
     "prop-types": "^15.6.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^6.0.0",
-    "react": "*",
+    "@folio/stripes": "^7.0.0",
+    "react": "^17.0.2",
     "react-intl": "^5.7.0",
     "react-router-dom": "^5.1.0"
   }
