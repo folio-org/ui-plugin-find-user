@@ -39,6 +39,7 @@ describe('UI-plugin-find-user', function () {
     describe('click the button', function () {
       beforeEach(async function () {
         await findUser.button.click();
+        await findUser.whenModalPresent();
       });
 
       it('opens a modal', function () {

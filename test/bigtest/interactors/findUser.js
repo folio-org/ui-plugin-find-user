@@ -65,6 +65,12 @@ import css from '../../../src/UserSearch.css';
   });
 
   modal = new PluginModalInteractor(`.${css.modalContent}`);
+
+  modalIsPresent = isPresent('#uiPluginFindUsers--paneset');
+
+  whenModalPresent() {
+    return this.when(() => this.modalIsPresent, 5000);
+  }
 }
 
 export default FindUserInteractor;
