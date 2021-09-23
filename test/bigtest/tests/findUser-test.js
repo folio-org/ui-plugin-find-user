@@ -39,17 +39,12 @@ describe('UI-plugin-find-user', function () {
     describe('click the button', function () {
       beforeEach(async function () {
         await findUser.button.click();
+        await findUser.whenModalPresent();
       });
 
       it('opens a modal', function () {
         expect(
           findUser.modal.isPresent
-        ).to.be.true;
-      });
-
-      it('focuses the search field', function () {
-        expect(
-          findUser.modal.searchField.isFocused
         ).to.be.true;
       });
 
@@ -116,10 +111,6 @@ describe('UI-plugin-find-user', function () {
 
             it('calls the selectUser callback', function () {
               expect(userChosen).to.be.true;
-            });
-
-            it('focuses the modal trigger button', function () {
-              expect(findUser.button.isFocused).to.be.true;
             });
           });
         });
