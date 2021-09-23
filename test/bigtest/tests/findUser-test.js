@@ -48,12 +48,6 @@ describe('UI-plugin-find-user', function () {
         ).to.be.true;
       });
 
-      it('focuses the search field', function () {
-        expect(
-          findUser.modal.searchField.isFocused
-        ).to.be.true;
-      });
-
       describe('checking show inactive filter', function () {
         beforeEach(async function () {
           await findUser.modal.clickInactiveUsersCheckbox();
@@ -117,10 +111,6 @@ describe('UI-plugin-find-user', function () {
 
             it('calls the selectUser callback', function () {
               expect(userChosen).to.be.true;
-            });
-
-            it('focuses the modal trigger button', function () {
-              expect(findUser.button.isFocused).to.be.true;
             });
           });
         });
