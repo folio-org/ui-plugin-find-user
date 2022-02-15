@@ -33,8 +33,13 @@ import css from './UserSearch.css';
 
 function getFullName(user) {
   const lastName = get(user, ['personal', 'lastName'], '');
-  const firstName = get(user, ['personal', 'firstName'], '');
+  let firstName = get(user, ['personal', 'firstName'], '');
   const middleName = get(user, ['personal', 'middleName'], '');
+  const preferredFirstName = get(user, ['personal', 'preferredFirstName'], '');
+
+  if (preferredFirstName && firstName) {
+    firstName = `${preferredFirstName} (${firstName})`;
+  }
 
   return `${lastName}${firstName ? ', ' : ' '}${firstName} ${middleName}`;
 }
@@ -297,6 +302,7 @@ class UserSearchView extends React.Component {
                                   disabled={(!searchValue.query || searchValue.query === '')}
                                   data-test-user-search-submit
                                 >
+
                                   Search
                                 </Button>
                               </div>
