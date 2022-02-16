@@ -1,5 +1,9 @@
 # Change history for ui-plugin-find-user
 
+## 6.1.0 (IN PROGRESS)
+
+* Display preferred name in the user search modal in Checkout and Requests. UIU-2503.
+
 ## [6.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.0.0) (2021-10-09)
 
 * Update to `@folio/stripes` `v7.0.0`. UIPFU-44.
