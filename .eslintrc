@@ -1,7 +1,4 @@
 {
   "parser": "babel-eslint",
-  "extends": "@folio/eslint-config-stripes",
-  "rules": {
-    "react/jsx-one-expression-per-line": 0
-  }
+  "extends": "@folio/eslint-config-stripes"
 }

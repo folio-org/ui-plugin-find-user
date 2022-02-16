@@ -32,10 +32,10 @@ import Filters from './Filters';
 import css from './UserSearch.css';
 
 function getFullName(user) {
-  const lastName = get(user, ['personal', 'lastName'], '');
-  let firstName = get(user, ['personal', 'firstName'], '');
-  const middleName = get(user, ['personal', 'middleName'], '');
-  const preferredFirstName = get(user, ['personal', 'preferredFirstName'], '');
+  let firstName = user?.personal?.firstName ?? '';
+  const lastName = user?.personal?.lastName ?? '';
+  const middleName = user?.personal?.middleName ?? '';
+  const preferredFirstName = user?.personal?.preferredFirstName ?? '';
 
   if (preferredFirstName && firstName) {
     firstName = `${preferredFirstName} (${firstName})`;
@@ -302,8 +302,7 @@ class UserSearchView extends React.Component {
                                   disabled={(!searchValue.query || searchValue.query === '')}
                                   data-test-user-search-submit
                                 >
-
-                                  Search
+                                  <FormattedMessage id="ui-plugin-find-user.searchFieldLabel" />
                                 </Button>
                               </div>
                               <div className={css.resetButtonWrap}>
