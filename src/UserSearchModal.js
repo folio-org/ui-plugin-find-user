@@ -71,6 +71,7 @@ class UserSearchModal extends Component {
         ref={this.modalRef}
         size="large"
         onClose={this.closeModal}
+        restoreFocus={false}
       >
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
         <UserSearchContainer {...this.props} onComponentWillUnmount={this.props.onCloseModal}>

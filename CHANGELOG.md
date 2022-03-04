@@ -2,6 +2,8 @@
 
 ## [6.2.0] IN PROGRESS
 
+* Resolve problem with focus after modal close. UIPFU-48.
+
 ## [6.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.1.0) (2022-03-03)
 
 * Display preferred name in the user search modal in Checkout and Requests. UIPFU-47.
