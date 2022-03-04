@@ -2,7 +2,7 @@
 
 ## [6.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.1.0) (2022-03-03)
 
-* Display preferred name in the user search modal in Checkout and Requests. UIU-2503.
+* Display preferred name in the user search modal in Checkout and Requests. UIPFU-47.
 
 ## [6.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.0.0) (2021-10-09)
 
