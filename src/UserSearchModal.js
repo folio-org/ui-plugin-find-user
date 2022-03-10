@@ -21,7 +21,12 @@ class UserSearchModal extends Component {
     dataKey: PropTypes.string,
     contentRef: PropTypes.object,
     modalRef: PropTypes.object,
+    restoreFocus: PropTypes.bool
   }
+
+  static defaultProps = {
+    restoreFocus: true,
+  };
 
   constructor(props) {
     super(props);
@@ -61,25 +66,32 @@ class UserSearchModal extends Component {
   }
 
   render() {
+    const {
+      restoreFocus,
+      onCloseModal,
+      openWhen,
+      selectUsers,
+    } = this.props;
+
     return (
       <Modal
         contentClass={css.modalContent}
         dismissible
         enforceFocus={false}
         label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
-        open={this.props.openWhen}
+        open={openWhen}
         ref={this.modalRef}
         size="large"
         onClose={this.closeModal}
-        restoreFocus={false}
+        restoreFocus={restoreFocus}
       >
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
-        <UserSearchContainer {...this.props} onComponentWillUnmount={this.props.onCloseModal}>
+        <UserSearchContainer {...this.props} onComponentWillUnmount={onCloseModal}>
           {(viewProps) => <UserSearchView
             {...viewProps}
             onSaveMultiple={this.passUsersOut}
             onSelectRow={this.passUserOut}
-            isMultiSelect={Boolean(this.props.selectUsers)}
+            isMultiSelect={Boolean(selectUsers)}
           />}
         </UserSearchContainer>
       </Modal>
