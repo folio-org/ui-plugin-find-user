@@ -1,6 +1,6 @@
 // This view component contains purely presentational code, apart from UserSearchContainer that contains the data-layer access.
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import noop from 'lodash/noop';
@@ -76,7 +76,7 @@ class UserSearchView extends React.Component {
 
   static defaultProps = {
     idPrefix: 'uiPluginFindUsers-',
-    visibleColumns: ['active', 'name', 'barcode', 'patronGroup', 'username', 'email'],
+    visibleColumns: ['name', 'active', 'barcode', 'patronGroup', 'username', 'email'],
     data: {},
     isMultiSelect: false,
   };
@@ -211,20 +211,22 @@ class UserSearchView extends React.Component {
           onChange={() => this.toggleItem(user)}
         />
       ),
-      active: user => (
-        <AppIcon
-          app="users"
-          size="small"
-          className={user.active ? '' : css.inactiveAppIcon}
-        >
-          {
-            user.active
-              ? <FormattedMessage id="ui-plugin-find-user.active" />
-              : <FormattedMessage id="ui-plugin-find-user.inactive" />
-          }
-        </AppIcon>
+      active: (user) => {
+        return user.active
+          ? <FormattedMessage id="ui-plugin-find-user.active" />
+          : <FormattedMessage id="ui-plugin-find-user.inactive" />;
+      },
+      name: (user) => (
+        <>
+          <AppIcon
+            app="users"
+            size="small"
+            className={user.active ? '' : css.inactiveAppIcon}
+          />
+          &nbsp;
+          {getFullName(user)}
+        </>
       ),
-      name: user => getFullName(user),
       barcode: user => user.barcode,
       patronGroup: (user) => {
         const pg = patronGroups.filter(g => g.id === user.patronGroup)[0];
@@ -235,7 +237,7 @@ class UserSearchView extends React.Component {
     };
 
     return (
-      <Fragment>
+      <>
         <div
           data-test-find-user
           ref={contentRef}
@@ -381,7 +383,7 @@ class UserSearchView extends React.Component {
         {
           isMultiSelect && (
             <div className={css.UserSearchViewFooter}>
-              <Fragment>
+              <>
                 <div>
                   <FormattedMessage
                     id="ui-plugin-find-user.modal.total"
@@ -397,11 +399,11 @@ class UserSearchView extends React.Component {
                 >
                   <FormattedMessage id="ui-plugin-find-user.modal.save" />
                 </Button>
-              </Fragment>
+              </>
             </div>
           )
         }
-      </Fragment>
+      </>
     );
   }
 }
