@@ -2,6 +2,7 @@
 
 ## [6.2.0] IN PROGRESS
 
+* Replace babel-eslint with @babel/eslint-parser. UIPFU-51
 * Resolve problem with focus after modal close. UIPFU-48.
 
 ## [6.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.1.0) (2022-03-03)
