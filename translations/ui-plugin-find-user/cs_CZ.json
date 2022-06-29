@@ -4,7 +4,7 @@
     "searchButton.title": "Find User",
     "noResults": "Choose a filter or enter a search query to show results.",
     "searchFieldLabel": "Search",
-    "information.patronGroup": "Patron group",
+    "information.patronGroup": "Skupina čtenáře",
     "active": "Active",
     "information.name": "Name",
     "information.barcode": "Barcode",
