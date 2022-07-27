@@ -2,7 +2,7 @@
     "meta.title": "Personen-Finder (Plugin)",
     "modal.label": "Person auswählen",
     "searchButton.title": "Person finden",
-    "noResults": "Filter auswählen oder Suchanfrage eingeben, um Ergebnisse anzuzeigen.",
+    "noResults": "Filter auswählen oder Suchanfrage eingeben. Die Treffer werden dann hier angezeigt.",
     "searchFieldLabel": "Suche",
     "information.patronGroup": "Personengruppe",
     "active": "Aktiv",
