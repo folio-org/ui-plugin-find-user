@@ -2,6 +2,8 @@
 
 ## 6.3.0 IN PROGRESS
 
+* Also query against `personal.preferredFirstName` and `customFields`. UIPFU-55.
+
 ## [6.2.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.2.0) (2022-06-28)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v6.1.0...v6.2.0)
 

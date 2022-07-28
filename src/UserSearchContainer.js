@@ -13,8 +13,21 @@ import filterConfig from './filterConfig';
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
 
+// list of fields to query against
+const queryFields = [
+  'username',
+  'personal.firstName',
+  'personal.preferredFirstName',
+  'personal.lastName',
+  'personal.email',
+  'barcode',
+  'id',
+  'externalSystemId',
+  'customFields'
+];
+
 const compileQuery = template(
-  '(username="%{query}*" or personal.firstName="%{query}*" or personal.lastName="%{query}*" or personal.email="%{query}*" or barcode="%{query}*" or id="%{query}*" or externalSystemId="%{query}*")',
+  `(${queryFields.map(f => `${f}="%{query}*"`).join(' or ')})`,
   { interpolate: /%{([\s\S]+?)}/g }
 );
 
