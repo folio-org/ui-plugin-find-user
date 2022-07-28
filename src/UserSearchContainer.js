@@ -27,7 +27,7 @@ const queryFields = [
 ];
 
 const compileQuery = template(
-  `(${queryFields.map(f => `${f}="%{query}*"`).join(" or ")})`,
+  `(${queryFields.map(f => `${f}="%{query}*"`).join(' or ')})`,
   { interpolate: /%{([\s\S]+?)}/g }
 );
 
