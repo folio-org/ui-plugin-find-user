@@ -2,7 +2,7 @@
     "meta.title": "Vyhledávač uživatelů (plugin)",
     "modal.label": "Vybrat uživatele",
     "searchButton.title": "Najít uživatele",
-    "noResults": "Choose a filter or enter a search query to show results.",
+    "noResults": "Chcete-li zobrazit výsledky, vyberte filtr nebo zadejte vyhledávací dotaz.",
     "searchFieldLabel": "Search",
     "information.patronGroup": "Skupina čtenáře",
     "active": "Aktivní",
@@ -12,7 +12,7 @@
     "contact.email": "E-mail",
     "status": "Status",
     "inactive": "Neaktivní",
-    "modal.close": "Close",
-    "modal.save": "Save",
-    "modal.total": "Total selected: {count}"
+    "modal.close": "Zavřít",
+    "modal.save": "Uložit",
+    "modal.total": "Celkem vybráno: {count}"
 }
