@@ -42,6 +42,8 @@ export default class Filters extends React.Component {
     const groupFilters = {};
     activeFilters.string.split(',').forEach(m => { groupFilters[m] = true; });
 
+    console.log(config, groupFilters);
+
     return (
       <FilterGroups
         config={config}
