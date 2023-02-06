@@ -2,6 +2,8 @@
 
 ## 6.4.0 IN PROGRESS
 
+* Bump stripes to 8.0.0 for Orchid/2023-R1. Refs UIPFU-63.
+
 ## [6.3.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.3.0) (2022-08-22)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v6.2.0...v6.3.0)
 
