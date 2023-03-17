@@ -1,7 +1,7 @@
 {
     "meta.title": "ユーザーファインダー（プラグイン）",
     "modal.label": "ユーザーを選択",
-    "searchButton.title": "Find User",
+    "searchButton.title": "ユーザーの検索",
     "noResults": "フィルターを選択するか、検索クエリを入力して結果を表示します。",
     "searchFieldLabel": "検索",
     "information.patronGroup": "利用者グループ",
