@@ -19,6 +19,7 @@ const queryFields = [
   'personal.firstName',
   'personal.preferredFirstName',
   'personal.lastName',
+  'personal.middleName',
   'personal.email',
   'barcode',
   'id',
