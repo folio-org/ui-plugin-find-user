@@ -8,6 +8,7 @@ import contains from 'dom-helpers/query/contains';
 import { Button, Icon } from '@folio/stripes/components';
 
 import UserSearchModal from './UserSearchModal';
+import { UsersShape } from './shapes';
 
 import css from './UserSearch.css';
 
@@ -111,6 +112,7 @@ PluginFindUser.defaultProps = {
   id: 'clickable-plugin-find-user',
   searchButtonStyle: 'primary noRightRadius',
   dataKey: 'find_patron',
+  initialSelectedUsers: {},
 };
 
 PluginFindUser.propTypes = {
@@ -123,6 +125,7 @@ PluginFindUser.propTypes = {
   onModalClose: PropTypes.func,
   renderTrigger: PropTypes.func,
   dataKey: PropTypes.string,
+  initialSelectedUsers: UsersShape,
 };
 
 export default PluginFindUser;

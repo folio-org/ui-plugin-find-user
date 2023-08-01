@@ -2,6 +2,7 @@
 
 ## 6.5.0 IN PROGRESS
 * Add middle name to keyword search for Users. Refs UIPFU-58.
+* Add Initial Selected Users list. Refs UIPFU-71.
 
 ## [6.4.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.4.0) (2023-02-20)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v6.3.0...v6.4.0)
