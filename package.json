@@ -36,11 +36,10 @@
     "@babel/eslint-parser": "^7.17.0",
     "@bigtest/interactor": "^0.9.1",
     "@bigtest/mocha": "^0.5.2",
-    "@bigtest/react": "^0.1.2",
-    "@folio/eslint-config-stripes": "^6.1.0",
-    "@folio/stripes": "^8.0.0",
-    "@folio/stripes-cli": "^2.4.0",
-    "@folio/stripes-core": "^9.0.0",
+    "@folio/eslint-config-stripes": "^7.0.0",
+    "@folio/stripes": "^9.0.0",
+    "@folio/stripes-cli": "^3.0.0",
+    "@folio/stripes-core": "^10.0.0",
     "@formatjs/cli": "^4.2.6",
     "chai": "^4.2.0",
     "core-js": "^3.6.4",
@@ -49,8 +48,8 @@
     "faker": "^4.1.0",
     "inflected": "^2.0.4",
     "miragejs": "^0.1.40",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intl": "^5.7.0",
     "react-router-dom": "^5.1.0",
     "regenerator-runtime": "^0.13.3"
@@ -62,8 +61,9 @@
     "prop-types": "^15.6.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^8.0.0",
-    "react": "^17.0.2",
+    "@folio/stripes": "^9.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intl": "^5.7.0",
     "react-router-dom": "^5.1.0"
   }
