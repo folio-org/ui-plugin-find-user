@@ -2,7 +2,6 @@ import React from 'react';
 import { describe, beforeEach, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 import PropTypes from 'prop-types';
-import { UsersShape } from '../../../src/shapes';
 
 import setupApplication, { mount } from '../helpers/helpers';
 import PluginHarness from '../helpers/PluginHarness';
@@ -231,7 +230,20 @@ describe('UsersShape PropTypes', () => {
       },
     };
     const result = PropTypes.checkPropTypes(
-      { users: UsersShape },
+      { users:  PropTypes.shape({
+        [PropTypes.string]: PropTypes.shape({
+          username: PropTypes.string,
+          id: PropTypes.string,
+          active: PropTypes.bool,
+          barcode: PropTypes.string,
+          personal: PropTypes.shape({
+            lastName: PropTypes.string,
+            firstName: PropTypes.string,
+            email: PropTypes.string,
+          }),
+          patronGroup: PropTypes.string,
+        }),
+      }) },
       { users: validProps },
       'users',
       'TestComponent'
