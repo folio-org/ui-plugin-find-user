@@ -4,6 +4,7 @@
 * Add middle name to keyword search for Users. Refs UIPFU-58.
 * Upgrade React to v18. Refs UIPFU-70.
 * update NodeJS to v16 in GitHub Actions. Refs UIPFU-67.
+* Add Initial Selected Users list. Refs UIPFU-71.
 
 ## [6.4.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.4.0) (2023-02-20)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v6.3.0...v6.4.0)

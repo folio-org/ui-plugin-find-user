@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 
 import { Modal } from '@folio/stripes/components';
+
 import UserSearchContainer from './UserSearchContainer';
 import UserSearchView from './UserSearchView';
 
@@ -21,7 +22,21 @@ class UserSearchModal extends Component {
     dataKey: PropTypes.string,
     contentRef: PropTypes.object,
     modalRef: PropTypes.object,
-    restoreFocus: PropTypes.bool
+    restoreFocus: PropTypes.bool,
+    initialSelectedUsers: PropTypes.shape({
+      [PropTypes.string]: PropTypes.shape({
+        username: PropTypes.string,
+        id: PropTypes.string,
+        active: PropTypes.bool,
+        barcode: PropTypes.string,
+        personal: PropTypes.shape({
+          lastName: PropTypes.string,
+          firstName: PropTypes.string,
+          email: PropTypes.string,
+        }),
+        patronGroup: PropTypes.string,
+      }),
+    }),
   }
 
   static defaultProps = {
@@ -71,6 +86,7 @@ class UserSearchModal extends Component {
       onCloseModal,
       openWhen,
       selectUsers,
+      initialSelectedUsers,
     } = this.props;
 
     return (
@@ -92,6 +108,7 @@ class UserSearchModal extends Component {
             onSaveMultiple={this.passUsersOut}
             onSelectRow={this.passUserOut}
             isMultiSelect={Boolean(selectUsers)}
+            initialSelectedUsers={initialSelectedUsers}
           />}
         </UserSearchContainer>
       </Modal>

@@ -111,6 +111,7 @@ PluginFindUser.defaultProps = {
   id: 'clickable-plugin-find-user',
   searchButtonStyle: 'primary noRightRadius',
   dataKey: 'find_patron',
+  initialSelectedUsers: {},
 };
 
 PluginFindUser.propTypes = {
@@ -123,6 +124,20 @@ PluginFindUser.propTypes = {
   onModalClose: PropTypes.func,
   renderTrigger: PropTypes.func,
   dataKey: PropTypes.string,
+  initialSelectedUsers: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      username: PropTypes.string,
+      id: PropTypes.string,
+      active: PropTypes.bool,
+      barcode: PropTypes.string,
+      personal: PropTypes.shape({
+        lastName: PropTypes.string,
+        firstName: PropTypes.string,
+        email: PropTypes.string,
+      }),
+      patronGroup: PropTypes.string,
+    }),
+  }),
 };
 
 export default PluginFindUser;

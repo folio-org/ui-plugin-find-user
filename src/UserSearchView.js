@@ -2,12 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import noop from 'lodash/noop';
 import get from 'lodash/get';
 import pickBy from 'lodash/pickBy';
-
 import { FormattedMessage } from 'react-intl';
+
 import { IntlConsumer, AppIcon } from '@folio/stripes/core';
 import {
   MultiColumnList,
@@ -19,7 +18,6 @@ import {
   PaneMenu,
   Checkbox,
 } from '@folio/stripes/components';
-
 import {
   SearchAndSortQuery,
   SearchAndSortNoResultsMessage as NoResultsMessage,
@@ -27,8 +25,8 @@ import {
 } from '@folio/stripes/smart-components';
 
 import filterConfig from './filterConfig';
-
 import Filters from './Filters';
+
 import css from './UserSearch.css';
 
 function getFullName(user) {
@@ -72,6 +70,20 @@ class UserSearchView extends React.Component {
     resultOffset: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }),
+    initialSelectedUsers: PropTypes.shape({
+      [PropTypes.string]: PropTypes.shape({
+        username: PropTypes.string,
+        id: PropTypes.string,
+        active: PropTypes.bool,
+        barcode: PropTypes.string,
+        personal: PropTypes.shape({
+          lastName: PropTypes.string,
+          firstName: PropTypes.string,
+          email: PropTypes.string,
+        }),
+        patronGroup: PropTypes.string,
+      }),
+    }),
   }
 
   static defaultProps = {
@@ -83,7 +95,7 @@ class UserSearchView extends React.Component {
 
   state = {
     filterPaneIsVisible: true,
-    checkedMap: {},
+    checkedMap: this.props.initialSelectedUsers || {},
     isAllChecked: false,
   }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { describe, beforeEach, it } from '@bigtest/mocha';
 import { expect } from 'chai';
+import PropTypes from 'prop-types';
 
 import setupApplication, { mount } from '../helpers/helpers';
 import PluginHarness from '../helpers/PluginHarness';
@@ -9,6 +10,33 @@ import FindUserInteractor from '../interactors/findUser';
 let closeHandled = false;
 let userChosen = false;
 let selectedUsers = [];
+
+const INITIAL_SELECTED_USERS = {
+  userId1: {
+    id: 'userId1',
+    username: 'testuser1',
+    active: false,
+    barcode: '123456',
+    personal: {
+      firstName: 'Test',
+      lastName: 'User1',
+      email: 'user1@folio.org'
+    },
+    patronGroup: 'staff'
+  },
+  userId2: {
+    id: 'userId2',
+    username: 'testuser2',
+    active: true,
+    barcode: '123456',
+    personal: {
+      firstName: 'Test',
+      lastName: 'User2',
+      email: 'user2@folio.org'
+    },
+    patronGroup: 'staff'
+  },
+};
 
 describe('UI-plugin-find-user', function () {
   const findUser = new FindUserInteractor();
@@ -154,6 +182,72 @@ describe('UI-plugin-find-user', function () {
           expect(selectedUsers.length).to.equal(2);
         });
       });
+
+      describe('with initial selected users', function () {
+        it('returns selected users', function () {
+          expect(selectedUsers.length).to.equal(2);
+        });
+      });
     });
+  });
+
+  describe('initialSelectedUsers', function () {
+    beforeEach(async function () {
+      await mount(
+        <PluginHarness
+          selectUsers={(users) => { selectedUsers = users; }}
+          initialSelectedUsers={INITIAL_SELECTED_USERS}
+        />
+      );
+
+      selectedUsers = [];
+      await findUser.button.click();
+      await findUser.modal.clickInactiveUsersCheckbox();
+      await findUser.modal.searchField.fill('t');
+      await findUser.modal.saveMultipleButton.click();
+    });
+
+    it('should return one initial selected user', function () {
+      expect(selectedUsers.length).to.equal(Object.keys(INITIAL_SELECTED_USERS).length);
+    });
+  });
+});
+
+describe('UsersShape PropTypes', () => {
+  it('should validate correctly for valid prop', () => {
+    const validProps = {
+      user1: {
+        username: 'user1',
+        id: '1',
+        active: true,
+        barcode: 'barcode1',
+        personal: {
+          lastName: 'Last',
+          firstName: 'First',
+          email: 'user1@example.com',
+        },
+        patronGroup: 'group1',
+      },
+    };
+    const result = PropTypes.checkPropTypes(
+      { users:  PropTypes.shape({
+        [PropTypes.string]: PropTypes.shape({
+          username: PropTypes.string,
+          id: PropTypes.string,
+          active: PropTypes.bool,
+          barcode: PropTypes.string,
+          personal: PropTypes.shape({
+            lastName: PropTypes.string,
+            firstName: PropTypes.string,
+            email: PropTypes.string,
+          }),
+          patronGroup: PropTypes.string,
+        }),
+      }) },
+      { users: validProps },
+      'users',
+      'TestComponent'
+    );
+    expect(result).to.equal(undefined);
   });
 });
