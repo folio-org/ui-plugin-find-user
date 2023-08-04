@@ -26,7 +26,6 @@ import {
 
 import filterConfig from './filterConfig';
 import Filters from './Filters';
-import { UsersShape } from './shapes';
 
 import css from './UserSearch.css';
 
@@ -71,7 +70,20 @@ class UserSearchView extends React.Component {
     resultOffset: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }),
-    initialSelectedUsers: UsersShape,
+    initialSelectedUsers: PropTypes.shape({
+      [PropTypes.string]: PropTypes.shape({
+        username: PropTypes.string,
+        id: PropTypes.string,
+        active: PropTypes.bool,
+        barcode: PropTypes.string,
+        personal: PropTypes.shape({
+          lastName: PropTypes.string,
+          firstName: PropTypes.string,
+          email: PropTypes.string,
+        }),
+        patronGroup: PropTypes.string,
+      }),
+    }),
   }
 
   static defaultProps = {

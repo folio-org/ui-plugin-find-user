@@ -8,7 +8,6 @@ import contains from 'dom-helpers/query/contains';
 import { Button, Icon } from '@folio/stripes/components';
 
 import UserSearchModal from './UserSearchModal';
-import { UsersShape } from './shapes';
 
 import css from './UserSearch.css';
 
@@ -125,7 +124,20 @@ PluginFindUser.propTypes = {
   onModalClose: PropTypes.func,
   renderTrigger: PropTypes.func,
   dataKey: PropTypes.string,
-  initialSelectedUsers: UsersShape,
+  initialSelectedUsers: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      username: PropTypes.string,
+      id: PropTypes.string,
+      active: PropTypes.bool,
+      barcode: PropTypes.string,
+      personal: PropTypes.shape({
+        lastName: PropTypes.string,
+        firstName: PropTypes.string,
+        email: PropTypes.string,
+      }),
+      patronGroup: PropTypes.string,
+    }),
+  }),
 };
 
 export default PluginFindUser;

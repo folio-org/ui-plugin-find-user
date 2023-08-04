@@ -6,7 +6,6 @@ import { Modal } from '@folio/stripes/components';
 
 import UserSearchContainer from './UserSearchContainer';
 import UserSearchView from './UserSearchView';
-import { UsersShape } from './shapes';
 
 import css from './UserSearch.css';
 
@@ -24,7 +23,20 @@ class UserSearchModal extends Component {
     contentRef: PropTypes.object,
     modalRef: PropTypes.object,
     restoreFocus: PropTypes.bool,
-    initialSelectedUsers: UsersShape,
+    initialSelectedUsers: PropTypes.shape({
+      [PropTypes.string]: PropTypes.shape({
+        username: PropTypes.string,
+        id: PropTypes.string,
+        active: PropTypes.bool,
+        barcode: PropTypes.string,
+        personal: PropTypes.shape({
+          lastName: PropTypes.string,
+          firstName: PropTypes.string,
+          email: PropTypes.string,
+        }),
+        patronGroup: PropTypes.string,
+      }),
+    }),
   }
 
   static defaultProps = {
