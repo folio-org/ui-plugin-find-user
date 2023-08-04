@@ -1,8 +1,9 @@
 import React from 'react';
 import { describe, beforeEach, it } from '@bigtest/mocha';
 import { expect } from 'chai';
+import PropTypes from 'prop-types';
+import { UsersShape } from '../../../src/shapes';
 
-import { find } from 'lodash';
 import setupApplication, { mount } from '../helpers/helpers';
 import PluginHarness from '../helpers/PluginHarness';
 import FindUserInteractor from '../interactors/findUser';
@@ -210,5 +211,31 @@ describe('UI-plugin-find-user', function () {
     it('should return one initial selected user', function () {
       expect(selectedUsers.length).to.equal(Object.keys(INITIAL_SELECTED_USERS).length);
     });
+  });
+});
+
+describe('UsersShape PropTypes', () => {
+  it('should validate correctly for valid prop', () => {
+    const validProps = {
+      user1: {
+        username: 'user1',
+        id: '1',
+        active: true,
+        barcode: 'barcode1',
+        personal: {
+          lastName: 'Last',
+          firstName: 'First',
+          email: 'user1@example.com',
+        },
+        patronGroup: 'group1',
+      },
+    };
+    const result = PropTypes.checkPropTypes(
+      { users: UsersShape },
+      { users: validProps },
+      'users',
+      'TestComponent'
+    );
+    expect(result).to.equal(undefined);
   });
 });
