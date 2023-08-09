@@ -1,6 +1,6 @@
 <!--
   If you have a relevant JIRA issue number, please put it in the issue title.
-  Example: UIPFU-68 Orders schema updates
+  Example: UIPFU-2 Add ability to customize search button
 -->
 
 ## Purpose
@@ -18,7 +18,7 @@
   section."
 
   If you have a relevant JIRA issue, add a link directly to the issue URL here.
-  Example: https://issues.folio.org/browse/UIPFU-68
+  Example: https://issues.folio.org/browse/UIPFU-2
  -->
 
 ## Approach
