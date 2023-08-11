@@ -40,6 +40,7 @@ class UserSearchContainer extends React.Component {
     resultOffset: { initialValue: 0 },
     records: {
       type: 'okapi',
+      tenant: '!{tenantId}',
       records: 'users',
       resultOffset: '%{resultOffset}',
       perRequest: 100,
@@ -68,6 +69,7 @@ class UserSearchContainer extends React.Component {
     },
     patronGroups: {
       type: 'okapi',
+      tenant: '!{tenantId}',
       path: 'groups',
       params: {
         query: 'cql.allRecords=1 sortby group',
@@ -105,6 +107,8 @@ class UserSearchContainer extends React.Component {
     stripes: PropTypes.shape({
       logger: PropTypes.object
     }).isRequired,
+    // eslint-disable-next-line
+    tenantId: PropTypes.string.isRequired,
   }
 
   constructor(props) {
