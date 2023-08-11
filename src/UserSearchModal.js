@@ -13,6 +13,7 @@ class UserSearchModal extends Component {
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
+      okapi: PropTypes.object.isRequired,
     }).isRequired,
     selectUsers: PropTypes.func,
     selectUser: PropTypes.func,
@@ -37,6 +38,7 @@ class UserSearchModal extends Component {
         patronGroup: PropTypes.string,
       }),
     }),
+    tenantId: PropTypes.string,
   }
 
   static defaultProps = {
@@ -87,6 +89,8 @@ class UserSearchModal extends Component {
       openWhen,
       selectUsers,
       initialSelectedUsers,
+      tenantId,
+      stripes,
     } = this.props;
 
     return (
@@ -102,7 +106,11 @@ class UserSearchModal extends Component {
         restoreFocus={restoreFocus}
       >
         {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
-        <UserSearchContainer {...this.props} onComponentWillUnmount={onCloseModal}>
+        <UserSearchContainer
+          {...this.props}
+          onComponentWillUnmount={onCloseModal}
+          tenantId={tenantId || stripes.okapi.tenant}
+        >
           {(viewProps) => <UserSearchView
             {...viewProps}
             onSaveMultiple={this.passUsersOut}
