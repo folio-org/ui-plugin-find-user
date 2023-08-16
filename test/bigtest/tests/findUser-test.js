@@ -183,9 +183,17 @@ describe('UI-plugin-find-user', function () {
         });
       });
 
-      describe('with initial selected users', function () {
-        it('returns selected users', function () {
-          expect(selectedUsers.length).to.equal(2);
+      describe('unselect users', function () {
+        beforeEach(async function () {
+          selectedUsers = [];
+          await findUser.modal.instances(1).check();
+          await findUser.modal.instances(3).check();
+          await findUser.modal.instances(3).check();
+          await findUser.modal.saveMultipleButton.click();
+        });
+
+        it('returns selected users after unselect a user', function () {
+          expect(selectedUsers.length).to.equal(1);
         });
       });
     });
