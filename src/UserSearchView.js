@@ -192,7 +192,7 @@ class UserSearchView extends React.Component {
     const { checkedMap, isAllChecked } = this.state;
 
     const { patronGroups, users } = data;
-    const checkedUsersLength = Object.keys(checkedMap).length;
+    const checkedUsersLength = Object.values(checkedMap).filter(Boolean).length;
     const builtVisibleColumns = isMultiSelect ? ['isChecked', ...visibleColumns] : visibleColumns;
 
     const query = queryGetter ? queryGetter() || {} : {};
