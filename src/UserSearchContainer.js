@@ -107,7 +107,11 @@ class UserSearchContainer extends React.Component {
     stripes: PropTypes.shape({
       logger: PropTypes.object
     }).isRequired,
-    // eslint-disable-next-line
+    /*
+      Linter rule is disabled, because prop `tenantId` is required in manifest, and not used in component.
+      As a result linter can't see prop usage and reports error
+    */
+    // eslint-disable-next-line react/no-unused-prop-types
     tenantId: PropTypes.string.isRequired,
   }
 
