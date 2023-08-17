@@ -36,7 +36,7 @@ const compileQuery = template(
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
   const mainQuery = makeQueryFunction(
     'cql.allRecords=1',
-    (parsedQuery, props, localProps) => localProps.query.query.trim().split(/\s+/).map(query => compileQuery({ query })).join(' and '),
+    (_parsedQuery, _props, localProps) => localProps.query.query.trim().split(/\s+/).map(query => compileQuery({ query })).join(' and '),
     {
       // the keys in this object must match those passed to
       // SearchAndSort's columnMapping prop
