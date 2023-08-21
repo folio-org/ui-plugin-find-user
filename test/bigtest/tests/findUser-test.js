@@ -3,6 +3,8 @@ import { describe, beforeEach, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 import PropTypes from 'prop-types';
 
+import { NOT_SHADOW_USER_CQL } from '../../../src/constants';
+import { buildQuery } from '../../../src/UserSearchContainer';
 import setupApplication, { mount } from '../helpers/helpers';
 import PluginHarness from '../helpers/PluginHarness';
 import FindUserInteractor from '../interactors/findUser';
@@ -183,9 +185,17 @@ describe('UI-plugin-find-user', function () {
         });
       });
 
-      describe('with initial selected users', function () {
-        it('returns selected users', function () {
-          expect(selectedUsers.length).to.equal(2);
+      describe('unselect users', function () {
+        beforeEach(async function () {
+          selectedUsers = [];
+          await findUser.modal.instances(1).check();
+          await findUser.modal.instances(3).check();
+          await findUser.modal.instances(3).check();
+          await findUser.modal.saveMultipleButton.click();
+        });
+
+        it('returns selected users after unselect a user', function () {
+          expect(selectedUsers.length).to.equal(1);
         });
       });
     });
@@ -249,5 +259,24 @@ describe('UsersShape PropTypes', () => {
       'TestComponent'
     );
     expect(result).to.equal(undefined);
+  });
+
+  describe('buildQuery', () => {
+    const queryParams = {
+      filters: 'active.active',
+      query: 'Joe',
+      sort: 'name',
+    };
+    const pathComponents = {};
+    const resourceData = {
+      query: queryParams,
+    };
+    const logger = {
+      log: () => {},
+    };
+
+    it('should exclude shadow users when building CQL query', () => {
+      expect(buildQuery(queryParams, pathComponents, resourceData, logger)).contain(NOT_SHADOW_USER_CQL);
+    });
   });
 });
