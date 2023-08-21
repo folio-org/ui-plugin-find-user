@@ -193,6 +193,7 @@ class UserSearchView extends React.Component {
 
     const { patronGroups, users } = data;
     const checkedUsersLength = Object.values(checkedMap).filter(Boolean).length;
+    const disabled = Object.keys(checkedMap).length === 0;
     const builtVisibleColumns = isMultiSelect ? ['isChecked', ...visibleColumns] : visibleColumns;
 
     const query = queryGetter ? queryGetter() || {} : {};
@@ -406,7 +407,7 @@ class UserSearchView extends React.Component {
                   data-test-find-users-modal-save-multiple
                   marginBottom0
                   onClick={this.saveMultiple}
-                  disabled={!checkedUsersLength}
+                  disabled={disabled}
                   buttonStyle="primary"
                 >
                   <FormattedMessage id="ui-plugin-find-user.modal.save" />
