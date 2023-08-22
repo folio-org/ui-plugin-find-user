@@ -62,6 +62,7 @@ class UserSearchContainer extends React.Component {
     resultOffset: { initialValue: 0 },
     records: {
       type: 'okapi',
+      tenant: '!{tenantId}',
       records: 'users',
       resultOffset: '%{resultOffset}',
       perRequest: 100,
@@ -73,6 +74,7 @@ class UserSearchContainer extends React.Component {
     },
     patronGroups: {
       type: 'okapi',
+      tenant: '!{tenantId}',
       path: 'groups',
       params: {
         query: 'cql.allRecords=1 sortby group',
@@ -110,6 +112,12 @@ class UserSearchContainer extends React.Component {
     stripes: PropTypes.shape({
       logger: PropTypes.object
     }).isRequired,
+    /*
+      Linter rule is disabled, because prop `tenantId` is required in manifest, and not used in component.
+      As a result linter can't see prop usage and reports error
+    */
+    // eslint-disable-next-line react/no-unused-prop-types
+    tenantId: PropTypes.string.isRequired,
   }
 
   constructor(props) {
