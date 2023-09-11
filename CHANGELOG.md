@@ -11,6 +11,7 @@
 * Fix selected users length. Refs UIPFU-75.
 * ECS - Do not display shadow users in search results. Refs UIPFU-76.
 * Support fetch users from different tenants. Refs UIPFU-74.
+* *BREAKING* bump `react-intl` to `v6.4.4`. Refs UIPFU-79.
 
 ## [6.4.0](https://github.com/folio-org/ui-plugin-find-user/tree/v6.4.0) (2023-02-20)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v6.3.0...v6.4.0)
