@@ -8,7 +8,6 @@ import {
   StripesConnectedSource,
 } from '@folio/stripes/smart-components';
 
-import { NOT_SHADOW_USER_CQL } from './constants';
 import filterConfig from './filterConfig';
 
 const INITIAL_RESULT_COUNT = 30;
@@ -33,27 +32,6 @@ const compileQuery = template(
   { interpolate: /%{([\s\S]+?)}/g }
 );
 
-export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
-  const mainQuery = makeQueryFunction(
-    'cql.allRecords=1',
-    (_parsedQuery, _props, localProps) => localProps.query.query.trim().split(/\s+/).map(query => compileQuery({ query })).join(' and '),
-    {
-      // the keys in this object must match those passed to
-      // SearchAndSort's columnMapping prop
-      'active': 'active',
-      'name': 'personal.lastName personal.firstName',
-      'patronGroup': 'patronGroup.group',
-      'username': 'username',
-      'barcode': 'barcode',
-      'email': 'personal.email',
-    },
-    filterConfig,
-    2,
-  )(queryParams, pathComponents, resourceData, logger, props);
-
-  return mainQuery && `${NOT_SHADOW_USER_CQL} and ${mainQuery}`;
-}
-
 class UserSearchContainer extends React.Component {
   static manifest = Object.freeze({
     initializedFilterConfig: { initialValue: false },
@@ -68,7 +46,24 @@ class UserSearchContainer extends React.Component {
       perRequest: 100,
       path: 'users',
       GET: {
-        params: { query: buildQuery },
+        params: {
+          query: makeQueryFunction(
+            'cql.allRecords=1',
+            (parsedQuery, props, localProps) => localProps.query.query.trim().split(/\s+/).map(query => compileQuery({ query })).join(' and '),
+            {
+              // the keys in this object must match those passed to
+              // SearchAndSort's columnMapping prop
+              'active': 'active',
+              'name': 'personal.lastName personal.firstName',
+              'patronGroup': 'patronGroup.group',
+              'username': 'username',
+              'barcode': 'barcode',
+              'email': 'personal.email',
+            },
+            filterConfig,
+            2,
+          ),
+        },
         staticFallback: { params: {} },
       },
     },
