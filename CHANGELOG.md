@@ -9,7 +9,6 @@
 * Add PULL_REQUEST_TEMPLATE.md file to the repository. Refs UIPFU-68.
 * Update Node.js to v18 in GitHub Actions. Refs. UIPFU-73.
 * Fix selected users length. Refs UIPFU-75.
-* ECS - Do not display shadow users in search results. Refs UIPFU-76.
 * Support fetch users from different tenants. Refs UIPFU-74.
 * *BREAKING* bump `react-intl` to `v6.4.4`. Refs UIPFU-79.
 
