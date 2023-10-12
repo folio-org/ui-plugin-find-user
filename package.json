@@ -28,8 +28,8 @@
     "test": "stripes test karma"
   },
   "okapiInterfaces": {
-    "users": "15.0",
-    "users-bl": "3.2 4.0"
+    "users": "16.0",
+    "users-bl": "6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",

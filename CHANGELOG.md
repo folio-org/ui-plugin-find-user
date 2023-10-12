@@ -1,6 +1,10 @@
 # Change history for ui-plugin-find-user
 
-## 7.0.0 IN PROGRESS
+## 7.1.0 IN PROGRESS
+
+## [7.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v7.0.0) (2023-10-12)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v6.3.0...v7.0.0)
+
 * Add middle name to keyword search for Users. Refs UIPFU-58.
 * Upgrade React to v18. Refs UIPFU-70.
 * update NodeJS to v16 in GitHub Actions. Refs UIPFU-67.
