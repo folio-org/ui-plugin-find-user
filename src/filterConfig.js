@@ -27,4 +27,25 @@ const filterConfig = [
   },
 ];
 
+export const filterConfigWithUserAssignedStatus = [
+  ...filterConfig,
+  {
+    label: <FormattedMessage id="ui-plugin-find-user.userAssignmentStatus" />,
+    name: 'uas',
+    cql: 'uas',
+    values: [
+      {
+        name: 'Assigned',
+        cql: 'true',
+        displayName: <FormattedMessage id="ui-plugin-find-user.assigned" />,
+      },
+      {
+        name: 'Unassigned',
+        cql: 'false',
+        displayName: <FormattedMessage id="ui-plugin-find-user.unassigned" />,
+      },
+    ],
+  },
+];
+
 export default filterConfig;

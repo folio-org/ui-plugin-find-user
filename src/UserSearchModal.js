@@ -110,6 +110,7 @@ class UserSearchModal extends Component {
           {...this.props}
           onComponentWillUnmount={onCloseModal}
           tenantId={tenantId || stripes.okapi.tenant}
+          initialSelectedUsers={initialSelectedUsers}
         >
           {(viewProps) => <UserSearchView
             {...viewProps}

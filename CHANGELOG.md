@@ -2,6 +2,8 @@
 
 ## 7.1.0 IN PROGRESS
 
+* Add "User assignment status" filter in find-user-plugin. Refs UIPFU-77.
+
 ## [7.0.0](https://github.com/folio-org/ui-plugin-find-user/tree/v7.0.0) (2023-10-12)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v6.3.0...v7.0.0)
 

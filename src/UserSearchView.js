@@ -24,7 +24,9 @@ import {
   SearchAndSortSearchButton as FilterPaneToggle,
 } from '@folio/stripes/smart-components';
 
-import filterConfig from './filterConfig';
+import { UAS } from './constants';
+import { getUsersBasedOnAssignmentStatus } from './utils';
+import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig';
 import Filters from './Filters';
 
 import css from './UserSearch.css';
@@ -173,6 +175,13 @@ class UserSearchView extends React.Component {
 
   isSelected = ({ item }) => Boolean(this.state.checkedMap[item.id]);
 
+  getFilterConfig = () => {
+    if (this.props.initialSelectedUsers) {
+      return filterConfigWithUserAssignedStatus;
+    }
+    return filterConfig;
+  }
+
   render() {
     const {
       onSelectRow,
@@ -286,6 +295,19 @@ class UserSearchView extends React.Component {
                   return true;
                 };
 
+                const getContentData = () => {
+                  const activeFilterState = activeFilters?.state;
+                  const isUasFilterGroupActive = {}.hasOwnProperty.call(activeFilterState, UAS);
+                  const uasFilterValue = activeFilterState.uas;
+
+                  if (isUasFilterGroupActive && uasFilterValue.length === 1) {
+                    const filteredUsers = getUsersBasedOnAssignmentStatus(activeFilterState, uasFilterValue, initialSelectedUsers, users);
+                    return filteredUsers;
+                  }
+                  // when both  'Assigned' and 'Unassigned' filters are applied or both are not applied
+                  return users;
+                };
+
                 return (
                   <IntlConsumer>
                     {intl => (
@@ -339,7 +361,7 @@ class UserSearchView extends React.Component {
                               <Filters
                                 onChangeHandlers={getFilterHandlers()}
                                 activeFilters={activeFilters}
-                                config={filterConfig}
+                                config={this.getFilterConfig()}
                                 resultOffset={resultOffset}
                               />
                             </form>
@@ -355,7 +377,7 @@ class UserSearchView extends React.Component {
                           <MultiColumnList
                             visibleColumns={builtVisibleColumns}
                             isSelected={this.isSelected}
-                            contentData={users}
+                            contentData={getContentData()}
                             totalCount={count}
                             id="list-plugin-find-user"
                             columnMapping={{

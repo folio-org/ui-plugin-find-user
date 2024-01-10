@@ -25,7 +25,8 @@
     "lint": "eslint .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-plugin-find-user ./translations/ui-plugin-find-user/compiled",
-    "test": "stripes test karma"
+    "test": "stripes test karma",
+    "test:jest": "yarn run jest"
   },
   "okapiInterfaces": {
     "users": "16.0",
@@ -37,6 +38,7 @@
     "@bigtest/interactor": "^0.9.1",
     "@bigtest/mocha": "^0.5.2",
     "@folio/eslint-config-stripes": "^7.0.0",
+    "@folio/jest-config-stripes": "^2.0.0",
     "@folio/stripes": "^9.0.0",
     "@folio/stripes-cli": "^3.0.0",
     "@folio/stripes-core": "^10.0.0",
