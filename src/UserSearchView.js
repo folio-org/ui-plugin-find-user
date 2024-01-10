@@ -297,7 +297,7 @@ class UserSearchView extends React.Component {
 
                 const getContentData = () => {
                   const activeFilterState = activeFilters?.state;
-                  const isUasFilterGroupActive = {}.hasOwnProperty.call(activeFilterState, UAS);
+                  const isUasFilterGroupActive = Object.hasOwn(activeFilterState, UAS);
                   const uasFilterValue = activeFilterState.uas;
 
                   if (isUasFilterGroupActive && uasFilterValue.length === 1) {

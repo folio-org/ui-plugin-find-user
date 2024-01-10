@@ -65,45 +65,6 @@ const filterUsersList = (filterString, initialSelectedUsers, users, filterCheck)
 export const getUsersBasedOnAssignmentStatus = (activeFilterState, uasFilterValue, initialSelectedUsers, users) => {
   const condForOneOfTheFilters = (u) => activeFilterState?.active?.includes(u.active ? `${ACTIVE}` : `${INACTIVE}`) || activeFilterState?.pg?.includes(u.patronGroup);
   const condForBothTheFilters = (u) => activeFilterState?.active?.includes(u.active ? `${ACTIVE}` : `${INACTIVE}`) && activeFilterState?.pg?.includes(u.patronGroup);
-  // if (uasFilterValue[0] === `${ASSIGNED}`) {
-  //   // when ONLY "Assigned" filter is selected
-  //   const assignedUsers = Object.values(initialSelectedUsers);
-  //   if (Object.keys(activeFilterState).length === 1) {
-  //     return assignedUsers;
-  //   }
-  //   // several filters are selected
-  //   // filter users based on the filter group values in place
-
-  //   // when "Assigned" from "User Assignment Status" filter group along with some other filter in one of the other filter groups
-  //   if (Object.keys(activeFilterState).length === 2) {
-  //     const filteredAssignedUsers = assignedUsers.filter(u => condForOneOfTheFilters(u));
-  //     return filteredAssignedUsers;
-  //   }
-
-  //   // when filters from all the filter groups are selected
-  //   const filteredAssignedUsers = assignedUsers.filter(u => condForBothTheFilters(u));
-  //   return filteredAssignedUsers;
-  // }
-  // if (uasFilterValue[0] === `${UNASSIGNED}`) {
-  //   // when ONLY "Unassigned" filter is selected
-  //   const assignedUserIds = Object.keys(initialSelectedUsers);
-  //   if (Object.keys(activeFilterState).length === 1) {
-  //     const filteredUsers = users.filter(u => !assignedUserIds.includes(u.id));
-  //     return filteredUsers;
-  //   }
-  //   // several filters are selected
-  //   // filter users based on the filter group values in place
-
-  //   // when "UnAssigned" from "User Assignment Status" filter group along with some other filter in one of the other filter groups
-  //   if (Object.keys(activeFilterState).length === 2) {
-  //     const filteredAssignedUsers = users.filter(u => !assignedUserIds.includes(u.id) && (condForOneOfTheFilters(u)));
-  //     return filteredAssignedUsers;
-  //   }
-
-  //   // when filters from all the filter groups are selected
-  //   const filteredAssignedUsers = users.filter(u => !assignedUserIds.includes(u.id) && (condForBothTheFilters(u)));
-  //   return filteredAssignedUsers;
-  // }
 
   let usersList;
   if (Object.keys(activeFilterState).length === 1) {
