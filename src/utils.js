@@ -46,15 +46,20 @@ const filterUsersList = (filterString, initialSelectedUsers, users, filterCheck)
   if (filterString === `${ASSIGNED}`) {
     const assignedUsers = Object.values(initialSelectedUsers);
     if (filterCheck) {
+      // "Assigned" filter along with one or more other filters from other filter groups are selected
       usersList = assignedUsers.filter(u => filterCheck(u));
     } else {
+      // when ONLY "Assigned" filter is selected
       usersList = assignedUsers;
     }
   } else if (filterString === `${UNASSIGNED}`) {
+    // when ONLY "Unassigned" filter is selected
     const assignedUserIds = Object.keys(initialSelectedUsers);
     if (filterCheck) {
+      // "Unassigned" filter along with one or more other filters from other filter groups are selected
       usersList = users.filter(u => !assignedUserIds.includes(u.id) && (filterCheck(u)));
     } else {
+      // when ONLY "Unassigned" filter is selected
       usersList = users.filter(u => !assignedUserIds.includes(u.id));
     }
   }
