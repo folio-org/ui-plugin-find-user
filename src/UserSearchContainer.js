@@ -10,7 +10,11 @@ import {
 
 import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig';
 import { updateResourceData } from './utils';
-import { UAS } from './constants';
+import {
+  ASSIGNED_FILTER_KEY,
+  UNASSIGNED_FILTER_KEY,
+  UAS,
+} from './constants';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -36,7 +40,7 @@ const compileQuery = template(
 
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
   const filters = props.initialSelectedUsers ? filterConfigWithUserAssignedStatus : filterConfig;
-  const updatedResourceData = props.initialSelectedUsers && resourceData?.query?.filters?.substring(`${UAS}`) ? updateResourceData(resourceData) : resourceData;
+  const updatedResourceData = props.initialSelectedUsers && resourceData?.query?.filters?.includes(`${UAS}`) ? updateResourceData(resourceData) : resourceData;
 
   return makeQueryFunction(
     'cql.allRecords=1',
@@ -120,6 +124,7 @@ class UserSearchContainer extends React.Component {
     */
     // eslint-disable-next-line react/no-unused-prop-types
     tenantId: PropTypes.string.isRequired,
+    initialSelectedUsers: PropTypes.object,
   }
 
   constructor(props) {
@@ -175,6 +180,46 @@ class UserSearchContainer extends React.Component {
     return get(this.props.resources, 'query', {});
   }
 
+  getUsers = () => {
+    const {
+      resources,
+      initialSelectedUsers,
+    } = this.props;
+    const fetchedUsers = get(resources, 'records.records', []);
+    const activeFilters = get(resources, 'query.filters', '');
+
+    if (activeFilters.includes(`${UAS}`)) {
+      const assignedUsers = Object.values(initialSelectedUsers);
+      const assignedUserIds = Object.keys(initialSelectedUsers);
+      const hasBothUASFilters = activeFilters.includes(`${ASSIGNED_FILTER_KEY}`) && activeFilters.includes(`${UNASSIGNED_FILTER_KEY}`);
+      const hasNoneOfUASFilters = !activeFilters.includes(`${ASSIGNED_FILTER_KEY}`) && !activeFilters.includes(`${UNASSIGNED_FILTER_KEY}`);
+
+      if (hasBothUASFilters || hasNoneOfUASFilters) {
+        return fetchedUsers;
+      }
+      const uasFilterValue = activeFilters.split(',').filter(f => f.includes(`${UAS}`))[0].split('.')[1];
+
+      let otherFilterGroups = activeFilters.split(',').filter(f => !f.includes(`${UAS}`)).map(f => f.split('.')[0]);
+      if (otherFilterGroups.indexOf('pg') !== -1) {
+        otherFilterGroups = otherFilterGroups.with(otherFilterGroups.indexOf('pg'), 'patronGroup');
+      }
+
+      let otherFilterValues = activeFilters.split(',').filter(f => !f.includes(`${UAS}`)).map(f => f.split('.')[1]);
+      if (otherFilterValues.indexOf('active') !== -1) {
+        otherFilterValues = otherFilterValues.with(otherFilterValues.indexOf('active'), true);
+      }
+
+      if (uasFilterValue === 'Assigned') {
+        if (!otherFilterGroups.length) return assignedUsers;
+        return assignedUsers.filter(u => otherFilterGroups.every((g, i) => u[g] === otherFilterValues[i]));
+      }
+      const unAssignedUsers = fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
+      if (!otherFilterGroups.length) return unAssignedUsers;
+      return unAssignedUsers.filter(u => otherFilterGroups.every((g, i) => u[g] === otherFilterValues[i]));
+    }
+    return fetchedUsers;
+  }
+
   render() {
     const {
       resources,
@@ -195,7 +240,7 @@ class UserSearchContainer extends React.Component {
       resultOffset,
       data: {
         patronGroups: (resources.patronGroups || {}).records || [],
-        users: get(resources, 'records.records', []),
+        users: this.getUsers(),
       },
     });
   }

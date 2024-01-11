@@ -24,8 +24,6 @@ import {
   SearchAndSortSearchButton as FilterPaneToggle,
 } from '@folio/stripes/smart-components';
 
-import { UAS } from './constants';
-import { getUsersBasedOnAssignmentStatus } from './utils';
 import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig';
 import Filters from './Filters';
 
@@ -295,19 +293,6 @@ class UserSearchView extends React.Component {
                   return true;
                 };
 
-                const getContentData = () => {
-                  const activeFilterState = activeFilters?.state;
-                  const isUasFilterGroupActive = Object.hasOwn(activeFilterState, UAS);
-                  const uasFilterValue = activeFilterState.uas;
-
-                  if (isUasFilterGroupActive && uasFilterValue.length === 1) {
-                    const filteredUsers = getUsersBasedOnAssignmentStatus(activeFilterState, uasFilterValue, initialSelectedUsers, users);
-                    return filteredUsers;
-                  }
-                  // when both  'Assigned' and 'Unassigned' filters are applied or both are not applied
-                  return users;
-                };
-
                 return (
                   <IntlConsumer>
                     {intl => (
@@ -377,7 +362,8 @@ class UserSearchView extends React.Component {
                           <MultiColumnList
                             visibleColumns={builtVisibleColumns}
                             isSelected={this.isSelected}
-                            contentData={getContentData()}
+                            // contentData={getContentData()}
+                            contentData={users}
                             totalCount={count}
                             id="list-plugin-find-user"
                             columnMapping={{
