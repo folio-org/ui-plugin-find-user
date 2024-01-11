@@ -18,20 +18,8 @@ export const updateResourceData = (rData) => {
   */
     const alteredfilters = 'active.active,active.inactive';
     newRData.query.filters = alteredfilters;
-  } else if (filterString.includes(`${UNASSIGNED_FILTER_KEY}`)) {
-    /*
-    * When UnAssigned filter is selected in combination with any other filters,
-    * filter a string for Unassigned is removed and the rest of the filter string is propagated to makeQueryFunction.
-    */
+  } else {
     const alteredfilters = newRData.query.filters.split(',').filter(str => !str.startsWith(`${UAS}`)).join(',');
-    newRData.query.filters = alteredfilters;
-  } else if (filterString.includes(`${ASSIGNED_FILTER_KEY}`)) {
-    /*
-    * When Assigned filter is selected on 'User assignment Status' filter group, in any combination of filters in other filter groups,
-    * cql formation is not needed.
-    * hence remove uas filter before propagating it further to makeQueryFunction
-    */
-    const alteredfilters = '';
     newRData.query.filters = alteredfilters;
   }
   return newRData;

@@ -14,6 +14,7 @@ import {
   ASSIGNED_FILTER_KEY,
   UNASSIGNED_FILTER_KEY,
   UAS,
+  ASSIGNED,
 } from './constants';
 
 const INITIAL_RESULT_COUNT = 30;
@@ -187,35 +188,24 @@ class UserSearchContainer extends React.Component {
     } = this.props;
     const fetchedUsers = get(resources, 'records.records', []);
     const activeFilters = get(resources, 'query.filters', '');
+    const assignedUsers = Object.values(initialSelectedUsers);
+
+    if (activeFilters === `${ASSIGNED_FILTER_KEY}`) return assignedUsers;
 
     if (activeFilters.includes(`${UAS}`)) {
-      const assignedUsers = Object.values(initialSelectedUsers);
       const assignedUserIds = Object.keys(initialSelectedUsers);
       const hasBothUASFilters = activeFilters.includes(`${ASSIGNED_FILTER_KEY}`) && activeFilters.includes(`${UNASSIGNED_FILTER_KEY}`);
       const hasNoneOfUASFilters = !activeFilters.includes(`${ASSIGNED_FILTER_KEY}`) && !activeFilters.includes(`${UNASSIGNED_FILTER_KEY}`);
+      const uasFilterValue = activeFilters.split(',').filter(f => f.includes(`${UAS}`))[0].split('.')[1];
 
       if (hasBothUASFilters || hasNoneOfUASFilters) {
         return fetchedUsers;
       }
-      const uasFilterValue = activeFilters.split(',').filter(f => f.includes(`${UAS}`))[0].split('.')[1];
 
-      let otherFilterGroups = activeFilters.split(',').filter(f => !f.includes(`${UAS}`)).map(f => f.split('.')[0]);
-      if (otherFilterGroups.indexOf('pg') !== -1) {
-        otherFilterGroups = otherFilterGroups.with(otherFilterGroups.indexOf('pg'), 'patronGroup');
+      if (uasFilterValue === `${ASSIGNED}`) {
+        return fetchedUsers.filter(u => assignedUserIds.includes(u.id));
       }
-
-      let otherFilterValues = activeFilters.split(',').filter(f => !f.includes(`${UAS}`)).map(f => f.split('.')[1]);
-      if (otherFilterValues.indexOf('active') !== -1) {
-        otherFilterValues = otherFilterValues.with(otherFilterValues.indexOf('active'), true);
-      }
-
-      if (uasFilterValue === 'Assigned') {
-        if (!otherFilterGroups.length) return assignedUsers;
-        return assignedUsers.filter(u => otherFilterGroups.every((g, i) => u[g] === otherFilterValues[i]));
-      }
-      const unAssignedUsers = fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
-      if (!otherFilterGroups.length) return unAssignedUsers;
-      return unAssignedUsers.filter(u => otherFilterGroups.every((g, i) => u[g] === otherFilterValues[i]));
+      return fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
     }
     return fetchedUsers;
   }

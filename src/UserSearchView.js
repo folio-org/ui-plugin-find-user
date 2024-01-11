@@ -207,7 +207,7 @@ class UserSearchView extends React.Component {
     const builtVisibleColumns = isMultiSelect ? ['isChecked', ...visibleColumns] : visibleColumns;
 
     const query = queryGetter ? queryGetter() || {} : {};
-    const count = source ? source.totalCount() : 0;
+    const count = users?.length;
     const sortOrder = query.sort || '';
     const resultsStatusMessage = source ? (
       <div data-test-find-user-no-results-message>
@@ -362,7 +362,6 @@ class UserSearchView extends React.Component {
                           <MultiColumnList
                             visibleColumns={builtVisibleColumns}
                             isSelected={this.isSelected}
-                            // contentData={getContentData()}
                             contentData={users}
                             totalCount={count}
                             id="list-plugin-find-user"

@@ -39,7 +39,7 @@ describe('updatedResourceData', () => {
   });
 
   describe('when Assigned filter is selected with or without combination of filters from other filter groups', () => {
-    it('should remove filter string', () => {
+    it('should remove assigned filter string', () => {
       const resourceData = {
         query: {
           filters: `${ASSIGNED_FILTER_KEY},active.active`,
@@ -48,7 +48,7 @@ describe('updatedResourceData', () => {
       const expectedResourceData = {
         query: {
           ...resourceData.query,
-          filters: '',
+          filters: 'active.active',
         },
       };
       expect(updateResourceData(resourceData)).toMatchObject(expectedResourceData);
