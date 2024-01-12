@@ -41,7 +41,7 @@ const compileQuery = template(
 
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
   const filters = props.initialSelectedUsers ? filterConfigWithUserAssignedStatus : filterConfig;
-  const updatedResourceData = props.initialSelectedUsers && resourceData?.query?.filters?.includes(`${UAS}`) ? updateResourceData(resourceData) : resourceData;
+  const updatedResourceData = props.initialSelectedUsers && resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
 
   return makeQueryFunction(
     'cql.allRecords=1',
@@ -190,19 +190,19 @@ class UserSearchContainer extends React.Component {
     const activeFilters = get(resources, 'query.filters', '');
     const assignedUsers = Object.values(initialSelectedUsers);
 
-    if (activeFilters === `${ASSIGNED_FILTER_KEY}`) return assignedUsers;
+    if (activeFilters === ASSIGNED_FILTER_KEY) return assignedUsers;
 
-    if (activeFilters.includes(`${UAS}`)) {
+    if (activeFilters.includes(UAS)) {
       const assignedUserIds = Object.keys(initialSelectedUsers);
-      const hasBothUASFilters = activeFilters.includes(`${ASSIGNED_FILTER_KEY}`) && activeFilters.includes(`${UNASSIGNED_FILTER_KEY}`);
-      const hasNoneOfUASFilters = !activeFilters.includes(`${ASSIGNED_FILTER_KEY}`) && !activeFilters.includes(`${UNASSIGNED_FILTER_KEY}`);
-      const uasFilterValue = activeFilters.split(',').filter(f => f.includes(`${UAS}`))[0].split('.')[1];
+      const hasBothUASFilters = activeFilters.includes(`${ASSIGNED_FILTER_KEY}`) && activeFilters.includes(UNASSIGNED_FILTER_KEY);
+      const hasNoneOfUASFilters = !activeFilters.includes(ASSIGNED_FILTER_KEY) && !activeFilters.includes(UNASSIGNED_FILTER_KEY);
+      const uasFilterValue = activeFilters.split(',').filter(f => f.includes(UAS))[0].split('.')[1];
 
       if (hasBothUASFilters || hasNoneOfUASFilters) {
         return fetchedUsers;
       }
 
-      if (uasFilterValue === `${ASSIGNED}`) {
+      if (uasFilterValue === ASSIGNED) {
         return fetchedUsers.filter(u => assignedUserIds.includes(u.id));
       }
       return fetchedUsers.filter(u => !assignedUserIds.includes(u.id));

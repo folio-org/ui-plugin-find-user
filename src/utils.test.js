@@ -3,7 +3,7 @@ import { UNASSIGNED_FILTER_KEY, ASSIGNED_FILTER_KEY } from './constants';
 
 describe('updatedResourceData', () => {
   describe('when only UnAssigned filter is selected', () => {
-    [`${UNASSIGNED_FILTER_KEY}`, `${ASSIGNED_FILTER_KEY},${UNASSIGNED_FILTER_KEY}`, `${UNASSIGNED_FILTER_KEY},${ASSIGNED_FILTER_KEY}`].forEach(filterStr => (
+    [UNASSIGNED_FILTER_KEY, `${ASSIGNED_FILTER_KEY},${UNASSIGNED_FILTER_KEY}`, `${UNASSIGNED_FILTER_KEY},${ASSIGNED_FILTER_KEY}`].forEach(filterStr => (
       it(`should remove ${filterStr} from filter string and add active and inactive filter strings`, () => {
         const resourceData = {
           query: {
