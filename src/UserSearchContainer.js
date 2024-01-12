@@ -194,7 +194,7 @@ class UserSearchContainer extends React.Component {
 
     if (activeFilters.includes(UAS)) {
       const assignedUserIds = Object.keys(initialSelectedUsers);
-      const hasBothUASFilters = activeFilters.includes(`${ASSIGNED_FILTER_KEY}`) && activeFilters.includes(UNASSIGNED_FILTER_KEY);
+      const hasBothUASFilters = activeFilters.includes(ASSIGNED_FILTER_KEY) && activeFilters.includes(UNASSIGNED_FILTER_KEY);
       const hasNoneOfUASFilters = !activeFilters.includes(ASSIGNED_FILTER_KEY) && !activeFilters.includes(UNASSIGNED_FILTER_KEY);
       const uasFilterValue = activeFilters.split(',').filter(f => f.includes(UAS))[0].split('.')[1];
 
