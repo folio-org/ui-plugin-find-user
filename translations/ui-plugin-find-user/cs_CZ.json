@@ -14,5 +14,8 @@
     "inactive": "Neaktivní",
     "modal.close": "Zavřít",
     "modal.save": "Uložit",
-    "modal.total": "Celkem vybráno: {count}"
+    "modal.total": "Celkem vybráno: {count}",
+    "userAssignmentStatus": "User Assignment Status",
+    "assigned": "Assigned",
+    "unassigned": "Unassigned"
 }

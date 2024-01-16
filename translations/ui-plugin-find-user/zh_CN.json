@@ -14,5 +14,8 @@
     "inactive": "未激活",
     "modal.close": "关闭",
     "modal.save": "保存",
-    "modal.total": "已选总数： {count}"
+    "modal.total": "已选总数： {count}",
+    "userAssignmentStatus": "User Assignment Status",
+    "assigned": "Assigned",
+    "unassigned": "Unassigned"
 }

@@ -14,5 +14,8 @@
     "inactive": "비활성",
     "modal.close": "닫기",
     "modal.save": "저장",
-    "modal.total": "선택된 총계: {count}"
+    "modal.total": "선택된 총계: {count}",
+    "userAssignmentStatus": "User Assignment Status",
+    "assigned": "Assigned",
+    "unassigned": "Unassigned"
 }
