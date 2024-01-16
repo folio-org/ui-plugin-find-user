@@ -8,7 +8,14 @@ import {
   StripesConnectedSource,
 } from '@folio/stripes/smart-components';
 
-import filterConfig from './filterConfig';
+import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig';
+import { updateResourceData } from './utils';
+import {
+  ASSIGNED_FILTER_KEY,
+  UNASSIGNED_FILTER_KEY,
+  UAS,
+  ASSIGNED,
+} from './constants';
 
 const INITIAL_RESULT_COUNT = 30;
 const RESULT_COUNT_INCREMENT = 30;
@@ -32,6 +39,28 @@ const compileQuery = template(
   { interpolate: /%{([\s\S]+?)}/g }
 );
 
+export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
+  const filters = props.initialSelectedUsers ? filterConfigWithUserAssignedStatus : filterConfig;
+  const updatedResourceData = props.initialSelectedUsers && resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
+
+  return makeQueryFunction(
+    'cql.allRecords=1',
+    (parsedQuery, _, localProps) => localProps.query.query.trim().split(/\s+/).map(query => compileQuery({ query })).join(' and '),
+    {
+      // the keys in this object must match those passed to
+      // SearchAndSort's columnMapping prop
+      'active': 'active',
+      'name': 'personal.lastName personal.firstName',
+      'patronGroup': 'patronGroup.group',
+      'username': 'username',
+      'barcode': 'barcode',
+      'email': 'personal.email',
+    },
+    filters,
+    2,
+  )(queryParams, pathComponents, updatedResourceData, logger, props);
+}
+
 class UserSearchContainer extends React.Component {
   static manifest = Object.freeze({
     initializedFilterConfig: { initialValue: false },
@@ -46,24 +75,7 @@ class UserSearchContainer extends React.Component {
       perRequest: 100,
       path: 'users',
       GET: {
-        params: {
-          query: makeQueryFunction(
-            'cql.allRecords=1',
-            (parsedQuery, props, localProps) => localProps.query.query.trim().split(/\s+/).map(query => compileQuery({ query })).join(' and '),
-            {
-              // the keys in this object must match those passed to
-              // SearchAndSort's columnMapping prop
-              'active': 'active',
-              'name': 'personal.lastName personal.firstName',
-              'patronGroup': 'patronGroup.group',
-              'username': 'username',
-              'barcode': 'barcode',
-              'email': 'personal.email',
-            },
-            filterConfig,
-            2,
-          ),
-        },
+        params: { query: buildQuery },
         staticFallback: { params: {} },
       },
     },
@@ -113,6 +125,7 @@ class UserSearchContainer extends React.Component {
     */
     // eslint-disable-next-line react/no-unused-prop-types
     tenantId: PropTypes.string.isRequired,
+    initialSelectedUsers: PropTypes.object,
   }
 
   constructor(props) {
@@ -168,6 +181,35 @@ class UserSearchContainer extends React.Component {
     return get(this.props.resources, 'query', {});
   }
 
+  getUsers = () => {
+    const {
+      resources,
+      initialSelectedUsers,
+    } = this.props;
+    const fetchedUsers = get(resources, 'records.records', []);
+    const activeFilters = get(resources, 'query.filters', '');
+    const assignedUsers = Object.values(initialSelectedUsers);
+
+    if (activeFilters === ASSIGNED_FILTER_KEY) return assignedUsers;
+
+    if (activeFilters.includes(UAS)) {
+      const assignedUserIds = Object.keys(initialSelectedUsers);
+      const hasBothUASFilters = activeFilters.includes(ASSIGNED_FILTER_KEY) && activeFilters.includes(UNASSIGNED_FILTER_KEY);
+      const hasNoneOfUASFilters = !activeFilters.includes(ASSIGNED_FILTER_KEY) && !activeFilters.includes(UNASSIGNED_FILTER_KEY);
+      const uasFilterValue = activeFilters.split(',').filter(f => f.includes(UAS))[0].split('.')[1];
+
+      if (hasBothUASFilters || hasNoneOfUASFilters) {
+        return fetchedUsers;
+      }
+
+      if (uasFilterValue === ASSIGNED) {
+        return fetchedUsers.filter(u => assignedUserIds.includes(u.id));
+      }
+      return fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
+    }
+    return fetchedUsers;
+  }
+
   render() {
     const {
       resources,
@@ -188,7 +230,7 @@ class UserSearchContainer extends React.Component {
       resultOffset,
       data: {
         patronGroups: (resources.patronGroups || {}).records || [],
-        users: get(resources, 'records.records', []),
+        users: this.getUsers(),
       },
     });
   }

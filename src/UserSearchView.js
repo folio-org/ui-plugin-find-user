@@ -24,7 +24,7 @@ import {
   SearchAndSortSearchButton as FilterPaneToggle,
 } from '@folio/stripes/smart-components';
 
-import filterConfig from './filterConfig';
+import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig';
 import Filters from './Filters';
 
 import css from './UserSearch.css';
@@ -173,6 +173,13 @@ class UserSearchView extends React.Component {
 
   isSelected = ({ item }) => Boolean(this.state.checkedMap[item.id]);
 
+  getFilterConfig = () => {
+    if (this.props.initialSelectedUsers) {
+      return filterConfigWithUserAssignedStatus;
+    }
+    return filterConfig;
+  }
+
   render() {
     const {
       onSelectRow,
@@ -200,7 +207,7 @@ class UserSearchView extends React.Component {
     const builtVisibleColumns = isMultiSelect ? ['isChecked', ...visibleColumns] : visibleColumns;
 
     const query = queryGetter ? queryGetter() || {} : {};
-    const count = source ? source.totalCount() : 0;
+    const count = users?.length;
     const sortOrder = query.sort || '';
     const resultsStatusMessage = source ? (
       <div data-test-find-user-no-results-message>
@@ -339,7 +346,7 @@ class UserSearchView extends React.Component {
                               <Filters
                                 onChangeHandlers={getFilterHandlers()}
                                 activeFilters={activeFilters}
-                                config={filterConfig}
+                                config={this.getFilterConfig()}
                                 resultOffset={resultOffset}
                               />
                             </form>

@@ -14,5 +14,8 @@
   "information.username": "Username",
   "contact.email": "Email",
   "status": "Status",
-  "inactive": "Inactive"
+  "inactive": "Inactive",
+  "userAssignmentStatus": "User Assignment Status",
+  "assigned": "Assigned",
+  "unassigned": "Unassigned"
 }
