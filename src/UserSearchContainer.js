@@ -40,8 +40,8 @@ const compileQuery = template(
 );
 
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
-  const filters = props.initialSelectedUsers ? filterConfigWithUserAssignedStatus : filterConfig;
-  const updatedResourceData = props.initialSelectedUsers && resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
+  const filters = Object.keys(props.initialSelectedUsers).length ? filterConfigWithUserAssignedStatus : filterConfig;
+  const updatedResourceData = Object.keys(props.initialSelectedUsers).length && resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
 
   return makeQueryFunction(
     'cql.allRecords=1',
