@@ -14,5 +14,8 @@
     "inactive": "非アクティブ",
     "modal.close": "閉じる",
     "modal.save": "保存",
-    "modal.total": "選択済合計： {count}"
+    "modal.total": "選択済合計： {count}",
+    "userAssignmentStatus": "User Assignment Status",
+    "assigned": "Assigned",
+    "unassigned": "Unassigned"
 }

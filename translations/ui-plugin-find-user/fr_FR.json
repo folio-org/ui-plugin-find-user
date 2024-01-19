@@ -14,5 +14,8 @@
     "inactive": "Inactif",
     "modal.close": "Fermer",
     "modal.save": "Sauvegarder",
-    "modal.total": "Total sélectionné: {count}"
+    "modal.total": "Total sélectionné: {count}",
+    "userAssignmentStatus": "User Assignment Status",
+    "assigned": "Assigned",
+    "unassigned": "Unassigned"
 }
