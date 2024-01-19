@@ -174,7 +174,7 @@ class UserSearchView extends React.Component {
   isSelected = ({ item }) => Boolean(this.state.checkedMap[item.id]);
 
   getFilterConfig = () => {
-    if (this.props.initialSelectedUsers) {
+    if (Object.keys(this.props.initialSelectedUsers).length) {
       return filterConfigWithUserAssignedStatus;
     }
     return filterConfig;
