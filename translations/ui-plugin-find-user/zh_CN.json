@@ -15,7 +15,7 @@
     "modal.close": "关闭",
     "modal.save": "保存",
     "modal.total": "已选总数： {count}",
-    "userAssignmentStatus": "User Assignment Status",
-    "assigned": "Assigned",
-    "unassigned": "Unassigned"
+    "userAssignmentStatus": "用户分配状态",
+    "assigned": "已分配",
+    "unassigned": "未分配"
 }
