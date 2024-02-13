@@ -15,7 +15,7 @@
     "modal.close": "Schließen",
     "modal.save": "Speichern",
     "modal.total": "Insgesamt ausgewählt: {count}",
-    "userAssignmentStatus": "User Assignment Status",
-    "assigned": "Assigned",
-    "unassigned": "Unassigned"
+    "userAssignmentStatus": "Status der Zuweisungen der Person",
+    "assigned": "Zugewiesen",
+    "unassigned": "Nicht zugewiesen"
 }
