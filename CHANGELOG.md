@@ -1,6 +1,9 @@
 # Change history for ui-plugin-find-user
 
-## 7.1.0 IN PROGRESS
+## 7.2.0 IN PROGRESS
+
+## [7.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.0) (2024-03-20)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.0.0...v7.1.0)
 
 * Add "User assignment status" filter group. Refs UIPFU-77.
 
