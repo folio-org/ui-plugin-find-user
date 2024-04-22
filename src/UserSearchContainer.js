@@ -40,7 +40,7 @@ const compileQuery = template(
 );
 
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
-  const filters = Object.keys(props.initialSelectedUsers).length ? filterConfigWithUserAssignedStatus : filterConfig;
+  const filters = props.initialSelectedUsers ? filterConfigWithUserAssignedStatus : filterConfig;
   const updatedResourceData = Object.keys(props.initialSelectedUsers).length && resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
 
   return makeQueryFunction(
@@ -186,28 +186,47 @@ class UserSearchContainer extends React.Component {
       resources,
       initialSelectedUsers,
     } = this.props;
+    const users = {
+      records : [],
+      count: 0
+    };
     const fetchedUsers = get(resources, 'records.records', []);
     const activeFilters = get(resources, 'query.filters', '');
     const assignedUsers = Object.values(initialSelectedUsers);
 
-    if (activeFilters === ASSIGNED_FILTER_KEY) return assignedUsers;
+    if (activeFilters === ASSIGNED_FILTER_KEY) {
+      users.records = assignedUsers;
+      users.count = assignedUsers.length;
+      return users;
+    }
 
     if (activeFilters.includes(UAS)) {
       const assignedUserIds = Object.keys(initialSelectedUsers);
       const hasBothUASFilters = activeFilters.includes(ASSIGNED_FILTER_KEY) && activeFilters.includes(UNASSIGNED_FILTER_KEY);
-      const hasNoneOfUASFilters = !activeFilters.includes(ASSIGNED_FILTER_KEY) && !activeFilters.includes(UNASSIGNED_FILTER_KEY);
       const uasFilterValue = activeFilters.split(',').filter(f => f.includes(UAS))[0].split('.')[1];
 
-      if (hasBothUASFilters || hasNoneOfUASFilters) {
-        return fetchedUsers;
+      if (hasBothUASFilters && this.source && this.source.loaded()) {
+        users.records = fetchedUsers;
+        users.count = this.source.totalCount();
+        return users;
       }
 
       if (uasFilterValue === ASSIGNED) {
-        return fetchedUsers.filter(u => assignedUserIds.includes(u.id));
+        const filteredAssignedUsers = fetchedUsers.filter(u => assignedUserIds.includes(u.id));
+        users.records = filteredAssignedUsers;
+        users.count = filteredAssignedUsers.length;
+        return users;
       }
-      return fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
+
+      const filteredUnassignedUsers = fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
+      users.records = filteredUnassignedUsers;
+      users.count = filteredUnassignedUsers.length;
+      return users;
     }
-    return fetchedUsers;
+
+    users.records = fetchedUsers;
+    users.count = this.source && this.source.loaded() && this.source.totalCount();
+    return users;
   }
 
   render() {
