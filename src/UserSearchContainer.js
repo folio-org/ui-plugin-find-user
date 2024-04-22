@@ -41,7 +41,8 @@ const compileQuery = template(
 
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
   const filters = props.initialSelectedUsers ? filterConfigWithUserAssignedStatus : filterConfig;
-  const updatedResourceData = Object.keys(props.initialSelectedUsers).length && resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
+  const updatedResourceData = props.initialSelectedUsers &&
+    resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
 
   return makeQueryFunction(
     'cql.allRecords=1',
@@ -186,13 +187,14 @@ class UserSearchContainer extends React.Component {
       resources,
       initialSelectedUsers,
     } = this.props;
+
     const users = {
       records : [],
       count: 0
     };
     const fetchedUsers = get(resources, 'records.records', []);
     const activeFilters = get(resources, 'query.filters', '');
-    const assignedUsers = Object.values(initialSelectedUsers);
+    const assignedUsers = this.props.initialSelectedUsers ? Object.values(initialSelectedUsers) : [];
 
     if (activeFilters === ASSIGNED_FILTER_KEY) {
       users.records = assignedUsers;
@@ -200,12 +202,12 @@ class UserSearchContainer extends React.Component {
       return users;
     }
 
-    if (activeFilters.includes(UAS)) {
+    if (activeFilters.includes(UAS) && this.source && this.source.loaded()) {
       const assignedUserIds = Object.keys(initialSelectedUsers);
       const hasBothUASFilters = activeFilters.includes(ASSIGNED_FILTER_KEY) && activeFilters.includes(UNASSIGNED_FILTER_KEY);
       const uasFilterValue = activeFilters.split(',').filter(f => f.includes(UAS))[0].split('.')[1];
 
-      if (hasBothUASFilters && this.source && this.source.loaded()) {
+      if (hasBothUASFilters) {
         users.records = fetchedUsers;
         users.count = this.source.totalCount();
         return users;
@@ -220,12 +222,12 @@ class UserSearchContainer extends React.Component {
 
       const filteredUnassignedUsers = fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
       users.records = filteredUnassignedUsers;
-      users.count = filteredUnassignedUsers.length;
+      users.count = this.source.totalCount() - assignedUsers.length;
       return users;
     }
 
     users.records = fetchedUsers;
-    users.count = this.source && this.source.loaded() && this.source.totalCount();
+    users.count = this.source?.totalCount() || 0;
     return users;
   }
 
