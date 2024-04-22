@@ -160,16 +160,17 @@ class UserSearchContainer extends React.Component {
 
   onNeedMoreData = (askAmount, index) => {
     const { resultOffset } = this.props.mutator;
-    if(index/askAmount < 1) {
+    let offset = index;
+    if (offset < askAmount) {
       /*
-        This condition sets offset to 100 when there are less than 100 records in the current 
+        This condition sets offset to 100 when there are less than 100 records in the current
         paginated result in order to skip the first 100 records and make an API call to fetch next 100.
       */
-      index = 100;
+      offset = 100;
     }
     if (this.source) {
-      if (resultOffset && index >= 0) {
-        this.source.fetchOffset(index);
+      if (resultOffset && offset >= 0) {
+        this.source.fetchOffset(offset);
       } else {
         this.source.fetchMore(RESULT_COUNT_INCREMENT);
       }
