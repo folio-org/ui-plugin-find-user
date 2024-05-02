@@ -24,7 +24,6 @@ import {
   SearchAndSortSearchButton as FilterPaneToggle,
 } from '@folio/stripes/smart-components';
 
-import { CREATE_USER_URL } from './constants';
 import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig';
 import Filters from './Filters';
 
@@ -59,7 +58,6 @@ class UserSearchView extends React.Component {
     idPrefix: PropTypes.string,
     isMultiSelect: PropTypes.bool,
     onSelectRow: PropTypes.func,
-    onClose: PropTypes.func,
     onSaveMultiple: PropTypes.func,
     onComponentWillUnmount: PropTypes.func,
     queryGetter: PropTypes.func,
@@ -69,7 +67,6 @@ class UserSearchView extends React.Component {
     data: PropTypes.object,
     onNeedMoreData: PropTypes.func,
     visibleColumns: PropTypes.arrayOf(PropTypes.string),
-    showCreateUserButton: PropTypes.bool,
     resultOffset: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }),
@@ -199,8 +196,6 @@ class UserSearchView extends React.Component {
       isMultiSelect,
       resultOffset,
       initialSelectedUsers,
-      onClose,
-      showCreateUserButton,
     } = this.props;
     const { checkedMap, isAllChecked } = this.state;
 
@@ -262,17 +257,6 @@ class UserSearchView extends React.Component {
       username: user => user.username,
       email: user => get(user, ['personal', 'email']),
     };
-
-    const createUserButton = (
-      <Button
-        data-test-find-users-modal-save-multiple
-        marginBottom0
-        to={CREATE_USER_URL}
-        buttonStyle="primary"
-      >
-        <FormattedMessage id="ui-plugin-find-user.modal.button.new" />
-      </Button>
-    );
 
     return (
       <>
@@ -373,7 +357,6 @@ class UserSearchView extends React.Component {
                           paneSub={resultPaneSub}
                           defaultWidth="fill"
                           padContent={false}
-                          lastMenu={showCreateUserButton && createUserButton}
                         >
                           <MultiColumnList
                             visibleColumns={builtVisibleColumns}
@@ -422,28 +405,23 @@ class UserSearchView extends React.Component {
         {
           isMultiSelect && (
             <div className={css.UserSearchViewFooter}>
-              <Button
-                data-test-find-users-modal-save-multiple
-                marginBottom0
-                onClick={onClose}
-              >
-                <FormattedMessage id="ui-plugin-find-user.modal.button.cancel" />
-              </Button>
-              <div>
-                <FormattedMessage
-                  id="ui-plugin-find-user.modal.total"
-                  values={{ count: checkedUsersLength }}
-                />
-              </div>
-              <Button
-                data-test-find-users-modal-save-multiple
-                marginBottom0
-                onClick={this.saveMultiple}
-                disabled={disabled}
-                buttonStyle="primary"
-              >
-                <FormattedMessage id="ui-plugin-find-user.modal.save" />
-              </Button>
+              <>
+                <div>
+                  <FormattedMessage
+                    id="ui-plugin-find-user.modal.total"
+                    values={{ count: checkedUsersLength }}
+                  />
+                </div>
+                <Button
+                  data-test-find-users-modal-save-multiple
+                  marginBottom0
+                  onClick={this.saveMultiple}
+                  disabled={disabled}
+                  buttonStyle="primary"
+                >
+                  <FormattedMessage id="ui-plugin-find-user.modal.save" />
+                </Button>
+              </>
             </div>
           )
         }

@@ -6,8 +6,6 @@
   "modal.close": "Close",
   "modal.save": "Save",
   "modal.total": "Total selected: {count}",
-  "modal.button.new": "New",
-  "modal.button.cancel": "Cancel",
   "searchButton.title": "Find User",
   "information.patronGroup": "Patron group",
   "active": "Active",
