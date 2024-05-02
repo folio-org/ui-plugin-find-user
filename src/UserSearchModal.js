@@ -39,6 +39,7 @@ class UserSearchModal extends Component {
       }),
     }),
     tenantId: PropTypes.string,
+    showCreateUserButton: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -91,6 +92,7 @@ class UserSearchModal extends Component {
       initialSelectedUsers,
       tenantId,
       stripes,
+      showCreateUserButton = false,
     } = this.props;
 
     return (
@@ -116,8 +118,10 @@ class UserSearchModal extends Component {
             {...viewProps}
             onSaveMultiple={this.passUsersOut}
             onSelectRow={this.passUserOut}
+            onClose={this.closeModal}
             isMultiSelect={Boolean(selectUsers)}
             initialSelectedUsers={initialSelectedUsers}
+            showCreateUserButton={showCreateUserButton}
           />}
         </UserSearchContainer>
       </Modal>

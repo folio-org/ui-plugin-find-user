@@ -6,6 +6,7 @@
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.0...v7.1.1)
 
 * Fix Select User Modal with User Assignment Status Filters pagination issue. Refs UIPFU-87.
+* Add `Cancel` and `New` button to support Routing list feature and fix select all toggle button issue. Refs UIPFU-89.
 
 ## [7.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.0) (2024-03-20)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.0.0...v7.1.0)
