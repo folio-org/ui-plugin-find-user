@@ -1,7 +1,5 @@
 # Change history for ui-plugin-find-user
 
-## (7.2.0 IN PROGRESS)
-
 ## [7.1.1](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.1) (2024-05-03)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.0...v7.1.1)
 
