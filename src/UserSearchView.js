@@ -146,7 +146,7 @@ class UserSearchView extends React.Component {
     this.setState((state, props) => {
       const isAllChecked = !state.isAllChecked;
       const { data: { users } } = props;
-      const checkedMap = reduceUsersToMap(users, isAllChecked);
+      const checkedMap = reduceUsersToMap(users.records, isAllChecked);
 
       return {
         checkedMap,
