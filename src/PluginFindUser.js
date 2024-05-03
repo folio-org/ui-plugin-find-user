@@ -111,7 +111,6 @@ PluginFindUser.defaultProps = {
   id: 'clickable-plugin-find-user',
   searchButtonStyle: 'primary noRightRadius',
   dataKey: 'find_patron',
-  initialSelectedUsers: {},
 };
 
 PluginFindUser.propTypes = {
