@@ -1,6 +1,6 @@
 {
   "name": "@folio/plugin-find-user",
-  "version": "7.0.0",
+  "version": "7.2.0",
   "description": "User-finder for Stripes",
   "repository": "folio-org/ui-plugin-find-user",
   "publishConfig": {
@@ -29,7 +29,7 @@
     "test:jest": "jest --ci --coverage --colors"
   },
   "okapiInterfaces": {
-    "users": "16.0",
+    "users": "16.0 16.1",
     "users-bl": "6.1"
   },
   "devDependencies": {

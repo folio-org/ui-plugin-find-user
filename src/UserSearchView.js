@@ -146,7 +146,7 @@ class UserSearchView extends React.Component {
     this.setState((state, props) => {
       const isAllChecked = !state.isAllChecked;
       const { data: { users } } = props;
-      const checkedMap = reduceUsersToMap(users, isAllChecked);
+      const checkedMap = reduceUsersToMap(users.records, isAllChecked);
 
       return {
         checkedMap,
@@ -174,7 +174,7 @@ class UserSearchView extends React.Component {
   isSelected = ({ item }) => Boolean(this.state.checkedMap[item.id]);
 
   getFilterConfig = () => {
-    if (Object.keys(this.props.initialSelectedUsers).length) {
+    if (this.props.initialSelectedUsers) {
       return filterConfigWithUserAssignedStatus;
     }
     return filterConfig;
@@ -201,13 +201,13 @@ class UserSearchView extends React.Component {
 
     const { patronGroups, users } = data;
     const checkedUsersLength = Object.values(checkedMap).filter(Boolean).length;
-    const hasInitialSelectedUsers = Object.keys(initialSelectedUsers).length;
+    const hasInitialSelectedUsers = initialSelectedUsers && Object.keys(initialSelectedUsers).length;
     const disabled = !hasInitialSelectedUsers && !checkedUsersLength;
 
     const builtVisibleColumns = isMultiSelect ? ['isChecked', ...visibleColumns] : visibleColumns;
 
     const query = queryGetter ? queryGetter() || {} : {};
-    const count = users?.length;
+    const count = users.count;
     const sortOrder = query.sort || '';
     const resultsStatusMessage = source ? (
       <div data-test-find-user-no-results-message>
@@ -221,10 +221,9 @@ class UserSearchView extends React.Component {
       </div>) : 'no source yet';
 
     const resultsHeader = 'User Search Results';
-    let resultPaneSub = <FormattedMessage id="stripes-smart-components.searchCriteria" />;
-    if (source && source.loaded()) {
-      resultPaneSub = <FormattedMessage id="stripes-smart-components.searchResultsCountHeader" values={{ count }} />;
-    }
+    const resultPaneSub = count ?
+      <FormattedMessage id="stripes-smart-components.searchResultsCountHeader" values={{ count }} /> :
+      <FormattedMessage id="stripes-smart-components.searchCriteria" />;
 
     const resultsFormatter = {
       isChecked: user => (
@@ -362,7 +361,7 @@ class UserSearchView extends React.Component {
                           <MultiColumnList
                             visibleColumns={builtVisibleColumns}
                             isSelected={this.isSelected}
-                            contentData={users}
+                            contentData={users.records}
                             totalCount={count}
                             id="list-plugin-find-user"
                             columnMapping={{

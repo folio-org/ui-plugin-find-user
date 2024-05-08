@@ -9,6 +9,7 @@ import {
 export const updateResourceData = (rData) => {
   const filterString = rData?.query?.filters;
   const newRData = cloneDeep(rData);
+
   if (filterString === UNASSIGNED_FILTER_KEY || filterString === `${ASSIGNED_FILTER_KEY},${UNASSIGNED_FILTER_KEY}` || filterString === `${UNASSIGNED_FILTER_KEY},${ASSIGNED_FILTER_KEY}`) {
   /*
   * When Unassigned filter is selected on 'User assignment Status' filter group, with no other filter from other groups,
