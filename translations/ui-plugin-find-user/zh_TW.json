@@ -1,5 +1,5 @@
 {
-    "meta.title": "用戶查找器（插件）",
+    "meta.title": "使用者查找器（外掛）",
     "modal.label": "選擇使用者",
     "searchButton.title": "查詢使用者",
     "noResults": "點一個篩選項目或是輸入關鍵字以顯示結果。",
@@ -15,7 +15,7 @@
     "modal.close": "關閉",
     "modal.save": "儲存",
     "modal.total": "已選總數：{count}",
-    "userAssignmentStatus": "User Assignment Status",
-    "assigned": "Assigned",
-    "unassigned": "Unassigned"
+    "userAssignmentStatus": "使用者分配狀態",
+    "assigned": "已分配",
+    "unassigned": "未分配"
 }
