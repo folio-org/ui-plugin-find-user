@@ -8,6 +8,7 @@ jest.mock('@folio/stripes/smart-components', () => ({
     id,
     onClick = jest.fn(),
     disabled,
+    visible,
     ...restProps
   }) => (
     <div>
@@ -17,6 +18,7 @@ jest.mock('@folio/stripes/smart-components', () => ({
         id={id}
         onClick={onClick}
         disabled={disabled}
+        visible={visible}
         {...restProps}
       >
         <span size="small" icon="times-circle-solid">

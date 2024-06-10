@@ -4,11 +4,14 @@ jest.mock('@folio/stripes/components', () => ({
   Button: jest.fn(({
     children,
     onClick = jest.fn(),
-    // eslint-disable-next-line no-unused-vars
-    buttonStyle, buttonRef,
     ...rest
   }) => (
-    <button data-test-button type="button" {...rest} onClick={onClick}>
+    <button
+      data-test-button
+      type="button"
+      {...rest}
+      onClick={onClick}
+    >
       <span>
         {children}
       </span>
@@ -44,17 +47,12 @@ jest.mock('@folio/stripes/components', () => ({
   MultiColumnList: jest.fn((props) => (
     <div data-testid={props['data-testid']} />
   )),
-  // destructure appIcon and dismissible so they aren't incorrectly
-  // applied as DOM attributes via ...rest.
-  // eslint-disable-next-line no-unused-vars
-  Pane: jest.fn(({ children, className, defaultWidth, paneTitle, firstMenu, lastMenu, actionMenu, appIcon, dismissible, ...rest }) => {
+  Pane: jest.fn(({ children, className, defaultWidth, paneTitle, firstMenu, ...rest }) => {
     return (
       <div className={className} {...rest} style={{ width: defaultWidth }}>
         <div>
           {firstMenu ?? null}
           {paneTitle}
-          {actionMenu ? actionMenu({ onToggle: jest.fn() }) : null}
-          {lastMenu ?? null}
         </div>
         {children}
       </div>
