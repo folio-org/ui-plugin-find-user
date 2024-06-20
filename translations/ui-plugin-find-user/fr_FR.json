@@ -1,7 +1,7 @@
 {
     "meta.title": "Recherche utilisateur (plugin)",
     "modal.label": "Sélectionner un utilisateur",
-    "searchButton.title": "Trouver un utilisateur",
+    "searchButton.title": "Rechercher un utilisateur",
     "noResults": "Choisir un filtre ou saisir une recherche pour afficher les résultats.",
     "searchFieldLabel": "Rechercher",
     "information.patronGroup": "Groupe/Catégorie d'utilisateurs",
