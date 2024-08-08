@@ -1,10 +1,10 @@
 {
-    "meta.title": "Recherche utilisateur (plugin)",
+    "meta.title": "Recherche d'utilisateur (plugin)",
     "modal.label": "Sélectionner un utilisateur",
-    "searchButton.title": "Trouver un utilisateur",
+    "searchButton.title": "Rechercher un utilisateur",
     "noResults": "Choisir un filtre ou saisir une recherche pour afficher les résultats.",
     "searchFieldLabel": "Rechercher",
-    "information.patronGroup": "Groupe/Catégorie d'utilisateurs",
+    "information.patronGroup": "Groupe usagers",
     "active": "Actif",
     "information.name": "Nom",
     "information.barcode": "Code-barres",

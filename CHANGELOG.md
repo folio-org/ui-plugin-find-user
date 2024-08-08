@@ -2,6 +2,8 @@
 
 ## 7.2.0 IN PROGRESS
 
+* Create Jest test environment and setup initial mocks. Refs UIPFU-78.
+
 ## [7.1.1](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.1) (2024-05-03)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.0...v7.1.1)
 
