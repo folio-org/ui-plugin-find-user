@@ -7,6 +7,7 @@
 
 * Fix Select User Modal with User Assignment Status Filters pagination issue. Refs UIPFU-87.
 * Fix select all toggle button issue. Refs UIPFU-89.
+* Apply Prev/Next Pagination. Refs UIPFU-49.
 
 ## [7.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.0) (2024-03-20)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.0.0...v7.1.0)
