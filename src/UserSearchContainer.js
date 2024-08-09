@@ -73,6 +73,7 @@ class UserSearchContainer extends React.Component {
       tenant: '!{tenantId}',
       records: 'users',
       resultOffset: '%{resultOffset}',
+      resultDensity: 'sparse',
       perRequest: 100,
       path: 'users',
       GET: {

@@ -17,6 +17,7 @@ import {
   Button,
   PaneMenu,
   Checkbox,
+  MCLPagingTypes,
 } from '@folio/stripes/components';
 import {
   SearchAndSortQuery,
@@ -387,9 +388,8 @@ class UserSearchView extends React.Component {
                             sortDirection={sortOrder.startsWith('-') ? 'descending' : 'ascending'}
                             isEmptyMessage={resultsStatusMessage}
                             autosize
-                            virtualize
                             pageAmount={100}
-                            pagingType="click"
+                            pagingType={MCLPagingTypes.PREV_NEXT}
                           />
 
                         </Pane>
