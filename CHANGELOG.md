@@ -3,13 +3,14 @@
 ## 7.2.0 IN PROGRESS
 
 * Create Jest test environment and setup initial mocks. Refs UIPFU-78.
+* Apply Prev/Next Pagination. Refs UIPFU-49.
+* Use keywords CQL field for keyword user search. Ref UIPFU-95.
 
 ## [7.1.1](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.1) (2024-05-03)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.0...v7.1.1)
 
 * Fix Select User Modal with User Assignment Status Filters pagination issue. Refs UIPFU-87.
 * Fix select all toggle button issue. Refs UIPFU-89.
-* Apply Prev/Next Pagination. Refs UIPFU-49.
 
 ## [7.1.0](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.0) (2024-03-20)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.0.0...v7.1.0)
