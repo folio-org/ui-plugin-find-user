@@ -11,11 +11,11 @@
     "information.username": "ユーザー名",
     "contact.email": "Eメール",
     "status": "ステータス",
-    "inactive": "非アクティブ",
+    "inactive": "無効",
     "modal.close": "閉じる",
     "modal.save": "保存",
     "modal.total": "選択済合計： {count}",
     "userAssignmentStatus": "User Assignment Status",
-    "assigned": "Assigned",
-    "unassigned": "Unassigned"
+    "assigned": "割当済",
+    "unassigned": "未割当"
 }
