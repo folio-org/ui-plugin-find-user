@@ -230,11 +230,7 @@ class UserSearchContainer extends React.Component {
         return users;
       }
 
-      console.log('fetched users ', fetchedUsers);
       const filteredUnassignedUsers = fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
-      console.log('filtered unasigned users ', filteredUnassignedUsers);
-      const assignedUsersInFetchedUsers = fetchedUsers.filter(u => assignedUserIds.includes(u.id));
-      console.log('asigned users in fetched users ', assignedUsersInFetchedUsers);
       users.records = filteredUnassignedUsers;
       users.count = this.source.totalCount() - assignedUsers.length;
       return users;
