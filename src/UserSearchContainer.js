@@ -163,17 +163,17 @@ class UserSearchContainer extends React.Component {
 
   onNeedMoreData = (askAmount, index) => {
     const { resultOffset } = this.props.mutator;
-    // let offset = index;
-    // if (offset < askAmount) {
-    //   /*
-    //     This condition sets offset to 100 when there are less than 100 records in the current
-    //     paginated result in order to skip the first 100 records and make an API call to fetch next 100.
-    //   */
-    //   offset = 100;
-    // }
+    let offset = index;
+    if (offset < askAmount) {
+      /*
+        This condition sets offset to 100 when there are less than 100 records in the current
+        paginated result in order to skip the first 100 records and make an API call to fetch next 100.
+      */
+      offset = 100;
+    }
     if (this.source) {
-      if (resultOffset && index >= 0) {
-        this.source.fetchOffset(index);
+      if (resultOffset && offset >= 0) {
+        this.source.fetchOffset(offset);
       } else {
         this.source.fetchMore(RESULT_COUNT_INCREMENT);
       }
@@ -230,7 +230,11 @@ class UserSearchContainer extends React.Component {
         return users;
       }
 
+      console.log('fetched users ', fetchedUsers);
       const filteredUnassignedUsers = fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
+      console.log('filtered unasigned users ', filteredUnassignedUsers);
+      const assignedUsersInFetchedUsers = fetchedUsers.filter(u => assignedUserIds.includes(u.id));
+      console.log('asigned users in fetched users ', assignedUsersInFetchedUsers);
       users.records = filteredUnassignedUsers;
       users.count = this.source.totalCount() - assignedUsers.length;
       return users;
