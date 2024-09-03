@@ -181,6 +181,25 @@ class UserSearchView extends React.Component {
     return filterConfig;
   }
 
+  getPagingType = (activeFilters) => {
+    const { data, source } = this.props;
+    const { users } = data;
+    let pagingType = MCLPagingTypes.PREV_NEXT;
+
+    /**
+     * if active filter contain "Unassigned", switch to "LOAD_MORE" paging type.
+     * at the page, mark the pagination as "NONE"
+     */
+    if (activeFilters.state?.uas?.length === 1) {
+      if (activeFilters.state.uas[0] === 'Unassigned') {
+        if (source?.resources?.records?.records.length >= users.count) pagingType = MCLPagingTypes.NONE;
+        else pagingType = MCLPagingTypes.LOAD_MORE;
+      } else pagingType = MCLPagingTypes.NONE;
+    }
+
+    return pagingType;
+  };
+
   render() {
     const {
       onSelectRow,
@@ -389,7 +408,7 @@ class UserSearchView extends React.Component {
                             isEmptyMessage={resultsStatusMessage}
                             autosize
                             pageAmount={100}
-                            pagingType={MCLPagingTypes.PREV_NEXT}
+                            pagingType={this.getPagingType(activeFilters)}
                           />
 
                         </Pane>
