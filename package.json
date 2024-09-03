@@ -25,7 +25,7 @@
     "lint": "eslint .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-plugin-find-user ./translations/ui-plugin-find-user/compiled",
-    "test": "stripes test karma",
+    "test": "yarn run test:jest",
     "test:jest": "jest --ci --coverage --colors"
   },
   "okapiInterfaces": {
