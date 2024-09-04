@@ -1,6 +1,7 @@
+import { FormattedMessage } from 'react-intl';
+
 import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
-import { FormattedMessage } from 'react-intl';
 
 import renderWithRouter from 'helpers/renderWithRouter';
 import Filters from './Filters';
