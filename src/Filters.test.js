@@ -72,7 +72,7 @@ describe('Filters', () => {
   });
 
   it('should call changeHandler on clicking inactive checkbox', async () => {
-    const inActiveCheckbox = document.querySelector('[ id = "clickable-filter-active-inactive"]');
+    const inActiveCheckbox = screen.getByRole('checkbox', { name: 'ui-plugin-find-user.inactive' });
     await userEvent.click(inActiveCheckbox);
 
     expect(props.onChangeHandlers.checkbox).toHaveBeenCalled();
