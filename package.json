@@ -25,7 +25,7 @@
     "lint": "eslint .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-plugin-find-user ./translations/ui-plugin-find-user/compiled",
-    "test": "stripes test karma",
+    "test": "yarn run test:jest",
     "test:jest": "jest --ci --coverage --colors"
   },
   "okapiInterfaces": {
@@ -48,6 +48,7 @@
     "eslint": "^7.32.0",
     "eslint-import-resolver-webpack": "^0.13.2",
     "faker": "^4.1.0",
+    "history": "^4.0.0",
     "inflected": "^2.0.4",
     "miragejs": "^0.1.40",
     "react": "^18.2.0",
