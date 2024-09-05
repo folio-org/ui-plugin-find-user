@@ -7,7 +7,6 @@ import { createMemoryHistory } from 'history';
 
 let rtlApi;
 
-
 const renderWithRouter = (children, options = {}) => {
   const history = createMemoryHistory();
   const renderFn = options.rerender ? rtlApi.rerender : render;

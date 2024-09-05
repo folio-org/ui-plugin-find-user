@@ -18,7 +18,7 @@ on: [push, pull_request]
 jobs:
   github-actions-ci:
     env:
-      YARN_TEST_OPTIONS: '--karma.singleRun --karma.browsers ChromeDocker --karma.reporters mocha junit --coverage'
+      YARN_TEST_OPTIONS: ''
       SQ_ROOT_DIR: './src'
       COMPILE_TRANSLATION_FILES: 'true'
       PUBLISH_MOD_DESCRIPTOR: 'true'
@@ -95,7 +95,7 @@ jobs:
           comment_title: Jest Unit Test Statistics
 
       - name: Publish Jest coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: jest-coverage-report
@@ -113,7 +113,7 @@ jobs:
           comment_title: BigTest Unit Test Statistics
 
       - name: Publish BigTest coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: bigtest-coverage-report
