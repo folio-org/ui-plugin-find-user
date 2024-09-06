@@ -29,6 +29,7 @@ import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig
 import Filters from './Filters';
 
 import css from './UserSearch.css';
+import { UNASSIGNED } from './constants';
 
 function getFullName(user) {
   let firstName = user?.personal?.firstName ?? '';
@@ -182,22 +183,24 @@ class UserSearchView extends React.Component {
   }
 
   getPagingType = (activeFilters) => {
-    const { data, source } = this.props;
-    const { users } = data;
-    let pagingType = MCLPagingTypes.PREV_NEXT;
+    const { data: { users }, source } = this.props;
+    const { state } = activeFilters;
+    const { uas } = state || {};
 
     /**
      * if active filter contain "Unassigned", switch to "LOAD_MORE" paging type.
      * at the page, mark the pagination as "NONE"
      */
-    if (activeFilters.state?.uas?.length === 1) {
-      if (activeFilters.state.uas[0] === 'Unassigned') {
-        if (source?.resources?.records?.records.length >= users.count) pagingType = MCLPagingTypes.NONE;
-        else pagingType = MCLPagingTypes.LOAD_MORE;
-      } else pagingType = MCLPagingTypes.NONE;
+    if (!uas || uas.length !== 1) {
+      return MCLPagingTypes.PREV_NEXT;
     }
 
-    return pagingType;
+    if (uas[0] !== UNASSIGNED) {
+      return MCLPagingTypes.NONE;
+    }
+
+    const recordsCount = source?.resources?.records?.records.length || 0;
+    return recordsCount >= users.count ? MCLPagingTypes.NONE : MCLPagingTypes.LOAD_MORE;
   };
 
   render() {

@@ -15,6 +15,7 @@ import {
   UNASSIGNED_FILTER_KEY,
   UAS,
   ASSIGNED,
+  UNASSIGNED,
 } from './constants';
 
 const INITIAL_RESULT_COUNT = 30;
@@ -161,7 +162,7 @@ class UserSearchContainer extends React.Component {
     this.source.update(this.props);
   }
 
-  onNeedMoreData = (askAmount, index, firstINdex, direction) => {
+  onNeedMoreData = (askAmount, index, firstIndex, direction) => {
     const { resultOffset } = this.props.mutator;
 
     const fetchedUsers = get(this.props.resources, 'records.records', []);
