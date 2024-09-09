@@ -6,6 +6,7 @@
 * Apply Prev/Next Pagination. Refs UIPFU-49.
 * Use keywords CQL field for keyword user search. Ref UIPFU-95.
 * Add Jest unit tests for ui-plugin-find-user/src/Filters.js. Refs UIPFU-81.
+* Fix pagination issues with `Unassigned` filter. Refs UIPFU-96.
 
 ## [7.1.1](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.1) (2024-05-03)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.0...v7.1.1)

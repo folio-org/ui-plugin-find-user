@@ -15,6 +15,7 @@ import {
   UNASSIGNED_FILTER_KEY,
   UAS,
   ASSIGNED,
+  UNASSIGNED,
 } from './constants';
 
 const INITIAL_RESULT_COUNT = 30;
@@ -161,19 +162,19 @@ class UserSearchContainer extends React.Component {
     this.source.update(this.props);
   }
 
-  onNeedMoreData = (askAmount, index) => {
+  onNeedMoreData = (askAmount, index, firstIndex, direction) => {
     const { resultOffset } = this.props.mutator;
-    let offset = index;
-    if (offset < askAmount) {
-      /*
-        This condition sets offset to 100 when there are less than 100 records in the current
-        paginated result in order to skip the first 100 records and make an API call to fetch next 100.
-      */
-      offset = 100;
-    }
+
+    const fetchedUsers = get(this.props.resources, 'records.records', []);
+    const totalUserRecords = this.source.totalCount();
+
     if (this.source) {
-      if (resultOffset && offset >= 0) {
-        this.source.fetchOffset(offset);
+      if (!direction) {
+        if (fetchedUsers.length < totalUserRecords) {
+          this.source.fetchOffset(fetchedUsers.length);
+        }
+      } else if (resultOffset && index >= 0) {
+        this.source.fetchOffset(index);
       } else {
         this.source.fetchMore(RESULT_COUNT_INCREMENT);
       }

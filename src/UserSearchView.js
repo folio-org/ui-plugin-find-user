@@ -29,6 +29,7 @@ import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig
 import Filters from './Filters';
 
 import css from './UserSearch.css';
+import { UNASSIGNED } from './constants';
 
 function getFullName(user) {
   let firstName = user?.personal?.firstName ?? '';
@@ -180,6 +181,28 @@ class UserSearchView extends React.Component {
     }
     return filterConfig;
   }
+
+  getPagingType = (activeFilters) => {
+    const { data: { users }, source } = this.props;
+    const { state } = activeFilters;
+    const { uas } = state || {};
+
+    /**
+     * if active filter contain "Unassigned", switch to "LOAD_MORE" paging type.
+     * at the end of last page, mark the pagination as "NONE" - as, in this case
+     * the end of pagination cannot be accurately handled by MCL
+     */
+    if (!uas || uas.length !== 1) {
+      return MCLPagingTypes.PREV_NEXT;
+    }
+
+    if (uas[0] !== UNASSIGNED) {
+      return MCLPagingTypes.NONE;
+    }
+
+    const recordsCount = source?.resources?.records?.records.length || 0;
+    return recordsCount >= users.count ? MCLPagingTypes.NONE : MCLPagingTypes.LOAD_MORE;
+  };
 
   render() {
     const {
@@ -389,7 +412,7 @@ class UserSearchView extends React.Component {
                             isEmptyMessage={resultsStatusMessage}
                             autosize
                             pageAmount={100}
-                            pagingType={MCLPagingTypes.PREV_NEXT}
+                            pagingType={this.getPagingType(activeFilters)}
                           />
 
                         </Pane>
