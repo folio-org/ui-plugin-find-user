@@ -189,7 +189,8 @@ class UserSearchView extends React.Component {
 
     /**
      * if active filter contain "Unassigned", switch to "LOAD_MORE" paging type.
-     * at the page, mark the pagination as "NONE"
+     * at the end of last page, mark the pagination as "NONE" - as, in this case
+     * the end of pagination cannot be accurately handled by MCL
      */
     if (!uas || uas.length !== 1) {
       return MCLPagingTypes.PREV_NEXT;
