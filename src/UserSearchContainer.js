@@ -15,7 +15,6 @@ import {
   UNASSIGNED_FILTER_KEY,
   UAS,
   ASSIGNED,
-  UNASSIGNED,
 } from './constants';
 
 const INITIAL_RESULT_COUNT = 30;
