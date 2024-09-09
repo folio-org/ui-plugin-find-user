@@ -1,5 +1,10 @@
 # Change history for ui-plugin-find-user
 
+## [7.1.2](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.2) (2024-09-05)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.1...v7.1.2)
+
+* Use keywords CQL field for keyword user search. Refs UIPFU-95.
+
 ## [7.1.1](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.1) (2024-05-03)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.0...v7.1.1)
 

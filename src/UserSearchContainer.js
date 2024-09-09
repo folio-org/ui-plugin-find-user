@@ -34,15 +34,17 @@ const queryFields = [
   'customFields'
 ];
 
-const compileQuery = template(
-  `(${queryFields.map(f => `${f}="%{query}*"`).join(' or ')})`,
-  { interpolate: /%{([\s\S]+?)}/g }
-);
-
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
   const filters = props.initialSelectedUsers ? filterConfigWithUserAssignedStatus : filterConfig;
   const updatedResourceData = props.initialSelectedUsers &&
     resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
+
+  const compileQuery = props.stripes.hasInterface('users', '16.3') ?
+    template('keywords="%{query}*"', { interpolate: /%{([\s\S]+?)}/g }) :
+    template(
+      `(${queryFields.map(f => `${f}="%{query}*"`).join(' or ')})`,
+      { interpolate: /%{([\s\S]+?)}/g }
+    );
 
   return makeQueryFunction(
     'cql.allRecords=1',
