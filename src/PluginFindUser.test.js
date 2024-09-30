@@ -33,7 +33,7 @@ const props = {
   searchButtonStyle: 'primary',
   marginBottom0: true,
   marginTop0: false,
-  dataKey: 'userData',
+  dataKey: 'find_patron',
   initialSelectedUsers: {
     user1: {
       username: 'jdoe',
