@@ -94,6 +94,6 @@ describe('PluginFindUser', () => {
     const searchBtn = screen.getByTestId('searchButton');
     await userEvent.click(searchBtn);
     await userEvent.click(screen.getByText('Close Modal'));
-    expect(afterCloseMock).toHaveBeenCalled();
+    expect(afterCloseMock).toHaveBeenCalledTimes(1);
   });
 });
