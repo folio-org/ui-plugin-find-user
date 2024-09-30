@@ -6,6 +6,7 @@
 * Apply Prev/Next Pagination. Refs UIPFU-49.
 * Add Jest unit tests for ui-plugin-find-user/src/Filters.js. Refs UIPFU-81.
 * Fix pagination issues with `Unassigned` filter. Refs UIPFU-96.
+* Add Jest unit tests for ui-plugin-find-user/src/PluginFindUser.js. Refs UIPFU-82.
 
 ## [7.1.2](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.2) (2024-09-05)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.1...v7.1.2)

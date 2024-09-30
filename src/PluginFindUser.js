@@ -90,7 +90,7 @@ class PluginFindUser extends Component {
                 onClick={this.openModal}
                 buttonRef={this.modalTrigger}
                 marginBottom0={marginBottom0}
-                data-test-plugin-find-user-button
+                data-testid="searchButton"
               >
                 {searchLabel || <Icon icon="search" color="#fff" />}
               </Button>
