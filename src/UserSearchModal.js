@@ -23,6 +23,7 @@ class UserSearchModal extends Component {
     dataKey: PropTypes.string,
     contentRef: PropTypes.object,
     modalRef: PropTypes.object,
+    modalTitle: PropTypes.node,
     restoreFocus: PropTypes.bool,
     initialSelectedUsers: PropTypes.shape({
       [PropTypes.string]: PropTypes.shape({
@@ -98,7 +99,7 @@ class UserSearchModal extends Component {
         contentClass={css.modalContent}
         dismissible
         enforceFocus={false}
-        label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
+        label={modalTitle || <FormattedMessage id="ui-plugin-find-user.modal.label" />}
         open={openWhen}
         ref={this.modalRef}
         size="large"
