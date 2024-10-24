@@ -92,6 +92,7 @@ class UserSearchModal extends Component {
       initialSelectedUsers,
       tenantId,
       stripes,
+      modalTitle,
     } = this.props;
 
     return (
