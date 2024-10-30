@@ -29,7 +29,7 @@
     "test:jest": "jest --ci --coverage --colors"
   },
   "okapiInterfaces": {
-    "users": "16.0 16.1",
+    "users": "16.3",
     "users-bl": "6.1"
   },
   "devDependencies": {
