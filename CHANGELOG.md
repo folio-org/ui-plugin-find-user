@@ -1,6 +1,7 @@
 # Change history for ui-plugin-find-user
 
-## 7.2.0 IN PROGRESS
+## [7.2.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v7.2.0) (2024-09-05)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.2...v7.2.0)
 
 * Create Jest test environment and setup initial mocks. Refs UIPFU-78.
 * Apply Prev/Next Pagination. Refs UIPFU-49.
