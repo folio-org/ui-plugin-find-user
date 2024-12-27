@@ -1,7 +1,10 @@
-import { screen, render } from '@folio/jest-config-stripes/testing-library/react';
-import { useRef } from 'react';
+import { screen, render, waitFor } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import { createRef } from 'react';
 
 import UserSearchModal from './UserSearchModal';
+
+jest.unmock('@folio/stripes/components');
 
 jest.mock('./UserSearchContainer', () => {
   return jest.fn(() => <div>UserSearchContainer</div>);
@@ -20,30 +23,30 @@ const props = {
   onCloseModal: jest.fn(),
   openWhen: true,
   restoreFocus: true,
-  initialSelectedUsers,
+  initialSelectedUsers: undefined,
   tenantId: 'diku',
-}; 
+};
 
 describe('UserSearchModal', () => {
   beforeEach(() => {
-    const modalRef = useRef();
+    const modalRef = createRef();
 
-    render(<UserSearchModal  {...props} modalRef={modalRef} />);
+    render(<UserSearchModal {...props} modalRef={modalRef} />);
   });
 
   it('should display search label', () => {
-    expect(screen.getByText('ui-plugin-find-user.searchFieldLabel')).toBeInTheDocument();
+    expect(screen.getByText('ui-plugin-find-user.modal.label')).toBeInTheDocument();
   });
 
   it('should render "UserSearchContainer"', () => {
     expect(screen.getByText('UserSearchContainer')).toBeInTheDocument();
   });
 
-  it('close modal on clicking close button', () => {
-    const button = screen.getByRole('button', { name: 'Dismiss modal' });
+  it('close modal on clicking close button', async () => {
+    const button = screen.getByRole('button', { name: 'stripes-components.dismissModal' });
     expect(button).toBeInTheDocument();
 
-    button.click();
-    expect(screen.getByText('UserSearchContainer')).not.toBeInTheDocument();
+    userEvent.click(button);
+    await waitFor(() => expect(props.closeCB).toHaveBeenCalled());
   });
 });
