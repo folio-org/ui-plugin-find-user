@@ -1,4 +1,5 @@
 import { screen, render } from '@folio/jest-config-stripes/testing-library/react';
+import { useRef } from 'react';
 
 import UserSearchModal from './UserSearchModal';
 
@@ -6,9 +7,28 @@ jest.mock('./UserSearchContainer', () => {
   return jest.fn(() => <div>UserSearchContainer</div>);
 });
 
+
+const props = {
+  stripes: {
+    connect: jest.fn(),
+    okapi: {
+      tenant: 'diku',
+    },
+  },
+  selectUsers: jest.fn(),
+  selectUser: jest.fn(),
+  closeCB: jest.fn(),
+  onCloseModal: jest.fn(),
+  openWhen: true,
+  restoreFocus: true,
+  initialSelectedUsers,
+  tenantId: 'diku',
+};
+const modalRef = useRef();
+
 describe('UserSearchModal', () => {
   it('should display search label', () => {
-    render(<UserSearchModal />);
+    render(<UserSearchModal  {...props, modalRef} />);
 
     expect(screen.getByText('ui-plugin-find-user.searchFieldLabel')).toBeInTheDocument();
   });
