@@ -1,12 +1,14 @@
 # Change history for ui-plugin-find-user
 
-## 7.2.0 IN PROGRESS
+## [7.2.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v7.2.0) (2024-09-05)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.2...v7.2.0)
 
 * Create Jest test environment and setup initial mocks. Refs UIPFU-78.
 * Apply Prev/Next Pagination. Refs UIPFU-49.
 * Add Jest unit tests for ui-plugin-find-user/src/Filters.js. Refs UIPFU-81.
 * Fix pagination issues with `Unassigned` filter. Refs UIPFU-96.
 * Add Jest unit tests for ui-plugin-find-user/src/PluginFindUser.js. Refs UIPFU-82.
+* Add modal title prop support. Refs UIPFU-100.
 
 ## [7.1.2](https://github.com/folio-org/ui-plugin-find-user/tree/v7.1.2) (2024-09-05)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.1...v7.1.2)

@@ -4,7 +4,7 @@
     "searchButton.title": "Znajdź użytkownika",
     "noResults": "Wybierz filtr lub wprowadź zapytanie wyszukiwania, aby wyświetlić wyniki.",
     "searchFieldLabel": "Szukaj",
-    "information.patronGroup": "Grupa czytelników",
+    "information.patronGroup": "Grupa czytelnika",
     "active": "Aktywny",
     "information.name": "Nazwa",
     "information.barcode": "Kod kreskowy",
@@ -16,6 +16,6 @@
     "modal.save": "Zapisz",
     "modal.total": "Wybrano łącznie: {count}",
     "userAssignmentStatus": "User Assignment Status",
-    "assigned": "Przypisany",
+    "assigned": "Przypisanie",
     "unassigned": "Nieprzypisany"
 }
