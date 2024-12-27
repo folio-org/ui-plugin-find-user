@@ -6,7 +6,7 @@ import {
 } from '@folio/stripes/components';
 
 const Filters = ({
-  activeFilters = {},
+  activeFilters,
   onChangeHandlers,
   config,
   resultOffset,
