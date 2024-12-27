@@ -28,12 +28,12 @@ const renderPluginFindUser = (props) => renderWithRouter(
 
 const props = {
   afterClose: afterCloseMock,
-  id: 'clickable-plugin-find-proxy',
+  id: 'find-user',
   searchLabel: <span>Search User</span>,
   searchButtonStyle: 'primary',
   marginBottom0: true,
   marginTop0: false,
-  dataKey: 'userData',
+  dataKey: 'find_patron',
   initialSelectedUsers: {
     user1: {
       username: 'jdoe',
