@@ -9,17 +9,23 @@ import UserSearchView from './UserSearchView';
 
 import css from './UserSearch.css';
 
-const UserSearchModal = (props, modalRef) => {
+const UserSearchModal = (
+  (
+    {
+      stripes,
+      selectUsers,
+      selectUser,
+      closeCB,
+      onCloseModal,
+      openWhen,
+      restoreFocus = true,
+      initialSelectedUsers,
+      tenantId,
+    },
+    modalRef
+  ) => {
   const {
-    stripes,
-    selectUsers,
-    selectUser,
-    closeCB,
-    onCloseModal,
-    openWhen,
-    restoreFocus = true,
-    initialSelectedUsers,
-    tenantId,
+   
   } = props;
   const [error, setError] = useState(null);
   const [callbackTrigger, setCallbackTrigger] = useState(false);
