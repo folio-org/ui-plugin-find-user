@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useState, useRef, forwardRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import { Modal } from '@folio/stripes/components';
 
@@ -9,120 +9,110 @@ import UserSearchView from './UserSearchView';
 
 import css from './UserSearch.css';
 
-class UserSearchModal extends Component {
-  static propTypes = {
-    stripes: PropTypes.shape({
-      connect: PropTypes.func.isRequired,
-      okapi: PropTypes.object.isRequired,
-    }).isRequired,
-    selectUsers: PropTypes.func,
-    selectUser: PropTypes.func,
-    closeCB: PropTypes.func.isRequired,
-    onCloseModal: PropTypes.func,
-    openWhen: PropTypes.bool,
-    dataKey: PropTypes.string,
-    contentRef: PropTypes.object,
-    modalRef: PropTypes.object,
-    restoreFocus: PropTypes.bool,
-    initialSelectedUsers: PropTypes.shape({
-      [PropTypes.string]: PropTypes.shape({
-        username: PropTypes.string,
-        id: PropTypes.string,
-        active: PropTypes.bool,
-        barcode: PropTypes.string,
-        personal: PropTypes.shape({
-          lastName: PropTypes.string,
-          firstName: PropTypes.string,
-          email: PropTypes.string,
-        }),
-        patronGroup: PropTypes.string,
-      }),
-    }),
-    tenantId: PropTypes.string,
-  }
+const UserSearchModal = (props, modalRef) => {
+  const {
+    stripes,
+    selectUsers,
+    selectUser,
+    closeCB,
+    onCloseModal,
+    openWhen,
+    restoreFocus = true,
+    initialSelectedUsers,
+    tenantId,
+  } = props;
+  const [error, setError] = useState(null);
+  const [callbackTrigger, setCallbackTrigger] = useState(false);
+  const ref = useRef();
+  const mRef = modalRef || ref;
 
-  static defaultProps = {
-    restoreFocus: true,
+  useEffect(() => {
+    if (callbackTrigger && error === null) {
+      closeCB();
+      setCallbackTrigger(false);
+    }
+  }, [callbackTrigger, error, closeCB]);
+
+  const closeModal = () => {
+    setError(null);
+    setCallbackTrigger(true); // Trigger the callback after state update
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      error: null,
-    };
-
-    this.closeModal = this.closeModal.bind(this);
-    this.passUserOut = this.passUserOut.bind(this);
-    this.modalRef = props.modalRef || React.createRef();
-  }
-
-  closeModal() {
-    this.setState({
-      error: null,
-    }, () => {
-      this.props.closeCB();
-    });
-  }
-
-  passUserOut(e, user) {
-    this.props.selectUser(user);
+  const passUserOut = (e, user) => {
+    selectUser(user);
 
     if (!user.error) {
-      this.closeModal();
+      closeModal();
     } else {
-      this.setState({
-        error: user.error,
-      });
+      setError(user.error);
     }
-  }
+  };
 
-  passUsersOut = users => {
-    this.props.selectUsers(users);
-    this.closeModal();
-  }
+  const passUsersOut = users => {
+    selectUsers(users);
+    closeModal();
+  };
 
-  render() {
-    const {
-      restoreFocus,
-      onCloseModal,
-      openWhen,
-      selectUsers,
-      initialSelectedUsers,
-      tenantId,
-      stripes,
-    } = this.props;
-
-    return (
-      <Modal
-        contentClass={css.modalContent}
-        dismissible
-        enforceFocus={false}
-        label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
-        open={openWhen}
-        ref={this.modalRef}
-        size="large"
-        onClose={this.closeModal}
-        restoreFocus={restoreFocus}
+  return (
+    <Modal
+      contentClass={css.modalContent}
+      dismissible
+      enforceFocus={false}
+      label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
+      open={openWhen}
+      ref={mRef}
+      size="large"
+      onClose={closeModal}
+      restoreFocus={restoreFocus}
+    >
+      {error ? <div className={css.userError}>{error}</div> : null}
+      <UserSearchContainer
+        {...props}
+        onComponentWillUnmount={onCloseModal}
+        tenantId={tenantId || stripes.okapi.tenant}
+        initialSelectedUsers={initialSelectedUsers}
       >
-        {this.state.error ? <div className={css.userError}>{this.state.error}</div> : null}
-        <UserSearchContainer
-          {...this.props}
-          onComponentWillUnmount={onCloseModal}
-          tenantId={tenantId || stripes.okapi.tenant}
+        {(viewProps) => <UserSearchView
+          {...viewProps}
+          onSaveMultiple={passUsersOut}
+          onSelectRow={passUserOut}
+          isMultiSelect={Boolean(selectUsers)}
           initialSelectedUsers={initialSelectedUsers}
-        >
-          {(viewProps) => <UserSearchView
-            {...viewProps}
-            onSaveMultiple={this.passUsersOut}
-            onSelectRow={this.passUserOut}
-            isMultiSelect={Boolean(selectUsers)}
-            initialSelectedUsers={initialSelectedUsers}
-          />}
-        </UserSearchContainer>
-      </Modal>
-    );
-  }
-}
+        />}
+      </UserSearchContainer>
+    </Modal>
+  );
+};
 
-export default UserSearchModal;
+UserSearchModal.propTypes = {
+  stripes: PropTypes.shape({
+    connect: PropTypes.func.isRequired,
+    okapi: PropTypes.object.isRequired,
+  }).isRequired,
+  selectUsers: PropTypes.func,
+  selectUser: PropTypes.func,
+  closeCB: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func,
+  openWhen: PropTypes.bool,
+  dataKey: PropTypes.string,
+  contentRef: PropTypes.object,
+  modalRef: PropTypes.object,
+  restoreFocus: PropTypes.bool,
+  initialSelectedUsers: PropTypes.shape({
+    [PropTypes.string]: PropTypes.shape({
+      username: PropTypes.string,
+      id: PropTypes.string,
+      active: PropTypes.bool,
+      barcode: PropTypes.string,
+      personal: PropTypes.shape({
+        lastName: PropTypes.string,
+        firstName: PropTypes.string,
+        email: PropTypes.string,
+      }),
+      patronGroup: PropTypes.string,
+    }),
+  }),
+  tenantId: PropTypes.string,
+};
+
+export default forwardRef(UserSearchModal);
