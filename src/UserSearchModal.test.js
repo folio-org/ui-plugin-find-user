@@ -7,8 +7,6 @@ jest.mock('./UserSearchContainer', () => {
   return jest.fn(() => <div>UserSearchContainer</div>);
 });
 
-const ref = useRef();
-
 const props = {
   stripes: {
     connect: jest.fn(),
@@ -24,13 +22,16 @@ const props = {
   restoreFocus: true,
   initialSelectedUsers,
   tenantId: 'diku',
-  modalRef: ref,
 }; 
 
 describe('UserSearchModal', () => {
-  it('should display search label', () => {
-    render(<UserSearchModal  {...props} />);
+  beforeEach(() => {
+    const modalRef = useRef();
 
+    render(<UserSearchModal  {...props} modalRef={modalRef} />);
+  });
+
+  it('should display search label', () => {
     expect(screen.getByText('ui-plugin-find-user.searchFieldLabel')).toBeInTheDocument();
   });
 
