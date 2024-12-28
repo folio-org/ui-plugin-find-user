@@ -21,74 +21,79 @@ const UserSearchModal = (
       restoreFocus = true,
       initialSelectedUsers,
       tenantId,
+      ...rest
     },
     modalRef
   ) => {
-  const {
-   
-  } = props;
-  const [error, setError] = useState(null);
-  const [callbackTrigger, setCallbackTrigger] = useState(false);
-  const ref = useRef();
-  const mRef = modalRef || ref;
+    const [error, setError] = useState(null);
+    const [callbackTrigger, setCallbackTrigger] = useState(false);
+    const ref = useRef();
+    const mRef = modalRef || ref;
 
-  useEffect(() => {
-    if (callbackTrigger && error === null) {
-      closeCB();
-      setCallbackTrigger(false);
-    }
-  }, [callbackTrigger, error, closeCB]);
+    useEffect(() => {
+      if (callbackTrigger && error === null) {
+        closeCB();
+        setCallbackTrigger(false);
+      }
+    }, [callbackTrigger, error, closeCB]);
 
-  const closeModal = () => {
-    setError(null);
-    setCallbackTrigger(true); // Trigger the callback after state update
-  };
+    const closeModal = () => {
+      setError(null);
+      setCallbackTrigger(true); // Trigger the callback after state update
+    };
 
-  const passUserOut = (e, user) => {
-    selectUser(user);
+    const passUserOut = (e, user) => {
+      selectUser(user);
 
-    if (!user.error) {
+      if (!user.error) {
+        closeModal();
+      } else {
+        setError(user.error);
+      }
+    };
+
+    const passUsersOut = users => {
+      selectUsers(users);
       closeModal();
-    } else {
-      setError(user.error);
-    }
-  };
+    };
 
-  const passUsersOut = users => {
-    selectUsers(users);
-    closeModal();
-  };
-
-  return (
-    <Modal
-      contentClass={css.modalContent}
-      dismissible
-      enforceFocus={false}
-      label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
-      open={openWhen}
-      ref={mRef}
-      size="large"
-      onClose={closeModal}
-      restoreFocus={restoreFocus}
-    >
-      {error ? <div className={css.userError}>{error}</div> : null}
-      <UserSearchContainer
-        {...props}
-        onComponentWillUnmount={onCloseModal}
-        tenantId={tenantId || stripes.okapi.tenant}
-        initialSelectedUsers={initialSelectedUsers}
+    return (
+      <Modal
+        contentClass={css.modalContent}
+        dismissible
+        enforceFocus={false}
+        label={<FormattedMessage id="ui-plugin-find-user.modal.label" />}
+        open={openWhen}
+        ref={mRef}
+        size="large"
+        onClose={closeModal}
+        restoreFocus={restoreFocus}
       >
-        {(viewProps) => <UserSearchView
-          {...viewProps}
-          onSaveMultiple={passUsersOut}
-          onSelectRow={passUserOut}
-          isMultiSelect={Boolean(selectUsers)}
+        {error ? <div className={css.userError}>{error}</div> : null}
+        <UserSearchContainer
+          stripes={stripes}
+          selectUsers={selectUsers}
+          selectUser={selectUser}
+          closeCB={closeCB}
+          onCloseModal={onCloseModal}
+          openWhen={openWhen}
+          restoreFocus={restoreFocus}
+          onComponentWillUnmount={onCloseModal}
+          tenantId={tenantId || stripes.okapi.tenant}
           initialSelectedUsers={initialSelectedUsers}
-        />}
-      </UserSearchContainer>
-    </Modal>
-  );
-};
+          {...rest}
+        >
+          {(viewProps) => <UserSearchView
+            {...viewProps}
+            onSaveMultiple={passUsersOut}
+            onSelectRow={passUserOut}
+            isMultiSelect={Boolean(selectUsers)}
+            initialSelectedUsers={initialSelectedUsers}
+          />}
+        </UserSearchContainer>
+      </Modal>
+    );
+  });
 
 UserSearchModal.propTypes = {
   stripes: PropTypes.shape({
