@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import _omit from 'lodash/omit';
 import className from 'classnames';
@@ -11,106 +11,97 @@ import UserSearchModal from './UserSearchModal';
 
 import css from './UserSearch.css';
 
-class PluginFindUser extends Component {
-  constructor(props) {
-    super(props);
+const PluginFindUser = (props) => {
+  const {
+    afterClose,
+    id = 'clickable-plugin-find-user',
+    searchLabel,
+    searchButtonStyle = 'primary noRightRadius',
+    marginBottom0,
+    marginTop0,
+    // eslint-disable-next-line no-unused-vars
+    onModalClose,
+    renderTrigger,
+    // eslint-disable-next-line no-unused-vars
+    dataKey = 'find_patron',
+    // eslint-disable-next-line no-unused-vars
+    initialSelectedUsers,
+  } = props;
 
-    this.state = {
-      openModal: false,
-    };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalTrigger = useRef();
+  const modalRef = useRef();
+  const prevOpenModalRef = useRef(); // Reference to track the previous value of openModal
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.modalTrigger = React.createRef();
-    this.modalRef = React.createRef();
-  }
+  // don't inadvertently pass in other resources which could result in resource confusion.
+  const isolatedProps = _omit(props, ['parentResources', 'resources', 'mutator', 'parentMutator']);
 
-  getStyle() {
-    const { marginBottom0, marginTop0 } = this.props;
-    return className(
-      css.searchControl,
-      { [css.marginBottom0]: marginBottom0 },
-      { [css.marginTop0]: marginTop0 },
-    );
-  }
-
-  openModal() {
-    this.setState({
-      openModal: true,
-    });
-  }
-
-  closeModal() {
-    const {
-      afterClose
-    } = this.props;
-
-    this.setState({
-      openModal: false,
-    }, () => {
+  useEffect(() => {
+    if (prevOpenModalRef.current && !isModalOpen) {
       if (afterClose) {
         afterClose();
       }
 
-      if (this.modalRef.current && this.modalTrigger.current) {
-        if (contains(this.modalRef.current, document.activeElement)) {
-          this.modalTrigger.current.focus();
+      if (modalRef.current && modalTrigger.current) {
+        if (contains(modalRef.current, document.activeElement)) {
+          modalTrigger.current.focus();
         }
       }
-    });
-  }
+    }
+  }, [isModalOpen, afterClose]);
 
-  renderTriggerButton() {
-    const {
-      renderTrigger,
-    } = this.props;
+  const getStyle = () => (
+    className(
+      css.searchControl,
+      { [css.marginBottom0]: marginBottom0 },
+      { [css.marginTop0]: marginTop0 },
+    )
+  );
 
-    return renderTrigger({
-      buttonRef: this.modalTrigger,
-      onClick: this.openModal,
-    });
-  }
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  render() {
-    const { id, marginBottom0, renderTrigger, searchButtonStyle, searchLabel } = this.props;
-    // don't inadvertently pass in other resources which could result in resource confusion.
-    const isolatedProps = _omit(this.props, ['parentResources', 'resources', 'mutator', 'parentMutator']);
+  const closeModal = () => {
+    prevOpenModalRef.current = isModalOpen;
+    setIsModalOpen(false);
+  };
 
-    return (
-      <div className={this.getStyle()} data-test-plugin-find-user>
-        {renderTrigger ?
-          this.renderTriggerButton() :
-          <FormattedMessage id="ui-plugin-find-user.searchButton.title">
-            {ariaLabel => (
-              <Button
-                id={id}
-                key="searchButton"
-                buttonStyle={searchButtonStyle}
-                aria-label={ariaLabel}
-                onClick={this.openModal}
-                buttonRef={this.modalTrigger}
-                marginBottom0={marginBottom0}
-                data-testid="searchButton"
-              >
-                {searchLabel || <Icon icon="search" color="#fff" />}
-              </Button>
-            )}
-          </FormattedMessage>}
-        <UserSearchModal
-          openWhen={this.state.openModal}
-          closeCB={this.closeModal}
-          modalRef={this.modalRef}
-          {...isolatedProps}
-        />
-      </div>
-    );
-  }
-}
+  const renderTriggerButton = () => (
+    renderTrigger({
+      buttonRef: modalTrigger,
+      onClick: openModal,
+    })
+  );
 
-PluginFindUser.defaultProps = {
-  id: 'clickable-plugin-find-user',
-  searchButtonStyle: 'primary noRightRadius',
-  dataKey: 'find_patron',
+  return (
+    <div className={getStyle()} data-test-plugin-find-user>
+      {renderTrigger ?
+        renderTriggerButton() :
+        <FormattedMessage id="ui-plugin-find-user.searchButton.title">
+          {ariaLabel => (
+            <Button
+              id={id}
+              key="searchButton"
+              buttonStyle={searchButtonStyle}
+              aria-label={ariaLabel}
+              onClick={openModal}
+              buttonRef={modalTrigger}
+              marginBottom0={marginBottom0}
+              data-testid="searchButton"
+            >
+              {searchLabel || <Icon icon="search" color="#fff" />}
+            </Button>
+          )}
+        </FormattedMessage>}
+      <UserSearchModal
+        openWhen={isModalOpen}
+        closeCB={closeModal}
+        modalRef={modalRef}
+        {...isolatedProps}
+      />
+    </div>
+  );
 };
 
 PluginFindUser.propTypes = {
