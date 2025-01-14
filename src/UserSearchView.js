@@ -67,7 +67,7 @@ const UserSearchView = ({
   source,
   data,
   onNeedMoreData,
-  visibleColumns,
+  visibleColumns = ['name', 'active', 'barcode', 'patronGroup', 'username', 'email'],
   resultOffset,
   initialSelectedUsers,
 }) => {
