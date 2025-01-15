@@ -1,5 +1,9 @@
 # Change history for ui-plugin-find-user
 
+## In progress
+
+* React v19: refactor away from default props for functional components. Refs UIPFU-91.
+
 ## [7.2.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v7.2.0) (2024-09-05)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.1.2...v7.2.0)
 

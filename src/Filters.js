@@ -5,50 +5,41 @@ import {
   FilterGroups,
 } from '@folio/stripes/components';
 
-export default class Filters extends React.Component {
-  static propTypes = {
-    activeFilters: PropTypes.object,
-    onChangeHandlers: PropTypes.object.isRequired,
-    config: PropTypes.arrayOf(PropTypes.object),
-    resultOffset: PropTypes.shape({
-      replace: PropTypes.func.isRequired,
-    }),
-  };
+const Filters = ({
+  activeFilters,
+  onChangeHandlers,
+  config,
+  resultOffset,
+}) => {
+  const { clearGroup } = onChangeHandlers;
 
-  static defaultProps = {
-    activeFilters: {},
-  }
-
-  handleFilterChange = e => {
-    const {
-      resultOffset,
-      onChangeHandlers,
-    } = this.props;
-
+  const handleFilterChange = e => {
     if (resultOffset) {
       resultOffset.replace(0);
     }
 
     onChangeHandlers.checkbox(e);
-  }
+  };
 
-  render() {
-    const {
-      activeFilters,
-      onChangeHandlers: { clearGroup },
-      config,
-    } = this.props;
+  const groupFilters = {};
+  activeFilters.string.split(',').forEach(m => { groupFilters[m] = true; });
 
-    const groupFilters = {};
-    activeFilters.string.split(',').forEach(m => { groupFilters[m] = true; });
+  return (
+    <FilterGroups
+      config={config}
+      filters={groupFilters}
+      onChangeFilter={handleFilterChange}
+      onClearFilter={clearGroup}
+    />
+  );
+};
 
-    return (
-      <FilterGroups
-        config={config}
-        filters={groupFilters}
-        onChangeFilter={this.handleFilterChange}
-        onClearFilter={clearGroup}
-      />
-    );
-  }
-}
+Filters.propTypes = {
+  activeFilters: PropTypes.object,
+  onChangeHandlers: PropTypes.object.isRequired,
+  config: PropTypes.arrayOf(PropTypes.object),
+  resultOffset: PropTypes.shape({
+    replace: PropTypes.func.isRequired,
+  }),
+};
+export default Filters;

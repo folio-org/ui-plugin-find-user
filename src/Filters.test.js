@@ -17,8 +17,10 @@ const props = {
     checkbox: jest.fn(),
   },
   activeFilters: {
-    state: {},
-    string: '',
+    state: {
+      active : ['active'],
+    },
+    string: 'active.active',
   },
   resultOffset: {
     replace: jest.fn(),

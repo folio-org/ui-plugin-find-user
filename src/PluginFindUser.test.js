@@ -1,4 +1,4 @@
-import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import renderWithRouter from 'helpers/renderWithRouter';
@@ -6,17 +6,8 @@ import renderWithRouter from 'helpers/renderWithRouter';
 import PluginFindUser from './PluginFindUser';
 
 jest.unmock('@folio/stripes/components');
-jest.mock('./UserSearchModal', () => ({ closeCB, openWhen, modalRef }) => {
-  return (
-    <div>
-      {openWhen && (
-        <div ref={modalRef}>
-          User Search Modal
-          <button type="button" onClick={closeCB}>Close Modal</button>
-        </div>
-      )}
-    </div>
-  );
+jest.mock('./UserSearchContainer', () => {
+  return jest.fn(() => <div>UserSearchContainer</div>);
 });
 
 const afterCloseMock = jest.fn();
@@ -86,14 +77,14 @@ describe('PluginFindUser', () => {
     renderPluginFindUser(props);
     const searchBtn = screen.getByTestId('searchButton');
     await userEvent.click(searchBtn);
-    expect(screen.getByText('User Search Modal')).toBeInTheDocument();
+    expect(screen.getByText('ui-plugin-find-user.modal.label')).toBeInTheDocument();
   });
 
   it('should trigger afterClose() when the modal is closed', async () => {
     renderPluginFindUser(props);
     const searchBtn = screen.getByTestId('searchButton');
     await userEvent.click(searchBtn);
-    await userEvent.click(screen.getByText('Close Modal'));
-    expect(afterCloseMock).toHaveBeenCalledTimes(1);
+    await userEvent.click(screen.getByRole('button', { name : 'stripes-components.dismissModal' }));
+    await waitFor(() => expect(afterCloseMock).toHaveBeenCalledTimes(1));
   });
 });
