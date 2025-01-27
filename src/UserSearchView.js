@@ -62,9 +62,8 @@ const UserSearchView = ({
   const count = users.count;
   const sortOrder = query.sort || '';
   const resultsStatusMessage = source ? (
-    <div data-test-find-user-no-results-message>
+    <div>
       <NoResultsMessage
-        data-test-find-user-no-results-message
         source={source}
         searchTerm={query.query || ''}
         filterPaneIsVisible
@@ -174,7 +173,6 @@ const UserSearchView = ({
   return (
     <>
       <div
-        data-test-find-user
         data-testid="user-search-view"
         ref={contentRef}
         className={isMultiSelect ? css.UserSearchViewContent : ''}
@@ -230,7 +228,6 @@ const UserSearchView = ({
                                 value={searchValue.query}
                                 marginBottom0
                                 autoFocus
-                                data-test-user-search-input
                               />
                               <Button
                                 type="submit"
@@ -238,7 +235,6 @@ const UserSearchView = ({
                                 fullWidth
                                 marginBottom0
                                 disabled={(!searchValue.query || searchValue.query === '')}
-                                data-test-user-search-submit
                               >
                                 <FormattedMessage id="ui-plugin-find-user.searchFieldLabel" />
                               </Button>
@@ -328,7 +324,6 @@ const UserSearchView = ({
               </div>
               <Button
                 data-testid="save-multiple"
-                data-test-find-users-modal-save-multiple
                 marginBottom0
                 onClick={saveMultiple}
                 disabled={disabled}
