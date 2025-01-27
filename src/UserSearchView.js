@@ -17,7 +17,6 @@ import {
   Button,
   PaneMenu,
   Checkbox,
-  MCLPagingTypes,
 } from '@folio/stripes/components';
 import {
   SearchAndSortQuery,
@@ -29,30 +28,7 @@ import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig
 import Filters from './Filters';
 
 import css from './UserSearch.css';
-import { UNASSIGNED } from './constants';
-
-function getFullName(user) {
-  let firstName = user?.personal?.firstName ?? '';
-  const lastName = user?.personal?.lastName ?? '';
-  const middleName = user?.personal?.middleName ?? '';
-  const preferredFirstName = user?.personal?.preferredFirstName ?? '';
-
-  if (preferredFirstName && firstName) {
-    firstName = `${preferredFirstName} (${firstName})`;
-  }
-
-  return `${lastName}${firstName ? ', ' : ' '}${firstName} ${middleName}`;
-}
-
-const reduceUsersToMap = (users, isChecked = false) => {
-  const usersReducer = (accumulator, user) => {
-    accumulator[user.id] = isChecked ? user : null;
-
-    return accumulator;
-  };
-
-  return users.reduce(usersReducer, {});
-};
+import { getFullName, getPagingType, reduceUsersToMap } from './utils';
 
 const UserSearchView = ({
   contentRef,
@@ -82,13 +58,12 @@ const UserSearchView = ({
 
   const builtVisibleColumns = isMultiSelect ? ['isChecked', ...visibleColumns] : visibleColumns;
 
-  const query = queryGetter ? queryGetter() || {} : {};
+  const query = queryGetter?.() ?? {};
   const count = users.count;
   const sortOrder = query.sort || '';
   const resultsStatusMessage = source ? (
-    <div data-test-find-user-no-results-message>
+    <div>
       <NoResultsMessage
-        data-test-find-user-no-results-message
         source={source}
         searchTerm={query.query || ''}
         filterPaneIsVisible
@@ -115,16 +90,13 @@ const UserSearchView = ({
   const resultsFormatter = {
     isChecked: user => (
       <Checkbox
+        data-testid="row-checked"
         type="checkbox"
         checked={Boolean(checkedMap[user.id])}
         onChange={() => toggleItem(user)}
       />
     ),
-    active: (user) => {
-      return user.active
-        ? <FormattedMessage id="ui-plugin-find-user.active" />
-        : <FormattedMessage id="ui-plugin-find-user.inactive" />;
-    },
+    active: user => <FormattedMessage id={user.active ? 'ui-plugin-find-user.active' : 'ui-plugin-find-user.inactive'} />,
     name: (user) => (
       <>
         <AppIcon
@@ -137,10 +109,7 @@ const UserSearchView = ({
       </>
     ),
     barcode: user => user.barcode,
-    patronGroup: (user) => {
-      const pg = patronGroups.filter(g => g.id === user.patronGroup)[0];
-      return pg ? pg.group : '?';
-    },
+    patronGroup: user => patronGroups.filter(g => g.id === user.patronGroup)[0]?.group ?? '?',
     username: user => user.username,
     email: user => get(user, ['personal', 'email']),
   };
@@ -171,27 +140,6 @@ const UserSearchView = ({
     return filterConfig;
   };
 
-  const getPagingType = (activeFilters) => {
-    const { state } = activeFilters;
-    const { uas } = state || {};
-
-    /**
-     * if active filter contain "Unassigned", switch to "LOAD_MORE" paging type.
-     * at the end of last page, mark the pagination as "NONE" - as, in this case
-     * the end of pagination cannot be accurately handled by MCL
-     */
-    if (!uas || uas.length !== 1) {
-      return MCLPagingTypes.PREV_NEXT;
-    }
-
-    if (uas[0] !== UNASSIGNED) {
-      return MCLPagingTypes.NONE;
-    }
-
-    const recordsCount = source?.resources?.records?.records.length || 0;
-    return recordsCount >= users.count ? MCLPagingTypes.NONE : MCLPagingTypes.LOAD_MORE;
-  };
-
   const renderResultsFirstMenu = (filters) => {
     const filterCount = filters.string !== '' ? filters.string.split(',').length : 0;
     const hideOrShowMessageId = isFilterPaneVisible
@@ -208,6 +156,7 @@ const UserSearchView = ({
             <FormattedMessage id={hideOrShowMessageId}>
               {hideOrShowMessage => (
                 <FilterPaneToggle
+                  data-testid="filter-pane-toggle"
                   visible={isFilterPaneVisible}
                   aria-label={`${hideOrShowMessage} \n\n${appliedFiltersMessage}`}
                   onClick={toggleFilterPane}
@@ -224,7 +173,7 @@ const UserSearchView = ({
   return (
     <>
       <div
-        data-test-find-user
+        data-testid="user-search-view"
         ref={contentRef}
         className={isMultiSelect ? css.UserSearchViewContent : ''}
       >
@@ -264,6 +213,7 @@ const UserSearchView = ({
                     >
                       {isFilterPaneVisible &&
                         <Pane
+                          data-testid="filter-pane"
                           defaultWidth="22%"
                           paneTitle="User search"
                           id="plugin-find-user-filter-pane"
@@ -278,7 +228,6 @@ const UserSearchView = ({
                                 value={searchValue.query}
                                 marginBottom0
                                 autoFocus
-                                data-test-user-search-input
                               />
                               <Button
                                 type="submit"
@@ -286,7 +235,6 @@ const UserSearchView = ({
                                 fullWidth
                                 marginBottom0
                                 disabled={(!searchValue.query || searchValue.query === '')}
-                                data-test-user-search-submit
                               >
                                 <FormattedMessage id="ui-plugin-find-user.searchFieldLabel" />
                               </Button>
@@ -329,6 +277,7 @@ const UserSearchView = ({
                           columnMapping={{
                             isChecked: (
                               <Checkbox
+                                data-testid="toggle-all-checked"
                                 checked={isAllChecked}
                                 onChange={toggleAll}
                                 type="checkbox"
@@ -350,7 +299,7 @@ const UserSearchView = ({
                           isEmptyMessage={resultsStatusMessage}
                           autosize
                           pageAmount={100}
-                          pagingType={getPagingType(activeFilters)}
+                          pagingType={getPagingType(activeFilters, source, users)}
                         />
 
                       </Pane>
@@ -374,7 +323,7 @@ const UserSearchView = ({
                 />
               </div>
               <Button
-                data-test-find-users-modal-save-multiple
+                data-testid="save-multiple"
                 marginBottom0
                 onClick={saveMultiple}
                 disabled={disabled}
