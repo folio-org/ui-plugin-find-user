@@ -1,6 +1,6 @@
 {
   "name": "@folio/plugin-find-user",
-  "version": "7.2.0",
+  "version": "8.0.0",
   "description": "User-finder for Stripes",
   "repository": "folio-org/ui-plugin-find-user",
   "publishConfig": {
@@ -24,7 +24,7 @@
   "scripts": {
     "lint": "eslint .",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
-    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-plugin-find-user ./translations/ui-plugin-find-user/compiled",
+    "formatjs-compile": "stripes translate compile",
     "test": "yarn run test:jest",
     "test:jest": "jest --ci --coverage --colors"
   },
@@ -37,12 +37,11 @@
     "@babel/eslint-parser": "^7.17.0",
     "@bigtest/interactor": "^0.9.1",
     "@bigtest/mocha": "^0.5.2",
-    "@folio/eslint-config-stripes": "^7.0.0",
-    "@folio/jest-config-stripes": "^2.0.0",
-    "@folio/stripes": "^9.0.0",
-    "@folio/stripes-cli": "^3.0.0",
-    "@folio/stripes-core": "^10.0.0",
-    "@formatjs/cli": "^6.1.3",
+    "@folio/eslint-config-stripes": "^8.0.0",
+    "@folio/jest-config-stripes": "^3.0.0",
+    "@folio/stripes": "^10.0.0",
+    "@folio/stripes-cli": "^4.0.0",
+    "@folio/stripes-core": "^11.0.0",
     "chai": "^4.2.0",
     "core-js": "^3.6.4",
     "eslint": "^7.32.0",
@@ -53,7 +52,7 @@
     "miragejs": "^0.1.40",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.4.4",
+    "react-intl": "^7.1.5",
     "react-router-dom": "^5.1.0",
     "regenerator-runtime": "^0.13.3"
   },
@@ -64,10 +63,10 @@
     "prop-types": "^15.6.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^9.0.0",
+    "@folio/stripes": "^10.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.4.4",
+    "react-intl": "^7.1.5",
     "react-router-dom": "^5.1.0"
   }
 }
