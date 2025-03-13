@@ -1,6 +1,7 @@
 # Change history for ui-plugin-find-user
 
-## In progress
+## [8.0.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v8.0.0) (2025-03-13)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.2.0...v8.0.0)
 
 * React v19: refactor away from default props for functional components. Refs UIPFU-91.
 * Migration of unit tests to Jest for ui-plugin-find-user/src /UserSearchView.js. Refs UIPFU-85.
