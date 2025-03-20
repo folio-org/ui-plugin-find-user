@@ -1,5 +1,5 @@
 {
-    "meta.title": "用户查找器（插件）",
+    "meta.title": "用户查找器 : 插件 ) ",
     "modal.label": "选择用户",
     "searchButton.title": "查找用户",
     "noResults": "选择筛选条件或输入搜索查询以显示结果。",
@@ -14,7 +14,7 @@
     "inactive": "未激活",
     "modal.close": "关闭",
     "modal.save": "保存",
-    "modal.total": "已选总数： {count}",
+    "modal.total": "已选总数 :  {count}",
     "userAssignmentStatus": "用户分配状态",
     "assigned": "已分配",
     "unassigned": "未分配"

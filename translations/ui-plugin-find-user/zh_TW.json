@@ -14,7 +14,7 @@
     "inactive": "未啟用",
     "modal.close": "關閉",
     "modal.save": "儲存",
-    "modal.total": "已選總數：{count}",
+    "modal.total": "已選總數 : {count}",
     "userAssignmentStatus": "使用者分配狀態",
     "assigned": "已分配",
     "unassigned": "未分配"
