@@ -1,5 +1,7 @@
 # Change history for ui-plugin-find-user
 
+* Incomplete search results after applying "User assignment status" facet and any other facet for authorization role. Refs UIPFU-107.
+
 ## [8.0.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v8.0.0) (2025-03-13)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.2.0...v8.0.0)
 

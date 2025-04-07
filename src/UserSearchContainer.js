@@ -37,30 +37,34 @@ const queryFields = [
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
   const filters = props.initialSelectedUsers ? filterConfigWithUserAssignedStatus : filterConfig;
   const updatedResourceData = props.initialSelectedUsers &&
-    resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
+  resourceData?.query?.filters?.includes(UAS) ? updateResourceData(resourceData) : resourceData;
 
-  const compileQuery = props.stripes.hasInterface('users', '16.3') ?
-    template('keywords="%{query}*"', { interpolate: /%{([\s\S]+?)}/g }) :
-    template(
-      `(${queryFields.map(f => `${f}="%{query}*"`).join(' or ')})`,
-      { interpolate: /%{([\s\S]+?)}/g }
-    );
+  if (!queryParams.query?.trim()) {
+    logger.log('mquery', 'Empty query detected, using fallback query');
+    return 'cql.allRecords=1';
+  }
+
+  const compileQuery = props.stripes.hasInterface('users', '16.3')
+      ? template('keywords="%{query}*"', { interpolate: /%{([\s\S]+?)}/g })
+      : template(
+          `(${queryFields.map(f => `${f}="%{query}*"`).join(' or ')})`,
+          { interpolate: /%{([\s\S]+?)}/g }
+      );
 
   return makeQueryFunction(
-    'cql.allRecords=1',
-    (parsedQuery, _, localProps) => localProps.query.query.trim().split(/\s+/).map(query => compileQuery({ query })).join(' and '),
-    {
-      // the keys in this object must match those passed to
-      // SearchAndSort's columnMapping prop
-      'active': 'active',
-      'name': 'personal.lastName personal.firstName',
-      'patronGroup': 'patronGroup.group',
-      'username': 'username',
-      'barcode': 'barcode',
-      'email': 'personal.email',
-    },
-    filters,
-    2,
+      'cql.allRecords=1',
+      (parsedQuery, _, localProps) =>
+          localProps.query.query.trim().split(/\s+/).map(query => compileQuery({ query })).join(' and '),
+      {
+        'active': 'active',
+        'name': 'personal.lastName personal.firstName',
+        'patronGroup': 'patronGroup.group',
+        'username': 'username',
+        'barcode': 'barcode',
+        'email': 'personal.email',
+      },
+      filters,
+      2,
   )(queryParams, pathComponents, updatedResourceData, logger, props);
 }
 
@@ -76,10 +80,12 @@ class UserSearchContainer extends React.Component {
       records: 'users',
       resultOffset: '%{resultOffset}',
       resultDensity: 'sparse',
-      perRequest: 100,
       path: 'users',
       GET: {
-        params: { query: buildQuery },
+        params: (queryParams, pathComponents, resourceData, logger, props) => {
+          const limit = resourceData?.query?.filters?.includes(ASSIGNED_FILTER_KEY) ? 2000 : props.limit || 100;
+          return { query: buildQuery(queryParams, pathComponents, resourceData, logger, props), limit };
+        },
         staticFallback: { params: {} },
       },
     },
