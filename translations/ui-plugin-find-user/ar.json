@@ -15,7 +15,7 @@
     "modal.close": "إغلاق",
     "modal.save": "حفظ",
     "modal.total": "إجمالي المحدد: {count}",
-    "userAssignmentStatus": "User Assignment Status",
-    "assigned": "Assigned",
-    "unassigned": "Unassigned"
+    "userAssignmentStatus": "حالة تعيين المستخدم",
+    "assigned": "معيّن",
+    "unassigned": "غير معيّن"
 }
