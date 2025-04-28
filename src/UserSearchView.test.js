@@ -81,8 +81,7 @@ describe('UserSearchView', () => {
     await waitFor(() => expect(getByTestId('row-checked')).toBeChecked());
 
     // first click checks all entries, second unchecks all entries
-    userEvent.click(getByTestId('toggle-all-checked'));
-    userEvent.click(getByTestId('toggle-all-checked'));
+    userEvent.dblClick(getByTestId('toggle-all-checked'));
 
     await waitFor(() => expect(getByTestId('row-checked')).not.toBeChecked());
   });
