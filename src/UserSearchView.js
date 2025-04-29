@@ -119,9 +119,10 @@ const UserSearchView = ({
   };
 
   const toggleAll = () => {
-    setIsAllChecked(!isAllChecked);
+    const prevCheckedState = isAllChecked;
+    setIsAllChecked(!prevCheckedState);
 
-    const newCheckedMap = reduceUsersToMap(users.records, isAllChecked);
+    const newCheckedMap = reduceUsersToMap(users.records, !prevCheckedState);
     setCheckedMap(newCheckedMap);
   };
 
