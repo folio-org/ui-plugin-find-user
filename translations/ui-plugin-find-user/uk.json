@@ -2,10 +2,10 @@
     "meta.title": "User-finder - пошук користувачів (плагін)",
     "modal.label": "Select User",
     "searchButton.title": "Find User",
-    "noResults": "Choose a filter or enter a search query to show results.",
-    "searchFieldLabel": "Search",
+    "noResults": "Виберіть фільтр або введіть пошуковий запит, щоб побачити результати.",
+    "searchFieldLabel": "Пошук",
     "information.patronGroup": "Patron group",
-    "active": "Active",
+    "active": "Активно",
     "information.name": "Name",
     "information.barcode": "Barcode",
     "information.username": "Username",
@@ -16,6 +16,6 @@
     "modal.save": "Save",
     "modal.total": "Total selected: {count}",
     "userAssignmentStatus": "User Assignment Status",
-    "assigned": "Assigned",
-    "unassigned": "Unassigned"
+    "assigned": "Призначено",
+    "unassigned": "Анульовано"
 }
