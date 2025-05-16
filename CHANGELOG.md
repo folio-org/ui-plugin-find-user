@@ -2,6 +2,7 @@
 
 ## In progress
 * Fix the algorithm for marking all users as checked/unchecked. Refs UIPFU-115. 
+* Refactor user filtering logic in UserSearchContainer. Fixes UIPFU-107.
 
 ## [8.0.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v8.0.0) (2025-03-13)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.2.0...v8.0.0)
