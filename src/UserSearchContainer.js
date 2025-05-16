@@ -11,10 +11,18 @@ import {
 import filterConfig, { filterConfigWithUserAssignedStatus } from './filterConfig';
 import { updateResourceData } from './utils';
 import {
+  filterByActiveStatus,
+  filterByPatronGroup,
+  filterByQuery,
+  sortUsers,
+} from './userUtils';
+import {
   ASSIGNED_FILTER_KEY,
   UNASSIGNED_FILTER_KEY,
   UAS,
-  ASSIGNED,
+  CUSTOM_FIELDS,
+  ACTIVE_FILTER_KEY,
+  INACTIVE_FILTER_KEY,
 } from './constants';
 
 const INITIAL_RESULT_COUNT = 30;
@@ -31,7 +39,7 @@ const queryFields = [
   'barcode',
   'id',
   'externalSystemId',
-  'customFields'
+  CUSTOM_FIELDS,
 ];
 
 export function buildQuery(queryParams, pathComponents, resourceData, logger, props) {
@@ -98,6 +106,11 @@ class UserSearchContainer extends React.Component {
   static propTypes = {
     children: PropTypes.func,
     resources: PropTypes.shape({
+      query: PropTypes.shape({
+        filters: PropTypes.string,
+        sort: PropTypes.string,
+        query: PropTypes.string,
+      }).isRequired,
       patronGroups: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
       })
@@ -198,6 +211,11 @@ class UserSearchContainer extends React.Component {
       initialSelectedUsers,
     } = this.props;
 
+    const {
+      query,
+      sort,
+    } = resources.query || {};
+
     const users = {
       records : [],
       count: 0
@@ -205,39 +223,38 @@ class UserSearchContainer extends React.Component {
     const fetchedUsers = get(resources, 'records.records', []);
     const activeFilters = get(resources, 'query.filters', '');
     const assignedUsers = this.props.initialSelectedUsers ? Object.values(initialSelectedUsers) : [];
+    const isAssignedOptionSelected = activeFilters.includes(ASSIGNED_FILTER_KEY);
+    const isUnassignedOptionSelected = activeFilters.includes(UNASSIGNED_FILTER_KEY);
+    const isActiveOptionSelected = activeFilters.includes(ACTIVE_FILTER_KEY);
+    const isInactiveOptionSelected = activeFilters.includes(INACTIVE_FILTER_KEY);
+    const totalRecords = this.source?.totalCount() || 0;
+    const patronGroups = resources.patronGroups.records;
 
-    if (activeFilters === ASSIGNED_FILTER_KEY) {
-      users.records = assignedUsers;
-      users.count = assignedUsers.length;
+    // When "Assigned" option is selected and "Unassigned" option is not selected,
+    // we need to filter the users on UI based on the selected filters, entered search terms, and sort them.
+    if (isAssignedOptionSelected && !isUnassignedOptionSelected) {
+      let filtered = filterByActiveStatus(assignedUsers, isActiveOptionSelected, isInactiveOptionSelected);
+      filtered = filterByPatronGroup(filtered, activeFilters);
+      filtered = filterByQuery(filtered, query, queryFields);
+      filtered = sortUsers(filtered, sort, patronGroups);
+
+      users.records = filtered;
+      users.count = filtered.length;
       return users;
     }
 
-    if (activeFilters.includes(UAS) && this.source && this.source.loaded()) {
-      const assignedUserIds = Object.keys(initialSelectedUsers);
-      const hasBothUASFilters = activeFilters.includes(ASSIGNED_FILTER_KEY) && activeFilters.includes(UNASSIGNED_FILTER_KEY);
-      const uasFilterValue = activeFilters.split(',').filter(f => f.includes(UAS))[0].split('.')[1];
+    // When "Unassigned" option is selected and "Assigned" option is not selected,
+    // we need to filter out the response from assigned users (initialSelectedUsers).
+    if (!isAssignedOptionSelected && isUnassignedOptionSelected) {
+      users.records = fetchedUsers.filter(user => !initialSelectedUsers[user.id]);
+      users.count = totalRecords - assignedUsers.length;
 
-      if (hasBothUASFilters) {
-        users.records = fetchedUsers;
-        users.count = this.source.totalCount();
-        return users;
-      }
-
-      if (uasFilterValue === ASSIGNED) {
-        const filteredAssignedUsers = fetchedUsers.filter(u => assignedUserIds.includes(u.id));
-        users.records = filteredAssignedUsers;
-        users.count = filteredAssignedUsers.length;
-        return users;
-      }
-
-      const filteredUnassignedUsers = fetchedUsers.filter(u => !assignedUserIds.includes(u.id));
-      users.records = filteredUnassignedUsers;
-      users.count = this.source.totalCount() - assignedUsers.length;
       return users;
     }
 
     users.records = fetchedUsers;
-    users.count = this.source?.totalCount() || 0;
+    users.count = totalRecords;
+
     return users;
   }
 

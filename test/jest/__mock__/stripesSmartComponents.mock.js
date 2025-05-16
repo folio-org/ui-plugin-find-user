@@ -1,7 +1,7 @@
 import React from 'react';
 
 jest.mock('@folio/stripes/smart-components', () => ({
-  makeQueryFunction: jest.fn((value) => value),
+  ...jest.requireActual('@folio/stripes/smart-components'),
   SearchAndSortQuery: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   SearchAndSortSearchButton: jest.fn(({
     label,
@@ -47,5 +47,4 @@ jest.mock('@folio/stripes/smart-components', () => ({
       }
     </div>
   )),
-  StripesConnectedSource: jest.fn(),
 }));

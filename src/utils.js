@@ -4,7 +4,8 @@ import {
   ASSIGNED_FILTER_KEY,
   UNASSIGNED_FILTER_KEY,
   UNASSIGNED,
-  UAS,
+  ACTIVE_FILTER_KEY,
+  INACTIVE_FILTER_KEY,
 } from './constants';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -12,18 +13,30 @@ export const updateResourceData = (rData) => {
   const filterString = rData?.query?.filters;
   const newRData = cloneDeep(rData);
 
-  if (filterString === UNASSIGNED_FILTER_KEY || filterString === `${ASSIGNED_FILTER_KEY},${UNASSIGNED_FILTER_KEY}` || filterString === `${UNASSIGNED_FILTER_KEY},${ASSIGNED_FILTER_KEY}`) {
-  /*
-  * When Unassigned filter is selected on 'User assignment Status' filter group, with no other filter from other groups,
-  * fetch all the user records. The filter string is adjusted to include both active and inactive status filters. This will result in (cql.allRecords=1)
-  *
-  * The same applies when both Assigned and Unassigned are selected in any sequential order.
-  */
-    const alteredfilters = 'active.active,active.inactive';
-    newRData.query.filters = alteredfilters;
-  } else {
-    const alteredfilters = newRData.query.filters.split(',').filter(str => !str.startsWith(UAS)).join(',');
-    newRData.query.filters = alteredfilters;
+  const isAssignedOptionSelected = filterString.includes(ASSIGNED_FILTER_KEY);
+  const isUnassignedOptionSelected = filterString.includes(UNASSIGNED_FILTER_KEY);
+
+  if (isAssignedOptionSelected && !isUnassignedOptionSelected) {
+    // prevent fetching records when only "Assigned" filter is used. Filtering and sorting are handled on UI
+    newRData.query.query = '';
+    newRData.query.filters = '';
+  } else if ((isAssignedOptionSelected && isUnassignedOptionSelected)
+    || (!isAssignedOptionSelected && isUnassignedOptionSelected)) {
+    const existingFilters = newRData.query.filters
+      .split(',')
+      // remove "User assignment status" filter options from the `query.filters`
+      // as they are not in the API, they are just flags for the UI
+      .filter(option => ![ASSIGNED_FILTER_KEY, UNASSIGNED_FILTER_KEY].includes(option))
+      .join(',');
+
+    // When Unassigned filter is selected, or both options of "User assignment status" filter are selected and
+    // no other options from other filters are selected, and there is no search query, we need to fetch all the users,
+    // but because we remove the "User assignment status" filter from the `query.filters` (BE doesn't support it),
+    // we need to add the "Status" filter options (active.active,active.inactive) to trigger the search, they will be
+    // converted to `cql.allRecords=1` in the `makeQueryFunction` function.
+    const findAllQuery = `${ACTIVE_FILTER_KEY},${INACTIVE_FILTER_KEY}`;
+
+    newRData.query.filters = existingFilters || findAllQuery;
   }
   return newRData;
 };

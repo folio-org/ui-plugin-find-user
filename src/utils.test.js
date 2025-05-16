@@ -47,23 +47,6 @@ describe('updatedResourceData', () => {
       expect(updateResourceData(resourceData)).toMatchObject(expectedResourceData);
     });
   });
-
-  describe('when Assigned filter is selected with or without combination of filters from other filter groups', () => {
-    it('should remove assigned filter string', () => {
-      const resourceData = {
-        query: {
-          filters: `${ASSIGNED_FILTER_KEY},active.active`,
-        }
-      };
-      const expectedResourceData = {
-        query: {
-          ...resourceData.query,
-          filters: 'active.active',
-        },
-      };
-      expect(updateResourceData(resourceData)).toMatchObject(expectedResourceData);
-    });
-  });
 });
 
 describe('getFullName', () => {
