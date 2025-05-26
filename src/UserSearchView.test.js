@@ -1,6 +1,8 @@
+import { act, createRef } from 'react';
+
 import { render, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
-import { createRef } from 'react';
+
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 
@@ -36,9 +38,11 @@ const defaultProps = {
     users: {
       records: [
         {
+          id: 'id-1',
           active: false,
         },
         {
+          id: 'id-2',
           active: true,
           userName: 'mockUsername',
         },
@@ -57,20 +61,92 @@ const defaultProps = {
 const history = createMemoryHistory();
 
 describe('UserSearchView', () => {
-  const renderWithProps = (props = defaultProps) => {
+  const getComponent = (props = {}) => {
     const contentRef = createRef();
 
-    return render(
+    return (
       <Router history={history}>
-        <UserSearchView {...props} contentRef={contentRef} />
+        <UserSearchView
+          {...defaultProps}
+          {...props}
+          contentRef={contentRef}
+        />
       </Router>
     );
   };
+
+  const renderWithProps = (props = {}) => render(getComponent(props));
 
   it('renders the component', () => {
     const { getByTestId } = renderWithProps();
 
     expect(getByTestId('user-search-view')).toBeInTheDocument();
+  });
+
+  describe('when "Select all" checkbox is selected', () => {
+    describe('and user opens next page', () => {
+      it('should display the unchecked "select all" checkbox', async () => {
+        const { getByTestId, rerender } = renderWithProps();
+
+        await act(() => userEvent.click(getByTestId('toggle-all-checked')));
+
+        expect(getByTestId('row-checked')).toBeChecked();
+
+        rerender(getComponent({
+          data: {
+            ...defaultProps.data,
+            users: {
+              records: [
+                {
+                  id: 'id-3'
+                },
+                {
+                  id: 'id-4',
+                },
+              ],
+            },
+          }
+        }));
+
+        expect(getByTestId('toggle-all-checked')).not.toBeChecked();
+      });
+
+      describe('and selects the "Select all" checkbox again and saves', () => {
+        it('should save all selected users from the first and the second page', async () => {
+          const { getByTestId, rerender } = renderWithProps();
+
+          await act(() => userEvent.click(getByTestId('toggle-all-checked')));
+
+          expect(getByTestId('row-checked')).toBeChecked();
+
+          rerender(getComponent({
+            data: {
+              ...defaultProps.data,
+              users: {
+                records: [
+                  {
+                    id: 'id-3'
+                  },
+                  {
+                    id: 'id-4',
+                  },
+                ],
+              },
+            }
+          }));
+
+          await act(() => userEvent.click(getByTestId('toggle-all-checked')));
+          await act(() => userEvent.click(getByTestId('save-multiple')));
+
+          expect(defaultProps.onSaveMultiple).toHaveBeenCalledWith(expect.arrayContaining([
+            expect.objectContaining({ id: 'id-1' }),
+            expect.objectContaining({ id: 'id-2' }),
+            expect.objectContaining({ id: 'id-3' }),
+            expect.objectContaining({ id: 'id-4' }),
+          ]));
+        });
+      });
+    });
   });
 
   it('handles checkboxes toggling', async () => {

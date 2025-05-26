@@ -113,6 +113,7 @@ PluginFindUser.propTypes = {
   marginTop0: PropTypes.bool,
   onModalClose: PropTypes.func,
   renderTrigger: PropTypes.func,
+  selectUsers: PropTypes.func,
   dataKey: PropTypes.string,
   initialSelectedUsers: PropTypes.shape({
     [PropTypes.string]: PropTypes.shape({
