@@ -12,9 +12,9 @@
     "contact.email": "Email",
     "status": "Status",
     "inactive": "Inactive",
-    "modal.close": "Close",
-    "modal.save": "Save",
-    "modal.total": "Total selected: {count}",
+    "modal.close": "Закрити",
+    "modal.save": "Зберегти",
+    "modal.total": "Всього вибрано: {count}",
     "userAssignmentStatus": "User Assignment Status",
     "assigned": "Призначено",
     "unassigned": "Анульовано"
