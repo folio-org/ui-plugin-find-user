@@ -15,7 +15,7 @@
     "modal.close": "Закрити",
     "modal.save": "Зберегти",
     "modal.total": "Всього вибрано: {count}",
-    "userAssignmentStatus": "User Assignment Status",
+    "userAssignmentStatus": "Стан призначення користувача",
     "assigned": "Призначено",
     "unassigned": "Анульовано"
 }
