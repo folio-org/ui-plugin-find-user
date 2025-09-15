@@ -25,6 +25,32 @@ const filterConfig = [
     cql: 'patronGroup',
     values: [], // will be filled in by componentDidUpdate
   },
+  {
+    label: <FormattedMessage id="ui-plugin-find-user.filter.userType" />,
+    name: 'userType',
+    cql: 'type',
+    // `restrictWhenAllSelected` prevents applying cql.allRecords=1 when all filter options are selected.
+    // There are more types of users then `staff`, `shadow` and `system`,
+    // and we don't want to search for other types when all of them are selected.
+    restrictWhenAllSelected: true,
+    values: [
+      {
+        name: 'staff',
+        cql: 'staff',
+        displayName: <FormattedMessage id="ui-plugin-find-user.staff" />,
+      },
+      {
+        name: 'shadow',
+        cql: 'shadow',
+        displayName: <FormattedMessage id="ui-plugin-find-user.shadow" />,
+      },
+      {
+        name: 'system',
+        cql: 'system',
+        displayName: <FormattedMessage id="ui-plugin-find-user.system" />,
+      },
+    ],
+  },
 ];
 
 export const filterConfigWithUserAssignedStatus = [
