@@ -17,5 +17,9 @@
     "modal.total": "已選總數 : {count}",
     "userAssignmentStatus": "使用者分配狀態",
     "assigned": "已分配",
-    "unassigned": "未分配"
+    "unassigned": "未分配",
+    "filter.userType": "User type",
+    "staff": "Staff",
+    "shadow": "Shadow",
+    "system": "System"
 }

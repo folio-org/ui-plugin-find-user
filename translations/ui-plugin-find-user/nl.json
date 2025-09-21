@@ -17,5 +17,9 @@
     "modal.total": "Totaal geselecteerd: {count}",
     "userAssignmentStatus": "Toewijzingsstatus gebruiker",
     "assigned": "Toegewezen",
-    "unassigned": "Niet toegewezen"
+    "unassigned": "Niet toegewezen",
+    "filter.userType": "User type",
+    "staff": "Staff",
+    "shadow": "Shadow",
+    "system": "System"
 }

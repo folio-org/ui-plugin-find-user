@@ -17,5 +17,9 @@
     "modal.total": "إجمالي المحدد: {count}",
     "userAssignmentStatus": "حالة تعيين المستخدم",
     "assigned": "معيّن",
-    "unassigned": "غير معيّن"
+    "unassigned": "غير معيّن",
+    "filter.userType": "User type",
+    "staff": "Staff",
+    "shadow": "Shadow",
+    "system": "System"
 }

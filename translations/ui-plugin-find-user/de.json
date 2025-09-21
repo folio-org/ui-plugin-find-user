@@ -17,5 +17,9 @@
     "modal.total": "Insgesamt ausgewählt: {count}",
     "userAssignmentStatus": "Status der Zuweisungen der Person",
     "assigned": "Zugewiesen",
-    "unassigned": "Nicht zugewiesen"
+    "unassigned": "Nicht zugewiesen",
+    "filter.userType": "User type",
+    "staff": "Staff",
+    "shadow": "Shadow",
+    "system": "System"
 }

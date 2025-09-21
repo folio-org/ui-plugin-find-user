@@ -17,5 +17,9 @@
     "modal.total": "Wybrano łącznie: {count}",
     "userAssignmentStatus": "User Assignment Status",
     "assigned": "Przypisanie",
-    "unassigned": "Nieprzypisany"
+    "unassigned": "Nieprzypisany",
+    "filter.userType": "User type",
+    "staff": "Staff",
+    "shadow": "Shadow",
+    "system": "System"
 }

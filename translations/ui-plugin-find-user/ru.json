@@ -17,5 +17,9 @@
     "modal.total": "Total selected: {count}",
     "userAssignmentStatus": "User Assignment Status",
     "assigned": "Assigned",
-    "unassigned": "Unassigned"
+    "unassigned": "Unassigned",
+    "filter.userType": "User type",
+    "staff": "Staff",
+    "shadow": "Shadow",
+    "system": "System"
 }
