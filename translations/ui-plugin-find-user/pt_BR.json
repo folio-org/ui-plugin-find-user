@@ -17,5 +17,9 @@
     "modal.total": "Total selecionado: {count}",
     "userAssignmentStatus": "Status de atribuição de usuário",
     "assigned": "Atribuído",
-    "unassigned": "Não atribuído"
+    "unassigned": "Não atribuído",
+    "filter.userType": "Tipo de usuário",
+    "staff": "Equipe",
+    "shadow": "Sombra",
+    "system": "Sistema"
 }

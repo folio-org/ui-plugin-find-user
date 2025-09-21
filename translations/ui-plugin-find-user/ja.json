@@ -17,5 +17,9 @@
     "modal.total": "選択済合計： {count}",
     "userAssignmentStatus": "User Assignment Status",
     "assigned": "割当済",
-    "unassigned": "未割当"
+    "unassigned": "未割当",
+    "filter.userType": "User type",
+    "staff": "Staff",
+    "shadow": "Shadow",
+    "system": "System"
 }

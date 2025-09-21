@@ -17,5 +17,9 @@
     "modal.total": "Celkem vybráno: {count}",
     "userAssignmentStatus": "Stav přiřazení uživatele",
     "assigned": "Přiřazeno",
-    "unassigned": "Nepřiřazeno"
+    "unassigned": "Nepřiřazeno",
+    "filter.userType": "Typ uživatele",
+    "staff": "Zaměstnanci",
+    "shadow": "Stín",
+    "system": "Systém"
 }

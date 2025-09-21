@@ -17,5 +17,9 @@
     "modal.total": "Всього вибрано: {count}",
     "userAssignmentStatus": "Стан призначення користувача",
     "assigned": "Призначено",
-    "unassigned": "Анульовано"
+    "unassigned": "Анульовано",
+    "filter.userType": "User type",
+    "staff": "Staff",
+    "shadow": "Shadow",
+    "system": "System"
 }
