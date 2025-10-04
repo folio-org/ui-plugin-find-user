@@ -18,8 +18,8 @@
     "userAssignmentStatus": "用户分配状态",
     "assigned": "已分配",
     "unassigned": "未分配",
-    "filter.userType": "User type",
-    "staff": "Staff",
-    "shadow": "Shadow",
-    "system": "System"
+    "filter.userType": "用户类型",
+    "staff": "员工",
+    "shadow": "影子用户",
+    "system": "系统"
 }
