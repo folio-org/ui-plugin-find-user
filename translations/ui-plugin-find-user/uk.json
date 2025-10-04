@@ -18,8 +18,8 @@
     "userAssignmentStatus": "Стан призначення користувача",
     "assigned": "Призначено",
     "unassigned": "Анульовано",
-    "filter.userType": "User type",
-    "staff": "Staff",
-    "shadow": "Shadow",
-    "system": "System"
+    "filter.userType": "Тип користувача",
+    "staff": "Персонал",
+    "shadow": "Приховано",
+    "system": "Система"
 }
