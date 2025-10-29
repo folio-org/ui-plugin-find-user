@@ -18,8 +18,8 @@
     "userAssignmentStatus": "Toewijzingsstatus gebruiker",
     "assigned": "Toegewezen",
     "unassigned": "Niet toegewezen",
-    "filter.userType": "User type",
-    "staff": "Staff",
-    "shadow": "Shadow",
-    "system": "System"
+    "filter.userType": "Type gebruiker",
+    "staff": "Medewerkers",
+    "shadow": "Schaduw",
+    "system": "Systeem"
 }
