@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import _omit from 'lodash/omit';
 import className from 'classnames';
@@ -8,6 +8,7 @@ import contains from 'dom-helpers/query/contains';
 import { Button, Icon } from '@folio/stripes/components';
 
 import UserSearchModal from './UserSearchModal';
+import { useSetState } from './hooks';
 
 import css from './UserSearch.css';
 
@@ -28,27 +29,12 @@ const PluginFindUser = (props) => {
     initialSelectedUsers,
   } = props;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useSetState(false);
   const modalTrigger = useRef();
   const modalRef = useRef();
-  const prevOpenModalRef = useRef(); // Reference to track the previous value of openModal
 
   // don't inadvertently pass in other resources which could result in resource confusion.
   const isolatedProps = _omit(props, ['parentResources', 'resources', 'mutator', 'parentMutator']);
-
-  useEffect(() => {
-    if (prevOpenModalRef.current && !isModalOpen) {
-      if (afterClose) {
-        afterClose();
-      }
-
-      if (modalRef.current && modalTrigger.current) {
-        if (contains(modalRef.current, document.activeElement)) {
-          modalTrigger.current.focus();
-        }
-      }
-    }
-  }, [isModalOpen, afterClose]);
 
   const getStyle = () => (
     className(
@@ -63,8 +49,17 @@ const PluginFindUser = (props) => {
   };
 
   const closeModal = () => {
-    prevOpenModalRef.current = isModalOpen;
-    setIsModalOpen(false);
+    setIsModalOpen(false, () => {
+      if (afterClose) {
+        afterClose();
+      }
+
+      if (modalRef.current && modalTrigger.current) {
+        if (contains(modalRef.current, document.activeElement)) {
+          modalTrigger.current.focus();
+        }
+      }
+    });
   };
 
   const renderTriggerButton = () => (

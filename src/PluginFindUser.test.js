@@ -1,7 +1,8 @@
+import { act } from 'react';
 import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
-import renderWithRouter from 'helpers/renderWithRouter';
+import renderWithRouter from '../test/jest/helpers/renderWithRouter';
 
 import PluginFindUser from './PluginFindUser';
 
@@ -86,5 +87,40 @@ describe('PluginFindUser', () => {
     await userEvent.click(searchBtn);
     await userEvent.click(screen.getByRole('button', { name : 'stripes-components.dismissModal' }));
     await waitFor(() => expect(afterCloseMock).toHaveBeenCalledTimes(1));
+  });
+
+  it('should call afterClose after the modal state has been updated to closed', async () => {
+    let modalStateWhenAfterCloseCalled = null;
+    const afterCloseWithStateCheck = jest.fn(() => {
+      // When afterClose is called, check if the modal is actually closed
+      // by checking if the modal content is no longer in the document
+      modalStateWhenAfterCloseCalled = !screen.queryByText('UserSearchContainer');
+    });
+
+    renderPluginFindUser({ ...props, afterClose: afterCloseWithStateCheck });
+    const searchBtn = screen.getByTestId('searchButton');
+
+    // Open modal
+    await userEvent.click(searchBtn);
+    expect(screen.getByText('UserSearchContainer')).toBeInTheDocument();
+
+    // Close modal
+    await userEvent.click(screen.getByRole('button', { name : 'stripes-components.dismissModal' }));
+
+    await waitFor(() => {
+      expect(afterCloseWithStateCheck).toHaveBeenCalled();
+      // Verify that when afterClose was called, the modal was already closed
+      expect(modalStateWhenAfterCloseCalled).toBe(true);
+    });
+  });
+
+  it('should not call afterClose if it is not provided', async () => {
+    renderPluginFindUser({ ...props, afterClose: undefined });
+    const searchBtn = screen.getByTestId('searchButton');
+
+    await act(() => userEvent.click(searchBtn));
+    await act(() => userEvent.click(screen.getByRole('button', { name : 'stripes-components.dismissModal' })));
+
+    expect(screen.queryByText('UserSearchContainer')).not.toBeInTheDocument();
   });
 });
