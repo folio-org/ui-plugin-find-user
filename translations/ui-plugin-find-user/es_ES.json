@@ -18,8 +18,8 @@
     "userAssignmentStatus": "User Assignment Status",
     "assigned": "Assigned",
     "unassigned": "Unassigned",
-    "filter.userType": "User type",
-    "staff": "Staff",
-    "shadow": "Shadow",
-    "system": "System"
+    "filter.userType": "Tipo de usuario",
+    "staff": "Personal",
+    "shadow": "Sombra",
+    "system": "Sistema"
 }
