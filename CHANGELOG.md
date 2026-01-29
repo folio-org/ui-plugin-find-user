@@ -5,6 +5,7 @@
 * Refactor user filtering logic in UserSearchContainer. Fixes UIPFU-107.
 * Add a new filter configuration to display the filter by user type. Refs UIPFU-99.
 * Call afterClose only after the modal state has been updated to closed. Fixes UIPFU-117.
+* Add patron user type to the 'User type' filter. Refs UIPFU-116.
 
 ## [8.0.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v8.0.0) (2025-03-13)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v7.2.0...v8.0.0)
