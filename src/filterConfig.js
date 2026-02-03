@@ -30,10 +30,15 @@ const filterConfig = [
     name: 'userType',
     cql: 'type',
     // `restrictWhenAllSelected` prevents applying cql.allRecords=1 when all filter options are selected.
-    // There are more types of users then `staff`, `shadow` and `system`,
+    // There are more types of users then `patron`, `staff`, `shadow` and `system`,
     // and we don't want to search for other types when all of them are selected.
     restrictWhenAllSelected: true,
     values: [
+      {
+        name: 'patron',
+        cql: 'patron',
+        displayName: <FormattedMessage id="ui-plugin-find-user.patron" />,
+      },
       {
         name: 'staff',
         cql: 'staff',
