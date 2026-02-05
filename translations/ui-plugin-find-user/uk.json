@@ -21,5 +21,6 @@
     "filter.userType": "Тип користувача",
     "staff": "Персонал",
     "shadow": "Приховано",
-    "system": "Система"
+    "system": "Система",
+    "patron": "Patron"
 }

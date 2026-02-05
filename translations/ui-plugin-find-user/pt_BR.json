@@ -21,5 +21,6 @@
     "filter.userType": "Tipo de usuário",
     "staff": "Equipe",
     "shadow": "Sombra",
-    "system": "Sistema"
+    "system": "Sistema",
+    "patron": "Usuário"
 }
