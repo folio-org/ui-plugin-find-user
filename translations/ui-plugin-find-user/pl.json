@@ -19,8 +19,8 @@
     "assigned": "Przypisanie",
     "unassigned": "Nieprzypisany",
     "filter.userType": "Typ użytkownika",
-    "staff": "Staff",
+    "staff": "Personel",
     "shadow": "Shadow",
     "system": "System",
-    "patron": "Patron"
+    "patron": "Czytelnik"
 }

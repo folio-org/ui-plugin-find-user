@@ -2,7 +2,7 @@
     "meta.title": "User-finder (plugin)",
     "modal.label": "Select User",
     "searchButton.title": "Find User",
-    "noResults": "Choose a filter or enter a search query to show results.",
+    "noResults": "Izvēlieties filtru vai ievadiet meklēšanas vaicājumu, lai parādītu rezultātus.",
     "searchFieldLabel": "Search",
     "information.patronGroup": "Patron group",
     "active": "Active",
