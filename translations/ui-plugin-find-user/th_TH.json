@@ -10,7 +10,7 @@
     "information.barcode": "Barcode",
     "information.username": "Username",
     "contact.email": "Email",
-    "status": "Status",
+    "status": "สถานะ",
     "inactive": "Inactive",
     "modal.close": "Close",
     "modal.save": "Save",
@@ -22,5 +22,5 @@
     "staff": "Staff",
     "shadow": "Shadow",
     "system": "System",
-    "patron": "Patron"
+    "patron": "สมาชิกห้องสมุด"
 }
