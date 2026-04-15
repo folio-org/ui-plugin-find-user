@@ -18,9 +18,9 @@
     "userAssignmentStatus": "User Assignment Status",
     "assigned": "割当済",
     "unassigned": "未割当",
-    "filter.userType": "User type",
-    "staff": "Staff",
+    "filter.userType": "ユーザータイプ",
+    "staff": "スタッフ",
     "shadow": "Shadow",
-    "system": "System",
+    "system": "システム",
     "patron": "Patron"
 }
