@@ -1,6 +1,7 @@
 # Change history for ui-plugin-find-user
 
-## In progress
+## [8.1.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v8.1.0) (2026-04-16)
+[Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v8.0.0...v8.1.0)
 * Fix the algorithm for marking all users as checked/unchecked. Refs UIPFU-115. 
 * Refactor user filtering logic in UserSearchContainer. Fixes UIPFU-107.
 * Add a new filter configuration to display the filter by user type. Refs UIPFU-99.
