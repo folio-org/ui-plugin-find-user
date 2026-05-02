@@ -16,11 +16,11 @@
     "modal.save": "Sauvegarder",
     "modal.total": "Total sélectionné: {count}",
     "userAssignmentStatus": "User Assignment Status",
-    "assigned": "Assigned",
-    "unassigned": "Unassigned",
-    "filter.userType": "User type",
-    "staff": "Staff",
+    "assigned": "Attribué",
+    "unassigned": "Non attribué",
+    "filter.userType": "Type d'utilisateur",
+    "staff": "Personnel",
     "shadow": "Shadow",
-    "system": "System",
-    "patron": "Patron"
+    "system": "Système",
+    "patron": "Usager"
 }
