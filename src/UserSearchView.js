@@ -49,9 +49,9 @@ const UserSearchView = ({
 }) => {
   const [isFilterPaneVisible, setIsFilterPaneVisible] = useState(true);
   const [checkedMap, setCheckedMap] = useState(initialSelectedUsers || {});
-  const [isAllChecked, setIsAllChecked] = useState(false);
 
   const { patronGroups, users } = data;
+  const isAllChecked = users.records?.length > 0 && users.records.every(user => Boolean(checkedMap[user.id]));
   const checkedUsersLength = Object.values(checkedMap).filter(Boolean).length;
   const hasInitialSelectedUsers = initialSelectedUsers && Object.keys(initialSelectedUsers).length;
   const disabled = !hasInitialSelectedUsers && !checkedUsersLength;
@@ -119,11 +119,8 @@ const UserSearchView = ({
   };
 
   const toggleAll = () => {
-    const prevCheckedState = isAllChecked;
-    setIsAllChecked(!prevCheckedState);
-
-    const newCheckedMap = reduceUsersToMap(users.records, !prevCheckedState);
-    setCheckedMap(newCheckedMap);
+    const pageMap = reduceUsersToMap(users.records, !isAllChecked);
+    setCheckedMap(prev => ({ ...prev, ...pageMap }));
   };
 
   const isSelected = ({ item }) => Boolean(checkedMap[item.id]);
