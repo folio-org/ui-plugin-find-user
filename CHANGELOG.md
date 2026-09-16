@@ -1,5 +1,9 @@
 # Change history for ui-plugin-find-user
 
+## [8.2.0] IN_PROGRESS
+
+* Fix problem with Select all checkbox in multi select find user plugin. Refs UIPFU-94.
+
 ## [8.1.0] (https://github.com/folio-org/ui-plugin-find-user/tree/v8.1.0) (2026-04-16)
 [Full Changelog](https://github.com/folio-org/ui-plugin-find-user/compare/v8.0.0...v8.1.0)
 * Fix the algorithm for marking all users as checked/unchecked. Refs UIPFU-115. 
